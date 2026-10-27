@@ -1,0 +1,136 @@
+{
+  "id": "dark-keynote",
+  "name": "Dark Keynote",
+  "version": "1.0.0",
+  "description": "Software-launch film on a dark navy stage: hairline grid, one mint accent, UI windows that snap to a grid on the beat, a giant number from glyph noise.",
+  "family": "ui",
+  "dim": "2d",
+  "tier": "pro",
+  "status": "ready",
+  "renderer": "hyperframes@0.8.96",
+  "aspect": [
+    "16:9"
+  ],
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "entry": "templates/index.html",
+  "licence": "LICENSES/",
+  "inspired_by": [
+    {
+      "repo": "lemo-opuscar/styles/dark-keynote",
+      "licence": "MIT",
+      "what": "style grammar only (stage, snap grid, light reveal, number scramble); all code and palette rewritten"
+    }
+  ],
+  "example_video": "samples/dark-keynote-example.mp4",
+  "read_first": [
+    "STYLE.md",
+    "RENDER.md",
+    "RUBRIC.md"
+  ],
+  "files": [
+    {
+      "path": "EXAMPLES.md",
+      "bytes": 656,
+      "sha256": "a5355ac98a99a1b4fa7978d9d6840ea696f9d92737f44dcb6e1f676e11e1caf0"
+    },
+    {
+      "path": "LICENSES/ASSETS.md",
+      "bytes": 922,
+      "sha256": "b4367529bd469f7eb203d36e24a85425d1c9b5c65504c637823e45191c99b855"
+    },
+    {
+      "path": "LICENSES/Inter-OFL.txt",
+      "bytes": 4477,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "LICENSES/JetBrainsMono-OFL.txt",
+      "bytes": 4524,
+      "sha256": "403581b69dac5cff4079205e01c6b467e56af449ecbd7247693ddb1baafa005b"
+    },
+    {
+      "path": "LICENSES/lemo-opuscar-MIT.txt",
+      "bytes": 1064,
+      "sha256": "14c9ff6f14bfb2391e74fedb01c256891d2a3bba1c2acf5789901bdf77e54e33"
+    },
+    {
+      "path": "RENDER.md",
+      "bytes": 1800,
+      "sha256": "a089814ef59f4db7848dd91d976bd3f67b06bb15c3a2c4f831e3054acc0e237a"
+    },
+    {
+      "path": "RUBRIC.md",
+      "bytes": 1581,
+      "sha256": "52937611c3c3e445aa1d95dbeb041a779bc5622e70ca7eb8ccb41c892dfcb263"
+    },
+    {
+      "path": "STYLE.md",
+      "bytes": 4799,
+      "sha256": "8d1ee788ce100964fe8bbe367669a138dedfd4fc9aa79284038a6f4082958dd3"
+    },
+    {
+      "path": "engine/dk.css",
+      "bytes": 5082,
+      "sha256": "0089b82993282b056ae79b6145349c6c54b827a6b25b24a68b047ca24a572000"
+    },
+    {
+      "path": "engine/dk.js",
+      "bytes": 7788,
+      "sha256": "f2927cf7c1b479fff8b7fa669bd0c2431a8a54ab20c7ce9a356501ebb4d314af"
+    },
+    {
+      "path": "fonts/Inter-400.woff2",
+      "bytes": 23664,
+      "sha256": "8909904ab6c872eb994093482a88a28eca2cd95912d7b6fecd72103b0dc07edc"
+    },
+    {
+      "path": "fonts/Inter-500.woff2",
+      "bytes": 24272,
+      "sha256": "f3779f1efccc4bdcdf9c0a02ab95bf6bd092ed09c48c08cedc725889edd1d19f"
+    },
+    {
+      "path": "fonts/Inter-800.woff2",
+      "bytes": 24400,
+      "sha256": "a7d0a50f15d389cad679238466bdb5fc9787aa0715719064ce25abaff042820d"
+    },
+    {
+      "path": "fonts/Inter-900.woff2",
+      "bytes": 23900,
+      "sha256": "d5c0ed7b8b5dde97d48b97947d740bbd8ad3ba9f2c5cc6b8280f16acba2d828e"
+    },
+    {
+      "path": "fonts/JetBrainsMono-500.woff2",
+      "bytes": 21832,
+      "sha256": "cb182feeed4d798ff6961d3c79f7026279448fca0676438aaecb21f3fc39553a"
+    },
+    {
+      "path": "fonts/fonts.css",
+      "bytes": 762,
+      "sha256": "d742afb5d1790b50a4e16febca1d7d953cb14cc4bb3040de1faced36192cc327"
+    },
+    {
+      "path": "fonts/inter-LICENSE.txt",
+      "bytes": 4477,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "fonts/jetbrains-mono-LICENSE.txt",
+      "bytes": 4524,
+      "sha256": "403581b69dac5cff4079205e01c6b467e56af449ecbd7247693ddb1baafa005b"
+    },
+    {
+      "path": "templates/index.html",
+      "bytes": 12238,
+      "sha256": "726f7ef23c894ecaf9b73d22e42d7c10ee1049f1927a8b251aa934dcbd146f4b"
+    },
+    {
+      "path": "tools/holdcheck.mjs",
+      "bytes": 2081,
+      "sha256": "6f04df3287d981a36c4c90521d4f296c6fd1289b2f95e3af6f0f2e4044de54f2"
+    }
+  ]
+}

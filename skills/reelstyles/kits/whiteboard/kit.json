@@ -1,0 +1,117 @@
+{
+  "id": "whiteboard",
+  "name": "Whiteboard explainer",
+  "version": "1.1.0",
+  "description": "An explainer drawn live on one glossy dry-erase board: handwriting written stroke by stroke, floating markers, a magnet coin, a felt eraser and a camera that travels across the board. Ships a foley generator for the marker sounds.",
+  "family": "explainer",
+  "dim": "2d",
+  "tier": "pro",
+  "status": "ready",
+  "renderer": "hyperframes@0.8.96",
+  "aspect": [
+    "16:9",
+    "9:16"
+  ],
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "entry": "templates/index.html",
+  "licence": "LICENSES/",
+  "inspired_by": [
+    {
+      "repo": "github.com/lemomo-ai/lemo-opuscar (styles/whiteboard)",
+      "licence": "MIT",
+      "what": "stroke-by-stroke single-line lettering, floating pens, magnets, eraser and travelling camera concepts; engine rewritten as classic script"
+    }
+  ],
+  "read_first": [
+    "STYLE.md",
+    "RENDER.md",
+    "RUBRIC.md"
+  ],
+  "files": [
+    {
+      "path": "EXAMPLES.md",
+      "bytes": 1252,
+      "sha256": "82ab7f94ea419d70e5a70e027be1f10e7d8783740541cbb4312965f27fe430fa"
+    },
+    {
+      "path": "LICENSES/ASSETS.md",
+      "bytes": 1671,
+      "sha256": "d6f7bd80cdcd5bba3564a70a5473ca6762b36aeb77548fac941c092d2e8b95b8"
+    },
+    {
+      "path": "LICENSES/MIT-lemo-opuscar.txt",
+      "bytes": 1064,
+      "sha256": "14c9ff6f14bfb2391e74fedb01c256891d2a3bba1c2acf5789901bdf77e54e33"
+    },
+    {
+      "path": "LICENSES/OFL-ArchitectsDaughter.txt",
+      "bytes": 4362,
+      "sha256": "0e441ae9f18ad0c294cc5b6ae3974c2db1614cab220598578b1b58c4cc334485"
+    },
+    {
+      "path": "RENDER.md",
+      "bytes": 4589,
+      "sha256": "2bb51b4152c96ef38ec5cad98c2ab2759f25b427c4b40c056c6881c5c0e5c9fb"
+    },
+    {
+      "path": "RUBRIC.md",
+      "bytes": 2081,
+      "sha256": "b205b6b1168557c12f7106d634b3cd278bccc27d4d53a6c87fbec69261667e7c"
+    },
+    {
+      "path": "STYLE.md",
+      "bytes": 10188,
+      "sha256": "883d7fb8d4d3a885ed3f1af33b0e3e3af8c9a5b0b370b6ca5533b539e81d6432"
+    },
+    {
+      "path": "engine/wb.js",
+      "bytes": 32563,
+      "sha256": "4cf29d4f34db035ea890efc34470e2d23e83a12251b65f10e2dfada1363fa3af"
+    },
+    {
+      "path": "fonts/ArchitectsDaughter-Regular.ttf",
+      "bytes": 43352,
+      "sha256": "6159718a08898e34bc1cb7354086141a5f9a70b73e54dbec27ead0d59a697359"
+    },
+    {
+      "path": "fonts/ems-tech.js",
+      "bytes": 24794,
+      "sha256": "d485d30a40e04254191cc909cbee4a6444fba936daa0e54cee6900d767934a4d"
+    },
+    {
+      "path": "samples/whiteboard-example.mp4",
+      "bytes": 12148959,
+      "sha256": "3c8b09e77d8565bcf8ca339c9160332a04fb942de897f0ec8f0e880aaac9a255"
+    },
+    {
+      "path": "templates/film-v.js",
+      "bytes": 4347,
+      "sha256": "8378654234885ac2c3fc758c759f98b65bff11bdb6ff2d9463b74816862398cb"
+    },
+    {
+      "path": "templates/film.js",
+      "bytes": 3290,
+      "sha256": "f3a7f227fbe600795b91637fe324d0b2ad3fed482d516978b5abbbc3834701aa"
+    },
+    {
+      "path": "templates/index.html",
+      "bytes": 1092,
+      "sha256": "f0e53f7ff934e7f2b126ef3e3b19f50b57cf93a638d4c26583d9569500e1091a"
+    },
+    {
+      "path": "templates/vertical.html",
+      "bytes": 1091,
+      "sha256": "43521fa37547cffac4bd850cc95e6c293be8eaa7d2226ccb48eb548eb0ecb104"
+    },
+    {
+      "path": "tools/foley.mjs",
+      "bytes": 5058,
+      "sha256": "b15ccb0b5dab15a34556b08260766fa1d5117f29ab12777080e28a9f47400415"
+    }
+  ],
+  "example_video": "samples/whiteboard-example.mp4"
+}

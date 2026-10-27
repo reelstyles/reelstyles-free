@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>whiteboard film</title>
+  <style>
+    @font-face { font-family: "Architects Daughter"; font-weight: 400; font-display: block; src: url("fonts/ArchitectsDaughter-Regular.ttf") format("truetype"); }
+    html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #f7f6f1; }
+    #c { display: block; width: 1920px; height: 1080px; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>window.__timelines = window.__timelines || {};   // HyperFrames lint wants the registry declared in the page</script>
+</head>
+<body>
+  <!-- data-duration must equal DUR in film.js -->
+  <div id="root" data-composition-id="main" data-start="0" data-duration="11" data-width="1920" data-height="1080">
+    <canvas id="c" width="1920" height="1080"></canvas>
+    <!-- sound: add an <audio> clip here, see RENDER.md -->
+  </div>
+  <script src="fonts/ems-tech.js"></script>
+  <script src="engine/wb.js"></script>
+  <script src="film.js"></script>
+</body>
+</html>

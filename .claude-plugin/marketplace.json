@@ -1,0 +1,14 @@
+{
+  "name": "reelstyles-free",
+  "description": "ReelStyles video style kits for AI agents.",
+  "owner": {
+    "name": "ReelStyles"
+  },
+  "plugins": [
+    {
+      "name": "reelstyles-free",
+      "source": "./",
+      "description": "3 video style kits: animated films in code, rendered with HyperFrames."
+    }
+  ]
+}

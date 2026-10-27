@@ -1,0 +1,180 @@
+[
+  {
+    "id": "life-as-explainer",
+    "name": "Life-as explainer",
+    "length": "8-11 min (15-25 min deep dives)",
+    "beats": [
+      "Hook: the surprising answer in the first 20 s",
+      "A normal day, hour by hour",
+      "The hard parts (work, food, danger)",
+      "What surprised the researchers",
+      "What modern viewers can take from it",
+      "Question for the comments"
+    ],
+    "hook": "Open on the answer that breaks the viewer's picture of the past.",
+    "title_pattern": "What Did [People] Actually Do [All Day / situation]?",
+    "thumbnail_pattern": "Daylight scene, 1-3 answer words in yellow caps, never the title again",
+    "evidence": "History x 15-30 min: 246k median, 65% of channels >= 100k. 'What Did Cavemen Actually Do All Day?' 1.5M (429x channel median).",
+    "example_channels": [
+      "@BeforeFireVideos",
+      "@thebasedplato",
+      "@OddCompass",
+      "@barelyevolved"
+    ]
+  },
+  {
+    "id": "pain-word-silent",
+    "name": "Pain-word silent film",
+    "length": "3-6 min",
+    "beats": [
+      "Cold open on the pain (no words)",
+      "The habit loop, shown",
+      "The turn: someone from another time does it differently",
+      "The change, shown",
+      "Quiet ending that loops back"
+    ],
+    "hook": "One searched pain word on screen, the character living it.",
+    "title_pattern": "[PAIN WORD] | An Animated Short Film",
+    "thumbnail_pattern": "Dark face close-up + the character's own line in 1-3 words",
+    "evidence": "Untested in the scan (no silent story channel in the list); topic rule = pain people already search (discipline, dopamine, lazy, phone). Mood words flop.",
+    "example_channels": []
+  },
+  {
+    "id": "then-vs-now-short",
+    "name": "Then vs Now split Short",
+    "length": "32-36 s, 9:16",
+    "beats": [
+      "6 split-screen comparisons, ~4 s each",
+      "Small labels, music + SFX, no voice",
+      "Reversal question at the end",
+      "Last frame matches the first (loop)"
+    ],
+    "hook": "First split lands in under 1 s.",
+    "title_pattern": "[Thing] then vs now",
+    "thumbnail_pattern": "n/a (Short)",
+    "evidence": "Animated split montages: 31-38 s Shorts hit, 10-22 s flop (formula §1, Shorts rule).",
+    "example_channels": []
+  },
+  {
+    "id": "money-disaster",
+    "name": "Money-disaster story",
+    "length": "10-12 min (test 18-22 min)",
+    "beats": [
+      "The outcome or twist in the first 20 s",
+      "Who they were before",
+      "The trick, explained simply",
+      "The people who warned",
+      "The collapse",
+      "What it cost real people"
+    ],
+    "hook": "The $ figure, when the number is the shock.",
+    "title_pattern": "The [Scam] That Broke [Institution] / How [Group] Lost $[Huge] on [Thing]",
+    "thumbnail_pattern": "Character face + $ number, 1-3 words",
+    "evidence": "Drawn money-story channels: 1.85M median (24 min), 942k (21 min), 653k (10 min); generic finance only 20k.",
+    "example_channels": [
+      "@CasualScholar",
+      "@h0ser",
+      "@Primateeconomics",
+      "@TILT223"
+    ]
+  },
+  {
+    "id": "every-x-explained",
+    "name": "Every [X] Explained ladder",
+    "length": "8-26 min",
+    "beats": [
+      "Promise the full set and the time",
+      "Level 1 (the easy one)",
+      "Each level a bit stranger",
+      "The last level is the payoff",
+      "Recap ladder on screen"
+    ],
+    "hook": "The time stamp in the title does the work.",
+    "title_pattern": "Every [X] Explained in [N] Minutes / Every Level of [X]",
+    "thumbnail_pattern": "Ladder or grid of the set, 1-3 words",
+    "evidence": "Lift 1.81-1.86. 'Every Level of Wealth in 13 Minutes' 4.8M; 'EVERY Crusader Military Order Explained' 1.8M.",
+    "example_channels": [
+      "@memeabledata",
+      "@thebasedplato",
+      "@GrowthSummary1"
+    ]
+  },
+  {
+    "id": "easy-actually",
+    "name": "[Hard thing] Is Easy, Actually",
+    "length": "4-10 min",
+    "beats": [
+      "Why it feels hard",
+      "The one idea that makes it easy",
+      "Show it working in 3 small steps",
+      "The common mistake",
+      "Try-this-today ending"
+    ],
+    "hook": "Name the hard thing and promise it flips.",
+    "title_pattern": "[Hard Thing] Is Easy, Actually",
+    "thumbnail_pattern": "Character relaxed next to the 'hard' thing, 1-2 words",
+    "evidence": "Lift 2.76. 'Being Confident Is Easy, Actually' 647k (199x median).",
+    "example_channels": [
+      "@easyactually",
+      "@Drewyrt"
+    ]
+  },
+  {
+    "id": "animated-movie",
+    "name": "Story of [X] | Animated Movie",
+    "length": "15-50 min",
+    "beats": [
+      "Known story, told start to end",
+      "Clear hero, clear threat",
+      "Three acts with a midpoint turn",
+      "Big set-piece climax",
+      "Short epilogue"
+    ],
+    "hook": "A famous story people already search for.",
+    "title_pattern": "Story of [Name] | Full Animated Movie",
+    "thumbnail_pattern": "Hero vs threat, movie-poster framing",
+    "evidence": "Lift 2.37. 'David and Goliath | Animated Bible Movie' 8.2M; 'Story of Daniel | Full Animated Bible Movie' 634k.",
+    "example_channels": [
+      "@BibleNutshells",
+      "@judahsketchanimation"
+    ]
+  },
+  {
+    "id": "start-to-finish",
+    "name": "Start-to-Finish build",
+    "length": "5-15 min, works wordless",
+    "beats": [
+      "The empty site",
+      "Gathering materials",
+      "Build stages with time jumps",
+      "One setback",
+      "Finished thing in use"
+    ],
+    "hook": "Show the finished result for 2 s, then cut to the empty start.",
+    "title_pattern": "[Person] Builds [Thing], Start to Finish",
+    "thumbnail_pattern": "Finished build, warm light, no text or 1 word",
+    "evidence": "'Man Builds Amazing Wooden Mansion... Start to Finish' 1.4M (74x median); build videos get millions without words.",
+    "example_channels": [
+      "@22techzoom"
+    ]
+  },
+  {
+    "id": "you-wouldnt-survive",
+    "name": "You Wouldn't Survive [time] in [era]",
+    "length": "10-17 min",
+    "beats": [
+      "Drop the viewer in, second person",
+      "Hour-by-hour dangers",
+      "The thing that kills modern people first",
+      "How locals coped",
+      "Final verdict: hours survived"
+    ],
+    "hook": "'You wake up in...' within 5 s.",
+    "title_pattern": "Why You Wouldn't Survive [Time] in [Era]",
+    "thumbnail_pattern": "Viewer-stand-in in danger, 1-3 words",
+    "evidence": "Lift 1.74. 'Why You Wouldn't Survive 24 Hours in Stone Age' 357k (102x median).",
+    "example_channels": [
+      "@BeforeFireVideos"
+    ]
+  }
+]

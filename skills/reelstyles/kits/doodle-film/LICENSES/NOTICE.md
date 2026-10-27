@@ -1,0 +1,2 @@
+Doodle film was inspired by alexgreensh/anidoodle (Copyright 2026 Alex Greenshpun, Apache License 2.0, full text in Apache-2.0-anidoodle.txt).
+Changes / what is ours: a new canvas-2D engine written from scratch (deterministic line-boil pen, loose marker fills with paper underlay, staggered draw-on, queued text with fit and minimum size, drifting motes), a new cast (Pip and Dot), set pieces, a scored 10 s template, a procedural score script, a dead-hold check. No anidoodle code, asset or sound pack (including its CC BY room impulse responses) is included.

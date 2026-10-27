@@ -1,0 +1,137 @@
+{
+  "id": "doodle-film",
+  "name": "Doodle film",
+  "version": "1.1.0",
+  "description": "A scored mini story drawn in one pen and a pack of markers: wobbly line-boil strokes, loose marker fills that miss the outline, cream paper grain, a round-headed kid, a cat and a falling spark.",
+  "family": "hand-drawn",
+  "dim": "2d",
+  "tier": "pro",
+  "status": "ready",
+  "renderer": "hyperframes@0.8.96",
+  "aspect": [
+    "16:9",
+    "9:16"
+  ],
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "inspired_by": [
+    {
+      "repo": "github.com/alexgreensh/anidoodle",
+      "licence": "Apache-2.0",
+      "what": "genre ideas only (loose marker fills, boiling hand marks, paper grain, one hand per film); engine, cast, sets and score written from scratch in canvas-2D"
+    }
+  ],
+  "entry": "templates/index.html",
+  "licence": "LICENSES/",
+  "example_video": "samples/doodle-film-example.mp4",
+  "read_first": [
+    "STYLE.md",
+    "RENDER.md",
+    "RUBRIC.md"
+  ],
+  "files": [
+    {
+      "path": "EXAMPLES.md",
+      "bytes": 1072,
+      "sha256": "82375028658f2e47863dcc2e0ea315eaedc2eb531ed83ef1fc8c7c5db72ba7f2"
+    },
+    {
+      "path": "LICENSES/ASSETS.md",
+      "bytes": 988,
+      "sha256": "a79bc4b3b434e394d1218247e21488116bd0a39e19aea7dd856b2b949cd21983"
+    },
+    {
+      "path": "LICENSES/Apache-2.0-anidoodle.txt",
+      "bytes": 11390,
+      "sha256": "aa7ba36133bb07559b8f2f96eb4d7e2e95003432238973b31b6727517bd6c0a0"
+    },
+    {
+      "path": "LICENSES/NOTICE.md",
+      "bytes": 561,
+      "sha256": "a539003a5c27c14bbd8bf18c8ea3d04db30c423b6ab80e51630f54bec25ba7ac"
+    },
+    {
+      "path": "LICENSES/OFL-Caveat.txt",
+      "bytes": 4385,
+      "sha256": "1f9d81d094273d82f3898a1ee8b598a717d050ecbf5ff7bede105b704880157b"
+    },
+    {
+      "path": "RENDER.md",
+      "bytes": 3957,
+      "sha256": "1b035aae892105a62d5c240082c9b992b3e7d1b919e774cc45442efc8f47bb08"
+    },
+    {
+      "path": "RUBRIC.md",
+      "bytes": 2508,
+      "sha256": "79ddcb079dcf661e7a5714129ada195e199fc3aa041a73b18f05f31d2368ef8d"
+    },
+    {
+      "path": "STYLE.md",
+      "bytes": 9104,
+      "sha256": "ccf053967e72c2eef827113a59b1839cf46041a5d709cd614fac3da571210acb"
+    },
+    {
+      "path": "audio/score.wav",
+      "bytes": 441078,
+      "sha256": "d714d28805f415a77725e6f297b3f35136ad371430382e0d1c8a06c01449f088"
+    },
+    {
+      "path": "characters/pip.js",
+      "bytes": 7611,
+      "sha256": "444bd0b01bfde3e20ef7b840660c1cc82492f92d8cf6913614566cebbea01875"
+    },
+    {
+      "path": "engine/doodle.js",
+      "bytes": 12312,
+      "sha256": "0561d10a59a5117a3e9ba8c2e5d46f1a0e62430505f25631c67e9071cdf031dd"
+    },
+    {
+      "path": "engine/runtime.js",
+      "bytes": 4060,
+      "sha256": "7c6ed81913300ff87e77cc72a6fa93fddb870d800d1766156cc19133e0e7082d"
+    },
+    {
+      "path": "fonts/Caveat.ttf",
+      "bytes": 403648,
+      "sha256": "0bdb6b660482d31531b3945849fba5916b3ef8695da7024a9e6b9ee3c4157988"
+    },
+    {
+      "path": "sets/sets.js",
+      "bytes": 7219,
+      "sha256": "3f27a3ee03d85a0c456d6f707af44002bf1a61e77187e099b1dc884375e4c77d"
+    },
+    {
+      "path": "templates/film-v.js",
+      "bytes": 8877,
+      "sha256": "929a061847d36c769e0e284bc812f1cb5f181f1dd3bb20a1d8b7e24f5623fdb5"
+    },
+    {
+      "path": "templates/film.js",
+      "bytes": 6714,
+      "sha256": "b84abf38edecac3b0837d67c68adee649ca0269b3fed297c3615fdb5f3c74644"
+    },
+    {
+      "path": "templates/index.html",
+      "bytes": 1223,
+      "sha256": "1b182a1a6269fb9d3449d6696474bc9600fc0817430954771c8b85a67999a5e7"
+    },
+    {
+      "path": "templates/vertical.html",
+      "bytes": 1286,
+      "sha256": "d08f72e502e878a7f80a8e73fe4e2e13acb4b13fe5e12c359a2db712d33c7ed8"
+    },
+    {
+      "path": "tools/deadhold.sh",
+      "bytes": 693,
+      "sha256": "7732acc5b62407f0c338d89c93d471c37b63a1b495422a9a329a806e3e1258fc"
+    },
+    {
+      "path": "tools/score.sh",
+      "bytes": 2199,
+      "sha256": "7ba1b1d2f43d12fc49b2dd0a2a03a880b85dbd70c9e1c45340aa272d1f844f62"
+    }
+  ]
+}

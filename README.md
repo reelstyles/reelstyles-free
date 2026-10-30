@@ -31,4 +31,4 @@ Node.js 22+, Chrome or Chromium (HyperFrames renders with it) and ffmpeg; the se
 MIT: use, change and share these kits, commercial use included. Full text: LICENSE.md.
 
 ## Want all the styles?
-Starter: 15 styles for $19. Full: all 119 plus every new one, $49 for the first 20 buyers, then $79. One payment. Live prices: https://reelstyles.com/pricing.html
+Starter: 15 styles for $19. Full: all 120 plus every new one, $49 for the first 20 buyers, then $79. One payment. Live prices: https://reelstyles.com/pricing.html

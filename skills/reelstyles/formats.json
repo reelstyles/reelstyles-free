@@ -13,8 +13,8 @@
     ],
     "hook": "Open on the answer that breaks the viewer's picture of the past.",
     "title_pattern": "What Did [People] Actually Do [All Day / situation]?",
-    "thumbnail_pattern": "Daylight scene, 1-3 answer words in yellow caps, never the title again",
-    "evidence": "History x 15-30 min: 246k median, 65% of channels >= 100k. 'What Did Cavemen Actually Do All Day?' 1.5M (429x channel median).",
+    "thumbnail_pattern": "A daylight scene with 1-3 words of the answer in yellow capitals. Don't repeat the title.",
+    "evidence": "History videos of 15-30 min had a median of 246k views, and 65% of those channels passed 100k. 'What Did Cavemen Actually Do All Day?' got 1.5M, 429 times the channel's usual.",
     "example_channels": [
       "@BeforeFireVideos",
       "@thebasedplato",
@@ -36,7 +36,7 @@
     "hook": "One searched pain word on screen, the character living it.",
     "title_pattern": "[PAIN WORD] | An Animated Short Film",
     "thumbnail_pattern": "Dark face close-up + the character's own line in 1-3 words",
-    "evidence": "Untested in the scan (no silent story channel in the list); topic rule = pain people already search (discipline, dopamine, lazy, phone). Mood words flop.",
+    "evidence": "Not tested in the scan, since no silent story channel was in it. Pick a pain people already search for (discipline, dopamine, lazy, phone). Mood words flop.",
     "example_channels": []
   },
   {
@@ -45,14 +45,14 @@
     "length": "32-36 s, 9:16",
     "beats": [
       "6 split-screen comparisons, ~4 s each",
-      "Small labels, music + SFX, no voice",
+      "Small labels, music and sound effects, no voice",
       "Reversal question at the end",
       "Last frame matches the first (loop)"
     ],
     "hook": "First split lands in under 1 s.",
     "title_pattern": "[Thing] then vs now",
-    "thumbnail_pattern": "n/a (Short)",
-    "evidence": "Animated split montages: 31-38 s Shorts hit, 10-22 s flop (formula §1, Shorts rule).",
+    "thumbnail_pattern": "None, it's a Short",
+    "evidence": "Animated split montages of 31-38 s did well. The ones of 10-22 s flopped.",
     "example_channels": []
   },
   {
@@ -67,10 +67,10 @@
       "The collapse",
       "What it cost real people"
     ],
-    "hook": "The $ figure, when the number is the shock.",
+    "hook": "Lead with the dollar amount when the number is the shock.",
     "title_pattern": "The [Scam] That Broke [Institution] / How [Group] Lost $[Huge] on [Thing]",
     "thumbnail_pattern": "Character face + $ number, 1-3 words",
-    "evidence": "Drawn money-story channels: 1.85M median (24 min), 942k (21 min), 653k (10 min); generic finance only 20k.",
+    "evidence": "Drawn money-story channels had medians of 1.85M (24 min films), 942k (21 min) and 653k (10 min). Generic finance channels got 20k.",
     "example_channels": [
       "@CasualScholar",
       "@h0ser",
@@ -89,10 +89,10 @@
       "The last level is the payoff",
       "Recap ladder on screen"
     ],
-    "hook": "The time stamp in the title does the work.",
+    "hook": "The time in the title does the work.",
     "title_pattern": "Every [X] Explained in [N] Minutes / Every Level of [X]",
     "thumbnail_pattern": "Ladder or grid of the set, 1-3 words",
-    "evidence": "Lift 1.81-1.86. 'Every Level of Wealth in 13 Minutes' 4.8M; 'EVERY Crusader Military Order Explained' 1.8M.",
+    "evidence": "1.8 times more common among breakout videos than among all the videos scanned. 'Every Level of Wealth in 13 Minutes' got 4.8M views and 'EVERY Crusader Military Order Explained' 1.8M.",
     "example_channels": [
       "@memeabledata",
       "@thebasedplato",
@@ -113,7 +113,7 @@
     "hook": "Name the hard thing and promise it flips.",
     "title_pattern": "[Hard Thing] Is Easy, Actually",
     "thumbnail_pattern": "Character relaxed next to the 'hard' thing, 1-2 words",
-    "evidence": "Lift 2.76. 'Being Confident Is Easy, Actually' 647k (199x median).",
+    "evidence": "2.76 times more common among breakout videos than among all the videos scanned. 'Being Confident Is Easy, Actually' got 647k views, 199 times the channel's usual.",
     "example_channels": [
       "@easyactually",
       "@Drewyrt"
@@ -133,7 +133,7 @@
     "hook": "A famous story people already search for.",
     "title_pattern": "Story of [Name] | Full Animated Movie",
     "thumbnail_pattern": "Hero vs threat, movie-poster framing",
-    "evidence": "Lift 2.37. 'David and Goliath | Animated Bible Movie' 8.2M; 'Story of Daniel | Full Animated Bible Movie' 634k.",
+    "evidence": "2.37 times more common among breakout videos than among all the videos scanned. 'David and Goliath | Animated Bible Movie' got 8.2M views and 'Story of Daniel | Full Animated Bible Movie' 634k.",
     "example_channels": [
       "@BibleNutshells",
       "@judahsketchanimation"
@@ -153,7 +153,7 @@
     "hook": "Show the finished result for 2 s, then cut to the empty start.",
     "title_pattern": "[Person] Builds [Thing], Start to Finish",
     "thumbnail_pattern": "Finished build, warm light, no text or 1 word",
-    "evidence": "'Man Builds Amazing Wooden Mansion... Start to Finish' 1.4M (74x median); build videos get millions without words.",
+    "evidence": "'Man Builds Amazing Wooden Mansion... Start to Finish' got 1.4M views, 74 times the channel's usual. Build videos get millions of views without any words.",
     "example_channels": [
       "@22techzoom"
     ]
@@ -172,7 +172,7 @@
     "hook": "'You wake up in...' within 5 s.",
     "title_pattern": "Why You Wouldn't Survive [Time] in [Era]",
     "thumbnail_pattern": "Viewer-stand-in in danger, 1-3 words",
-    "evidence": "Lift 1.74. 'Why You Wouldn't Survive 24 Hours in Stone Age' 357k (102x median).",
+    "evidence": "1.74 times more common among breakout videos than among all the videos scanned. 'Why You Wouldn't Survive 24 Hours in Stone Age' got 357k views, 102 times the channel's usual.",
     "example_channels": [
       "@BeforeFireVideos"
     ]

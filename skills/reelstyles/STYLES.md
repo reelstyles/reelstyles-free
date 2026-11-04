@@ -13,7 +13,7 @@ Kit folder: `kits/<id>/`. Aspects = the frame sizes the kit is tested in. Best f
 
 ## Not in this tier (115)
 
-These kits are in ReelStyles Starter or Full: https://reelstyles.com/pricing?utm_source=free-kit
+These styles come with ReelStyles Starter or Full: https://reelstyles.com/pricing?utm_source=free-kit
 
 | id | Name | Category | Aspects |
 |---|---|---|---|

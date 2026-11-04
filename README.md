@@ -1,6 +1,6 @@
 # ReelStyles Free 2026.11.4
 
-Open-source alternative to paid AI video tools: style packs for Claude Code that make videos in code with HyperFrames, no video-model bill.
+6 video styles for Claude Code and other coding agents. You pick a style, give your agent a topic, and it animates the film in code and renders an MP4 on your computer.
 
 [![Dark Keynote](https://reelstyles.com/samples/dark-keynote-example.jpg)](https://reelstyles.com/samples/dark-keynote-example.mp4)
 [![Whiteboard explainer](https://reelstyles.com/samples/whiteboard-example.jpg)](https://reelstyles.com/samples/whiteboard-example.mp4)
@@ -9,29 +9,29 @@ Open-source alternative to paid AI video tools: style packs for Claude Code that
 [![Stick-figure metaphor Short](https://reelstyles.com/samples/stick-metaphor-example.jpg)](https://reelstyles.com/samples/stick-metaphor-example.mp4)
 [![Countdown guessing quiz](https://reelstyles.com/samples/guess-quiz-example.jpg)](https://reelstyles.com/samples/guess-quiz-example.mp4)
 
-Quick start (30 seconds) in Claude Code: run the two /plugin lines below, then ask for "a 20 s video about coffee in the whiteboard style".
+To try it in Claude Code, run the two /plugin lines below and ask for "a 20 s video about coffee in the whiteboard style". It takes about 30 seconds.
 
-6 style kits that teach your AI agent to make animated videos in a finished look. The kits are plain files (style guide, templates, render steps, quality rubric), so any agent that can read files and run a terminal can use them: Claude Code, Codex, Cursor, Roo Code, Cline, Gemini CLI, GitHub Copilot and others. The agent writes every scene in code and renders it on your machine with HyperFrames. No video model.
+Each kit is a set of plain files: a style guide, scene templates, render steps and a rubric the agent checks its own frames against. Any agent that can read files and use a terminal can work with them, for example Claude Code, Codex, Cursor, Roo Code, Cline, Gemini CLI or GitHub Copilot. The agent writes each scene in code and HyperFrames renders it on your computer. You don't need an AI video model for this.
 
-**First step:** tell your agent **"set up ReelStyles"**. It runs the `reelstyles-setup` skill: checks Node.js 22+, ffmpeg and Chrome, installs what is missing once you say yes, connects ReelStyles to your agent and renders a 5 s test film. Or run the script yourself: `bash setup/setup.sh install`, then `wire auto`, then `test` (Windows PowerShell: `powershell -ExecutionPolicy Bypass -File setup\setup.ps1 install`, same commands).
+**Start here:** tell your agent **"set up ReelStyles"**. It runs the `reelstyles-setup` skill, which checks for Node.js 22+, ffmpeg and Chrome and asks before it installs anything missing. Then it connects ReelStyles to your agent and renders a 5 s test film. You can also run the script yourself: `bash setup/setup.sh install`, then `wire auto`, then `test` (on Windows PowerShell: `powershell -ExecutionPolicy Bypass -File setup\setup.ps1 install`, then the same commands).
 
-Then ask for a film: **"Read skills/reelstyles/SKILL.md, then make me a 30 s video about <topic> in the <style> style."** The styles are listed in `skills/reelstyles/STYLES.md`.
+After that, ask for a film: **"Read skills/reelstyles/SKILL.md, then make me a 30 s video about TOPIC in the STYLE style."** Replace TOPIC with your subject and STYLE with a style from `skills/reelstyles/STYLES.md`.
 
-## Claude Code (plugin, updates with one command)
+## Install in Claude Code
 ```
 /plugin marketplace add reelstyles/reelstyles-free
 /plugin install reelstyles-free@reelstyles-free
 ```
-Update later: `/plugin marketplace update reelstyles-free`.
+To update later, run `/plugin marketplace update reelstyles-free`.
 
-## Codex, Cursor, Roo Code, Cline, Gemini CLI, Copilot and other agents
-Clone this repo (or unzip it) into your project or next to it. `AGENTS.md` at the root points every agent that reads it to the skill. Or copy `skills/reelstyles/` to wherever your agent reads skills or rules. Update with `git pull`.
+## Use it with Codex, Cursor, Roo Code, Cline, Gemini CLI, Copilot or another agent
+Clone this repo (or unzip it) into your project or next to it. Agents that read `AGENTS.md` will find the skill from there. You can also copy `skills/reelstyles/` into the folder where your agent looks for skills or rules. To update, run `git pull`.
 
-## Needs
-Node.js 22+, Chrome or Chromium (HyperFrames renders with it) and ffmpeg; the setup skill installs them with your OK. Long films render faster on more CPU cores.
+## What you need
+Node.js 22 or newer, ffmpeg, and Chrome or Chromium (HyperFrames uses it to render). The setup skill can install them for you if you say yes. Long films render faster on a computer with more CPU cores.
 
 ## Licence
-MIT: use, change and share these kits, commercial use included. Full text: LICENSE.md.
+MIT. You can use, change and share these kits, also for commercial work. The full text is in LICENSE.md.
 
-## Want all the styles?
-Starter: 30 styles for $19. Full: all 121 plus every new one, $49 for the first 20 buyers, then $79. One payment. Live prices: https://reelstyles.com/pricing?utm_source=free-kit
+## More styles
+Starter has 30 styles for $19. Full has all 121 and every style added later. It costs $49 for the first 20 buyers and $79 after that. You pay once. Current prices are at https://reelstyles.com/pricing?utm_source=free-kit

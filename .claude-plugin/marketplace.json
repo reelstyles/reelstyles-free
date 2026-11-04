@@ -1,6 +1,6 @@
 {
   "name": "reelstyles-free",
-  "description": "ReelStyles video style kits for AI agents.",
+  "description": "Video style kits from ReelStyles for AI coding agents.",
   "owner": {
     "name": "ReelStyles"
   },
@@ -8,7 +8,7 @@
     {
       "name": "reelstyles-free",
       "source": "./",
-      "description": "6 video style kits: animated films in code, rendered with HyperFrames."
+      "description": "6 video styles. Your agent animates the film in code and renders it with HyperFrames."
     }
   ]
 }

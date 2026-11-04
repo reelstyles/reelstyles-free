@@ -105,8 +105,8 @@
     },
     {
       "path": "templates/film-v.js",
-      "bytes": 8877,
-      "sha256": "929a061847d36c769e0e284bc812f1cb5f181f1dd3bb20a1d8b7e24f5623fdb5"
+      "bytes": 8763,
+      "sha256": "2826b504c9e0cf6b46b1eaf292bb959be34731daa7785efcd9833fa32cf5bf08"
     },
     {
       "path": "templates/film.js",

@@ -1,0 +1,147 @@
+{
+  "id": "kinetic-type",
+  "name": "Kinetic type",
+  "version": "1.1.0",
+  "description": "Words as the actors: giant letters slam, stack, flash and swap over a drifting colour stage, with slanted wipes and a bracketed logo reveal.",
+  "family": "typography",
+  "dim": "2d",
+  "tier": "pro",
+  "status": "ready",
+  "renderer": "hyperframes@0.8.96",
+  "aspect": [
+    "16:9",
+    "9:16"
+  ],
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "entry": "templates/index.html",
+  "licence": "LICENSES/",
+  "inspired_by": [
+    {
+      "repo": "iart-ai/motion-skills",
+      "licence": "MIT",
+      "what": "kinetic typography look: dark blob stage, giant stacked type, slanted wipes, bracketed logo reveal (ideas only, code written from scratch)"
+    }
+  ],
+  "example_video": "samples/kinetic-type-example.mp4",
+  "read_first": [
+    "STYLE.md",
+    "RENDER.md",
+    "RUBRIC.md"
+  ],
+  "files": [
+    {
+      "path": "EXAMPLES.md",
+      "bytes": 1061,
+      "sha256": "3081578366248245115da8bc8d3d351f268f844355c93b9f9c69b8e73c1b9441"
+    },
+    {
+      "path": "LICENSES/ASSETS.md",
+      "bytes": 1090,
+      "sha256": "c3b912682dbdef178f2afab273981e484da7807df77f188588bc49900aa550cc"
+    },
+    {
+      "path": "LICENSES/ArchivoBlack-OFL.txt",
+      "bytes": 4398,
+      "sha256": "4cafdbbd100af37a23805af09b7068e4daafb4516dc3d6d52436f4a9d7b4c0d3"
+    },
+    {
+      "path": "LICENSES/Inter-OFL.txt",
+      "bytes": 4477,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "LICENSES/NOTICE.txt",
+      "bytes": 151,
+      "sha256": "0511ec7b352c92c970ce6b5689d3ac4f355512c70b7abaf566f18d3164d3b6fd"
+    },
+    {
+      "path": "LICENSES/motion-skills-MIT.txt",
+      "bytes": 1064,
+      "sha256": "33d6cd35a20903b5e968a76a1e584a7aeae2c83e3e58ea58ecc50b889b83e668"
+    },
+    {
+      "path": "RENDER.md",
+      "bytes": 4082,
+      "sha256": "72eff2ae5f35f20479ebec5595a618e1df8eabdf410cedbcecc631cf0de20f12"
+    },
+    {
+      "path": "RUBRIC.md",
+      "bytes": 2554,
+      "sha256": "46fe177534e3ad9f1c7fff6f2cd6bbe4b766e175aafc2b8a2d3def18d0330a21"
+    },
+    {
+      "path": "STYLE.md",
+      "bytes": 7889,
+      "sha256": "bba9e4970a7418b6eca5fe968aa9fe3720c3055990e7eed000023b39e4a18151"
+    },
+    {
+      "path": "engine/kinetic.js",
+      "bytes": 10761,
+      "sha256": "354c6ecc8298956744356129c9052d8b41631f6128c2943966dcc0aa61882590"
+    },
+    {
+      "path": "engine/runtime.js",
+      "bytes": 3357,
+      "sha256": "1812a5e3cc0d0fb9017902b0c3b195bf45fb95c26520c6ff1518152e37d896e3"
+    },
+    {
+      "path": "fonts/ArchivoBlack-Regular.ttf",
+      "bytes": 90988,
+      "sha256": "dd9a89a019b4849f66ab75455fe7bdf931311042cbb0f0f97acc061539703180"
+    },
+    {
+      "path": "fonts/Inter-500.woff2",
+      "bytes": 24272,
+      "sha256": "f3779f1efccc4bdcdf9c0a02ab95bf6bd092ed09c48c08cedc725889edd1d19f"
+    },
+    {
+      "path": "fonts/Inter-800.woff2",
+      "bytes": 24400,
+      "sha256": "a7d0a50f15d389cad679238466bdb5fc9787aa0715719064ce25abaff042820d"
+    },
+    {
+      "path": "fonts/OFL.txt",
+      "bytes": 4398,
+      "sha256": "4cafdbbd100af37a23805af09b7068e4daafb4516dc3d6d52436f4a9d7b4c0d3"
+    },
+    {
+      "path": "fonts/inter-LICENSE.txt",
+      "bytes": 4477,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "samples/kinetic-type-example.mp4",
+      "bytes": 6967969,
+      "sha256": "763e1828d9fbbcd64e8748e71a008fe26b5ce8b1c1a6f60992fb21d8e5dbb5ff"
+    },
+    {
+      "path": "templates/film-v.js",
+      "bytes": 6385,
+      "sha256": "d1274f491f71e7b18d27976b6047180b11274faaf1b70ff545292c83a21584cc"
+    },
+    {
+      "path": "templates/film.js",
+      "bytes": 4879,
+      "sha256": "fb58255fae65159fddb15e0c5b5e46abd747724ab41280c7ed3328a47cd10ddf"
+    },
+    {
+      "path": "templates/index.html",
+      "bytes": 1287,
+      "sha256": "f646aee83e22217295ec69e35aef571cd5afb7c33d07bcfd1e4562ed0afa9c60"
+    },
+    {
+      "path": "templates/vertical.html",
+      "bytes": 1433,
+      "sha256": "5bf51c2f5416381fde6d324486a95837031963b250ae6cdd6ecd9bfa7dc65432"
+    },
+    {
+      "path": "tools/dead-holds.mjs",
+      "bytes": 2530,
+      "sha256": "9ea6456eceb1d34c78b052de1993e410880beb48fa480e1a9ab3abbc91f6d2ce"
+    }
+  ]
+}

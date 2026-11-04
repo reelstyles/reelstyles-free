@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>kinetic type film (9:16)</title>
+  <style>
+    @font-face { font-family: "Archivo Black"; font-weight: 400; font-display: block; src: url("fonts/ArchivoBlack-Regular.ttf") format("truetype"); }
+    @font-face { font-family: "Inter"; font-weight: 800; font-display: block; src: url("fonts/Inter-800.woff2") format("woff2"); }
+    @font-face { font-family: "Inter"; font-weight: 500; font-display: block; src: url("fonts/Inter-500.woff2") format("woff2"); }
+    html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #0C0B16; }
+    #c { display: block; width: 1080px; height: 1920px; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>window.__timelines = window.__timelines || {};</script>
+</head>
+<body>
+  <!-- 9:16 (1080x1920). data-duration must equal DUR in film.js; copy this file to index.html and film-v.js to film.js -->
+  <div id="root" data-composition-id="main" data-start="0" data-duration="8.6" data-width="1080" data-height="1920">
+    <canvas id="c" width="1080" height="1920"></canvas>
+    <!-- sound: add an <audio> clip here, see RENDER.md -->
+  </div>
+  <script>window.FRAME_W = 1080; window.FRAME_H = 1920;</script>
+  <script src="engine/runtime.js"></script>
+  <script src="engine/kinetic.js"></script>
+  <script src="film.js"></script>
+</body>
+</html>

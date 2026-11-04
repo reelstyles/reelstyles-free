@@ -1,0 +1,1 @@
+Kinetic type kit. Fonts: Archivo Black and Inter, SIL OFL 1.1 (texts in this folder). Inspired by iart-ai/motion-skills (MIT); no source files copied.

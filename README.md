@@ -1,14 +1,17 @@
-# ReelStyles Free 2026.10.30
+# ReelStyles Free 2026.11.4
 
 Open-source alternative to paid AI video tools: style packs for Claude Code that make videos in code with HyperFrames, no video-model bill.
 
 [![Dark Keynote](https://reelstyles.com/samples/dark-keynote-example.jpg)](https://reelstyles.com/samples/dark-keynote-example.mp4)
 [![Whiteboard explainer](https://reelstyles.com/samples/whiteboard-example.jpg)](https://reelstyles.com/samples/whiteboard-example.mp4)
 [![Doodle film](https://reelstyles.com/samples/doodle-film-example.jpg)](https://reelstyles.com/samples/doodle-film-example.mp4)
+[![Kinetic type](https://reelstyles.com/samples/kinetic-type-example.jpg)](https://reelstyles.com/samples/kinetic-type-example.mp4)
+[![Stick-figure metaphor Short](https://reelstyles.com/samples/stick-metaphor-example.jpg)](https://reelstyles.com/samples/stick-metaphor-example.mp4)
+[![Countdown guessing quiz](https://reelstyles.com/samples/guess-quiz-example.jpg)](https://reelstyles.com/samples/guess-quiz-example.mp4)
 
 Quick start (30 seconds) in Claude Code: run the two /plugin lines below, then ask for "a 20 s video about coffee in the whiteboard style".
 
-3 style kits that teach your AI agent to make animated videos in a finished look. The kits are plain files (style guide, templates, render steps, quality rubric), so any agent that can read files and run a terminal can use them: Claude Code, Codex, Cursor, Roo Code, Cline, Gemini CLI, GitHub Copilot and others. The agent writes every scene in code and renders it on your machine with HyperFrames. No video model.
+6 style kits that teach your AI agent to make animated videos in a finished look. The kits are plain files (style guide, templates, render steps, quality rubric), so any agent that can read files and run a terminal can use them: Claude Code, Codex, Cursor, Roo Code, Cline, Gemini CLI, GitHub Copilot and others. The agent writes every scene in code and renders it on your machine with HyperFrames. No video model.
 
 **First step:** tell your agent **"set up ReelStyles"**. It runs the `reelstyles-setup` skill: checks Node.js 22+, ffmpeg and Chrome, installs what is missing once you say yes, connects ReelStyles to your agent and renders a 5 s test film. Or run the script yourself: `bash setup/setup.sh install`, then `wire auto`, then `test` (Windows PowerShell: `powershell -ExecutionPolicy Bypass -File setup\setup.ps1 install`, same commands).
 
@@ -31,4 +34,4 @@ Node.js 22+, Chrome or Chromium (HyperFrames renders with it) and ffmpeg; the se
 MIT: use, change and share these kits, commercial use included. Full text: LICENSE.md.
 
 ## Want all the styles?
-Starter: 15 styles for $19. Full: all 120 plus every new one, $49 for the first 20 buyers, then $79. One payment. Live prices: https://reelstyles.com/pricing.html
+Starter: 30 styles for $19. Full: all 121 plus every new one, $49 for the first 20 buyers, then $79. One payment. Live prices: https://reelstyles.com/pricing?utm_source=free-kit

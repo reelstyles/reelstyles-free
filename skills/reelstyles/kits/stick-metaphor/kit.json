@@ -1,0 +1,157 @@
+{
+  "id": "stick-metaphor",
+  "name": "Stick-figure metaphor Short",
+  "version": "1.0.0",
+  "description": "Vertical-first silent motivational Short: white round-head stick figures on pure black, grey props, one yellow accent for the point, six separate 4 s metaphors and a looping reversal question.",
+  "family": "stick",
+  "dim": "2d",
+  "tier": "pro",
+  "status": "ready",
+  "renderer": "hyperframes@0.8.96",
+  "aspect": [
+    "16:9",
+    "9:16"
+  ],
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "read_first": [
+    "STYLE.md",
+    "RENDER.md",
+    "RUBRIC.md"
+  ],
+  "entry": "templates/index.html",
+  "licence": "LICENSES/",
+  "inspired_by": [
+    {
+      "repo": "genre: stick-figure metaphor Shorts (no channel assets)",
+      "licence": "ideas only",
+      "what": "motion grammar and beat structure of the genre; all characters, palette, type and code are original"
+    }
+  ],
+  "example_video": "samples/stick-metaphor-example.mp4",
+  "files": [
+    {
+      "path": "EXAMPLES.md",
+      "bytes": 782,
+      "sha256": "2973f1cc0bc813d23c8a9d0b49cf5aaeadc15c408bc651205ecaa9851179bccb"
+    },
+    {
+      "path": "LESSONS.md",
+      "bytes": 328,
+      "sha256": "88347fd5e868809f5d2cf272a2188de6b1b9efcc4bf64e7b88f8d3464e449d5f"
+    },
+    {
+      "path": "LICENSES/ASSETS.md",
+      "bytes": 425,
+      "sha256": "14194a1cb9cda5dc37c10f6f3f578a5483e967e888283c13852762dcacbd25b8"
+    },
+    {
+      "path": "LICENSES/Inter-OFL-1.1.txt",
+      "bytes": 4477,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "LICENSES.md",
+      "bytes": 708,
+      "sha256": "f81431826bb4afed84752d3bad4a8e1afe1f2d19ba5eb8897d60e1f1647c2d9b"
+    },
+    {
+      "path": "RENDER.md",
+      "bytes": 3831,
+      "sha256": "2ed2858979002b344f9f99d23b245e8d066bd6cba612c9d925489a9dfaa5a3cd"
+    },
+    {
+      "path": "RUBRIC.md",
+      "bytes": 1888,
+      "sha256": "a71665d91d94c1297e557fbb37f23628ee31ee71f29dcb4a009d7c6f52f9ad08"
+    },
+    {
+      "path": "STYLE.md",
+      "bytes": 7323,
+      "sha256": "b7bc8a2fcb29d0279c557558958364f3810d89142467cef4697433b51f4dd478"
+    },
+    {
+      "path": "characters/stick.js",
+      "bytes": 10445,
+      "sha256": "118fdd2dd32a9de7ed51039c40a5fb728220ff50059f3838d2508d3e33861b4f"
+    },
+    {
+      "path": "engine/runtime.js",
+      "bytes": 9694,
+      "sha256": "8605d551bfa48557e5b0b06cfb5c5536ef2734d15dcf345f87e3a7a4916d1762"
+    },
+    {
+      "path": "engine/safe.js",
+      "bytes": 8507,
+      "sha256": "ea09032cfae046f8a0680f3c18bc0857f3aa50cf8fe8e2092fe4298c3e427fdc"
+    },
+    {
+      "path": "fonts/Inter-500.woff2",
+      "bytes": 24272,
+      "sha256": "f3779f1efccc4bdcdf9c0a02ab95bf6bd092ed09c48c08cedc725889edd1d19f"
+    },
+    {
+      "path": "fonts/Inter-800.woff2",
+      "bytes": 24400,
+      "sha256": "a7d0a50f15d389cad679238466bdb5fc9787aa0715719064ce25abaff042820d"
+    },
+    {
+      "path": "fonts/fonts.css",
+      "bytes": 357,
+      "sha256": "5f954a1b3141b8f0b0e8d96e93aa69a90157c530408f88c321a255ab7481c106"
+    },
+    {
+      "path": "fonts/inter-LICENSE.txt",
+      "bytes": 4477,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "sets/metaphors-v.js",
+      "bytes": 6637,
+      "sha256": "cef3bdda15f3234ef88dbdfbacbc4e0070e4730a735ab074ca41a0b45ac296c7"
+    },
+    {
+      "path": "sets/metaphors.js",
+      "bytes": 13857,
+      "sha256": "0c0029c22e2161a21acc3fcad1de6631245dbf762c941f85aa04bb64145552e3"
+    },
+    {
+      "path": "sets/props.js",
+      "bytes": 6109,
+      "sha256": "0ab6ac10cf744739136ba44d2ebf0458500dcc852e8e50dc92f56243266d194e"
+    },
+    {
+      "path": "templates/film-v.js",
+      "bytes": 4173,
+      "sha256": "67eaf9b8b6e187174e06af63db4a49ba64c3a53ccc2a14eb896b85a30c08d1a3"
+    },
+    {
+      "path": "templates/film.js",
+      "bytes": 1562,
+      "sha256": "9a755b749a214adb71c6df876dbd4c678dbe09a4e30e2770998614bcbcb76507"
+    },
+    {
+      "path": "templates/index.html",
+      "bytes": 1195,
+      "sha256": "02624a71de439267c878e7844c00ea46ebbcf5329e6707b4f69561034d3dbb8e"
+    },
+    {
+      "path": "templates/vertical.html",
+      "bytes": 1437,
+      "sha256": "675f448059cf06b420cf3183bb211ed08cb97234585425199b4c1129bbfcbd17"
+    },
+    {
+      "path": "tools/layout-check.mjs",
+      "bytes": 5922,
+      "sha256": "155440e7a69db31b7251b99817207833f80068ce3fee6966bf7f456a5a2f03f0"
+    },
+    {
+      "path": "tools/vcheck.sh",
+      "bytes": 3251,
+      "sha256": "38da72adbaf64045d8d423ba78f57237fa891cd4562347c598d841320d65a9cc"
+    }
+  ]
+}

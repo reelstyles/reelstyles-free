@@ -1,13 +1,13 @@
 // =====================================================================
 //  templates/film-v.js: the vertical 9:16 (1080x1920) twin of film.js: "Pip and the small spark", 8 s, composed for a tall frame.
-//  Copy it as film.js next to vertical.html. Camera zoom 1.6-2.6 so Pip is 500-850 px tall; the sky is stacked (sun, clouds, a spark
+//  Copy it as film.js next to vertical.html. Camera zoom 2.45-2.75 on the wides (Pip whole, ~45% of the frame, ground under his feet), one 3.2 close-up beat; the sky is stacked (sun, clouds, a spark
 //  that falls the whole height of the frame, doodles that rise in a column). Safe area: text and faces inside x 90-940, y 250-1470.
 //  Beats of the score (audio/score.wav): whoosh 2.9 · landing pop 3.9 · pick-up chime 4.9 · swell 5.6 (footsteps after 8 s are cut).
 // =====================================================================
 const DUR = 8.0;
 const gy = groundY;
 const SAFE = { x0: 90, x1: 940, y0: 250, y1: 1470 };
-const FEET = 1850;                                   // screen y of Pip's feet: in the bottom UI band (feet may live there), so he spans >= 60% of the frame
+const FEET = 1640;                                   // screen y of Pip's feet: whole figure with ground below him (wide framing, owner 11-02)
 const camY = (wy, z, feet = FEET) => wy - (feet - H / 2) / z;   // world y at frame centre so a point on the ground lands at `feet`
 
 function sceneryV(dusk, p = 1, sunP = 0, treeXs = [[560, 1.25, PAL.mint], [1010, 1.35, PAL.teal], [1560, 1.2, PAL.mint], [1900, 1.3, PAL.teal]]) {
@@ -39,7 +39,7 @@ shot(0, 2.8, () => {
   const px = lerp(620, 1240, TT / 2.8);
   pip({ x: px, y: gy(px) + 10, s: 1, face: 1, ph: TT * 9, armL: Math.sin(TT * 9) * 0.5, armR: -Math.sin(TT * 9) * 0.5, look: [0.5, -0.2] });
   say('Pip & the small spark', { size: 100, pop: EZ.back(seg(TT, 0.15, 0.7)), rot: -0.02, maxW: 560 });   // vertical: lands above his head by itself (engine/safe.js)
-}, 'meadow walk', (t) => { const z = lerp(3.4, 3.55, EZ.io(seg(t, 0, 2.8))), px = lerp(620, 1240, t / 2.8); return [px + 30, camY(gy(px) + 10, z), z]; });
+}, 'meadow walk', (t) => { const z = lerp(2.45, 2.6, EZ.io(seg(t, 0, 2.8))), px = lerp(620, 1240, t / 2.8); return [px + 30, camY(gy(px) + 10, z), z]; });
 
 // 2. MEDIUM-TALL (2.8 - 5.4 s): a spark falls the full height of the frame, Pip startles, crouches, picks it up
 const P2 = { x: 1300 };
@@ -58,7 +58,7 @@ shot(2.8, 5.4, () => {
     spark(x, landed ? lerp(g - 40, hand[1], pick) : sy, 46 + (landed ? Math.sin(tt * 14) * 2 : 0), TT * 1.6, { glowA: 0.5, tail: landed ? 0 : 330 });
   }
   if (tt > 1.0 && tt < 2.0) say('whoa!', { size: 130, pop: EZ.back(seg(tt, 1.0, 1.25)), rot: 0.05, maxW: 400 });
-}, 'the spark lands', (t) => { const z = lerp(3.5, 3.7, EZ.io(seg(t, 2.8, 5.4))); return [lerp(1330, 1340, seg(t, 2.8, 5.4)), camY(gy(1300) + 10, z), z, lerp(-0.04, 0.02, seg(t, 2.8, 5.4))]; });
+}, 'the spark lands', (t) => { const z = lerp(2.55, 2.75, EZ.io(seg(t, 2.8, 5.4))); return [lerp(1330, 1340, seg(t, 2.8, 5.4)), camY(gy(1300) + 10, z), z, lerp(-0.04, 0.02, seg(t, 2.8, 5.4))]; });
 
 // 3. CLOSE-TALL (5.4 - 8 s): the spark hums; hearts, notes and swirls rise out of it in a column up the frame
 const P3 = { x: 1300 };
@@ -79,7 +79,7 @@ shot(5.4, DUR, () => {
   });
   if (tt < 1.9) say('a small idea hums', { size: 100, pop: EZ.back(seg(tt, 0.85, 1.15)), maxW: 640 });
   else say('keep it.', { size: 130, color: PAL.glow, plate: PAL.night, pop: EZ.back(seg(tt, 1.9, 2.2)), rot: 0.02, maxW: 640 });
-}, 'it hums', (t) => { const z = lerp(3.9, 4.1, EZ.io(seg(t, 5.4, DUR))); return [lerp(1335, 1345, seg(t, 5.4, DUR)), gy(1300) - 225, z]; });
+}, 'it hums', (t) => { const z = lerp(3.2, 3.35, EZ.io(seg(t, 5.4, DUR))); return [lerp(1335, 1345, seg(t, 5.4, DUR)), gy(1300) - 225, z]; });
 
 // scribble wipe over each cut: a fat marker zig-zags down the tall frame (more rows than in 16:9) and sweeps off
 function wipe(tc, d, c) {

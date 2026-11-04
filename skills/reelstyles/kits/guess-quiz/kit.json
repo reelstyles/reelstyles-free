@@ -1,0 +1,122 @@
+{
+  "id": "guess-quiz",
+  "name": "Countdown guessing quiz",
+  "version": "1.0.0",
+  "description": "Bright game-show quiz film: a drawn item per round on a gradient stage, a 3-second ring timer, a colour-fill reveal with a spring name pop and a ticking score bar, four difficulty bands with full-screen title cards.",
+  "family": "quiz",
+  "dim": "2d",
+  "tier": "pro",
+  "status": "ready",
+  "renderer": "hyperframes@0.8.96",
+  "aspect": [
+    "16:9",
+    "9:16"
+  ],
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "entry": "templates/index.html",
+  "licence": "LICENSES/",
+  "inspired_by": [
+    {
+      "repo": "genre: countdown guessing quiz (no channel assets)",
+      "licence": "ideas only",
+      "what": "round structure and pacing of the genre; all drawings, palette, type and code are original"
+    }
+  ],
+  "example_video": "samples/guess-quiz-example.mp4",
+  "read_first": [
+    "STYLE.md",
+    "RENDER.md",
+    "RUBRIC.md"
+  ],
+  "files": [
+    {
+      "path": "EXAMPLES.md",
+      "bytes": 669,
+      "sha256": "320698a127349fc51e4ebd4520d153043137c118422c3e7a833817c99988ea6e"
+    },
+    {
+      "path": "LICENSES/ASSETS.md",
+      "bytes": 425,
+      "sha256": "8ec8103bfc40b49c98dc31b973e2146f6b9d584203e2061409fc9851fa81581d"
+    },
+    {
+      "path": "LICENSES/Inter-OFL-1.1.txt",
+      "bytes": 4477,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "RENDER.md",
+      "bytes": 3264,
+      "sha256": "9b0253b165e554eef3b3df1164b614f5e9fd5f541f525e97a46f140e4c191c18"
+    },
+    {
+      "path": "RUBRIC.md",
+      "bytes": 2156,
+      "sha256": "565d6926ca17825d9ac5d89148ea498a83447e2847e3e22c98b193ebfa1ed85f"
+    },
+    {
+      "path": "STYLE.md",
+      "bytes": 4717,
+      "sha256": "9a04abf72da8e554c21aeee8c7cba8597730a7e53bc5203e795e1eeca420559f"
+    },
+    {
+      "path": "characters/README.md",
+      "bytes": 89,
+      "sha256": "5cd1a48ca8c887b99f624658750cbe2ffea29ba88485dec0998d73bf8287db0a"
+    },
+    {
+      "path": "engine/runtime.js",
+      "bytes": 5837,
+      "sha256": "c983d0f24cefb83c9f045ecb06f01debb2bbaec860061c4ca3b0f1f9d168e45b"
+    },
+    {
+      "path": "fonts/Inter-800.woff2",
+      "bytes": 24400,
+      "sha256": "a7d0a50f15d389cad679238466bdb5fc9787aa0715719064ce25abaff042820d"
+    },
+    {
+      "path": "fonts/Inter-900.woff2",
+      "bytes": 23900,
+      "sha256": "d5c0ed7b8b5dde97d48b97947d740bbd8ad3ba9f2c5cc6b8280f16acba2d828e"
+    },
+    {
+      "path": "fonts/fonts.css",
+      "bytes": 357,
+      "sha256": "6d76ab923d540f67d4ed0681bff3b8df56898d9760149072969e34d9acd8f52c"
+    },
+    {
+      "path": "fonts/inter-LICENSE.txt",
+      "bytes": 4477,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "sets/items.js",
+      "bytes": 7615,
+      "sha256": "a4c66e1ea1cb4f7b3ffa59ef33a596af3322d25bd63cdd1cf0d89e66c029d49c"
+    },
+    {
+      "path": "sets/stage.js",
+      "bytes": 11783,
+      "sha256": "8f8ab36eb599b7a7924fd3ac08f3565725bd6e671227bf8c6f237c6d695fe46f"
+    },
+    {
+      "path": "templates/film.js",
+      "bytes": 738,
+      "sha256": "53d489cfc0623e4d4341df786ca94ba8d81a35157b99b27a696a0b6e24f6256e"
+    },
+    {
+      "path": "templates/index.html",
+      "bytes": 1141,
+      "sha256": "b54c6707ba25ce42a4a4a9dadde88d661a3939930237dfdb264b06768fa08da6"
+    },
+    {
+      "path": "templates/vertical.html",
+      "bytes": 1141,
+      "sha256": "2ef123a46f61cbe49556e49d465eb2f97820109e07662acc846b499eb8e1fe15"
+    }
+  ]
+}

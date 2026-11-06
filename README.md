@@ -1,13 +1,13 @@
-# ReelStyles Free 2026.11.4
+# ReelStyles Free 2026.11.6
 
 6 video styles for Claude Code and other coding agents. You pick a style, give your agent a topic, and it animates the film in code and renders an MP4 on your computer.
 
-[![Dark Keynote](https://reelstyles.com/samples/dark-keynote-example.jpg)](https://reelstyles.com/samples/dark-keynote-example.mp4)
-[![Whiteboard explainer](https://reelstyles.com/samples/whiteboard-example.jpg)](https://reelstyles.com/samples/whiteboard-example.mp4)
-[![Doodle film](https://reelstyles.com/samples/doodle-film-example.jpg)](https://reelstyles.com/samples/doodle-film-example.mp4)
-[![Kinetic type](https://reelstyles.com/samples/kinetic-type-example.jpg)](https://reelstyles.com/samples/kinetic-type-example.mp4)
-[![Stick-figure metaphor Short](https://reelstyles.com/samples/stick-metaphor-example.jpg)](https://reelstyles.com/samples/stick-metaphor-example.mp4)
-[![Countdown guessing quiz](https://reelstyles.com/samples/guess-quiz-example.jpg)](https://reelstyles.com/samples/guess-quiz-example.mp4)
+[![Dark Keynote](https://reelstyles.com/samples/dark-keynote-example.jpg)](https://reelstyles.com/style/dark-keynote)
+[![Whiteboard explainer](https://reelstyles.com/samples/whiteboard-example.jpg)](https://reelstyles.com/style/whiteboard)
+[![Doodle film](https://reelstyles.com/samples/doodle-film-example.jpg)](https://reelstyles.com/style/doodle-film)
+[![Kinetic type](https://reelstyles.com/samples/kinetic-type-example.jpg)](https://reelstyles.com/style/kinetic-type)
+[![Stick-figure metaphor Short](https://reelstyles.com/samples/stick-metaphor-example.jpg)](https://reelstyles.com/style/stick-metaphor)
+[![Countdown guessing quiz](https://reelstyles.com/samples/guess-quiz-example.jpg)](https://reelstyles.com/style/guess-quiz)
 
 To try it in Claude Code, run the two /plugin lines below and ask for "a 20 s video about coffee in the whiteboard style". It takes about 30 seconds.
 

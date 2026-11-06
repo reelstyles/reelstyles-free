@@ -34,4 +34,4 @@ Node.js 22 or newer, ffmpeg, and Chrome or Chromium (HyperFrames uses it to rend
 MIT. You can use, change and share these kits, also for commercial work. The full text is in LICENSE.md.
 
 ## More styles
-Starter has 30 styles for $19. Full has all 121 and every style added later. It costs $49 for the first 20 buyers and $79 after that. You pay once. Current prices are at https://reelstyles.com/pricing?utm_source=free-kit
+Starter has 31 styles for $19. Full has all 122 and every style added later. It costs $49 for the first 20 buyers and $79 after that. You pay once. Current prices are at https://reelstyles.com/pricing?utm_source=free-kit

@@ -11,7 +11,7 @@ Kit folder: `kits/<id>/`. Aspects = the frame sizes the kit is tested in. Best f
 | `stick-metaphor` | Stick-figure metaphor Short | Cartoon | 16:9, 9:16 | then-vs-now-short, pain-word-silent, easy-actually |
 | `guess-quiz` | Countdown guessing quiz | Motion graphics | 16:9, 9:16 | every-x-explained |
 
-## Not in this tier (116)
+## Not in this tier (117)
 
 These styles come with ReelStyles Starter or Full: https://reelstyles.com/pricing?utm_source=free-kit
 
@@ -76,6 +76,7 @@ These styles come with ReelStyles Starter or Full: https://reelstyles.com/pricin
 | `hd-2d` | HD-2D | Code art | 16:9 |
 | `size-scale` | 3D size comparison | 3D & cutaway | 16:9 |
 | `iq-quiz-reels` | IQ quiz reels | Motion graphics | 9:16, 16:9 |
+| `flat-cosmic` | Flat Cosmic Explainer | Motion graphics | 16:9, 9:16 |
 | `marble-race` | Marble race simulation | Code art | 16:9 |
 | `legend-movie` | Animated legend movie | Painterly | 16:9 |
 | `line-face-life` | Crude line-face life story | Cartoon | 16:9 |

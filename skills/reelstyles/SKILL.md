@@ -1,11 +1,13 @@
 ---
 name: reelstyles
-description: Make an animated video in a finished visual style (cut-paper, 80s anime, cartoon, collage, diagrams, 3D and more: 6 styles), animated in code and rendered with HyperFrames. Use when the user asks for a video, a film, a Short, an explainer or a ReelStyles style.
+description: Make an animated video or a whole researched, voiced episode from one topic sentence, in a finished visual style (cut-paper, 80s anime, cartoon, collage, diagrams, 3D and more: 6 styles), animated in code and rendered with HyperFrames. Use when the user asks for a video, a film, a Short, an explainer or a ReelStyles style.
 ---
 
 # ReelStyles
 
 Every path below is relative to the folder this SKILL.md is in.
+
+**Only a topic?** When the user gives a topic and leaves the rest to you ("make me a video about X", "an episode on Y"), follow `EPISODE.md`: it picks the style and format, researches, writes, voices with a free local voice, builds, checks and renders, with two stops for the user (the storyboard and the draft). Otherwise follow the steps below.
 
 0. **Setup first.** If `../../setup/setup.sh check` (Windows: `..\..\setup\setup.ps1 check`) has not passed on this machine yet, follow `../reelstyles-setup/SKILL.md` before anything else.
 

@@ -11,7 +11,7 @@ Kit folder: `kits/<id>/`. Aspects = the frame sizes the kit is tested in. Best f
 | `stick-metaphor` | Stick-figure metaphor Short | Cartoon | 16:9, 9:16 | then-vs-now-short, pain-word-silent, easy-actually |
 | `guess-quiz` | Countdown guessing quiz | Motion graphics | 16:9, 9:16 | every-x-explained |
 
-## Not in this tier (117)
+## Not in this tier (118)
 
 These styles come with ReelStyles Starter or Full: https://reelstyles.com/pricing?utm_source=free-kit
 
@@ -134,3 +134,4 @@ These styles come with ReelStyles Starter or Full: https://reelstyles.com/pricin
 | `cozy-room` | Cozy room loop | Painterly | 16:9 |
 | `infinite-zoom` | Infinite zoom | Cartoon | 16:9 |
 | `sketch-to-color` | Sketch to Color | Painterly | 9:16, 1:1 |
+| `voxel-duo` | Voxel Duo | 3D & cutaway | 9:16 |

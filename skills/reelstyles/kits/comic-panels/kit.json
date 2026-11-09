@@ -1,0 +1,122 @@
+{
+  "id": "comic-panels",
+  "name": "Pop comic panels",
+  "version": "1.0.0",
+  "description": "A printed comic page come alive: four-ink flat colour with Ben-Day dots and misregistration, thick outlines, balloons that pop, star-burst sound words, camera pushing panel to panel.",
+  "family": "comic",
+  "dim": "2d",
+  "tier": "pro",
+  "status": "ready",
+  "renderer": "hyperframes@0.8.96",
+  "aspect": [
+    "16:9",
+    "9:16"
+  ],
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "entry": "templates/index.html",
+  "licence": "LICENSES/",
+  "inspired_by": [
+    {
+      "repo": "genre: pop comic-book panels (no source repo)",
+      "licence": "n/a",
+      "what": "Genre conventions only: halftone dots, speech balloons, caption boxes, panel-to-panel pacing. All code, characters, palette and lettering are our own; font Bangers is SIL OFL."
+    }
+  ],
+  "example_video": "samples/comic-panels-example.mp4",
+  "read_first": [
+    "STYLE.md",
+    "RENDER.md",
+    "RUBRIC.md"
+  ],
+  "files": [
+    {
+      "path": "EXAMPLES.md",
+      "bytes": 757,
+      "sha256": "ef4c2398b66bcde78d477e76c2984082d34dc17e18b4380fc6d700fc28b517a1"
+    },
+    {
+      "path": "LICENSES/ASSETS.md",
+      "bytes": 797,
+      "sha256": "4858a2059e550de15b9e4acc66bc12cc30e7a02c268df914790c290084668e2f"
+    },
+    {
+      "path": "LICENSES/Bangers-OFL.txt",
+      "bytes": 4479,
+      "sha256": "630dd5a307c0657b094d324e069b390edf90182fe5003639e06c02a0e5769af7"
+    },
+    {
+      "path": "RENDER.md",
+      "bytes": 2725,
+      "sha256": "d25207521b92c37e2c21c4a509c66baf7666b032789a02573305085ad18b4097"
+    },
+    {
+      "path": "RUBRIC.md",
+      "bytes": 1837,
+      "sha256": "fa976b72ca40033c2c295d282aa0f33189dd4765f29de1648b6c71e137c1f411"
+    },
+    {
+      "path": "STYLE.md",
+      "bytes": 4900,
+      "sha256": "25480240b97482283c161d67570dd35e6ce9acfef013b19b5730abec52d06e29"
+    },
+    {
+      "path": "characters/hero.js",
+      "bytes": 3412,
+      "sha256": "408c0eef2eac079954391d29e1368da7a84a48a2dd02b71e62982eb5fb4e1fec"
+    },
+    {
+      "path": "characters/robot.js",
+      "bytes": 2635,
+      "sha256": "923d47e7b5647ddc798e57473c9153fda21eb580e41721095b0176ca8117be02"
+    },
+    {
+      "path": "engine/comic.js",
+      "bytes": 14356,
+      "sha256": "62b85dfdd39537bd8412345ca9b3820afebaa14c63af68185338517b7318823a"
+    },
+    {
+      "path": "engine/runtime.js",
+      "bytes": 2150,
+      "sha256": "6e35b233f283238035d02f601f7946b7f54b6363efb7fdc76afb54b760bc1644"
+    },
+    {
+      "path": "fonts/Bangers-Regular.ttf",
+      "bytes": 93148,
+      "sha256": "4160a7311de9342674cce9160cde9fcbb30f48190397d86ff1b70b455af65824"
+    },
+    {
+      "path": "fonts/OFL.txt",
+      "bytes": 4479,
+      "sha256": "630dd5a307c0657b094d324e069b390edf90182fe5003639e06c02a0e5769af7"
+    },
+    {
+      "path": "sets/sets.js",
+      "bytes": 2539,
+      "sha256": "f1ad493fbe883c352f5d42504760621aaa4cebee2f3054249fb9619a58b311c9"
+    },
+    {
+      "path": "templates/film.js",
+      "bytes": 12038,
+      "sha256": "c5d1969497541b03689d1ba68fffe6d7ca6cc2b5a44b0d2f7a8ae27c07da9d86"
+    },
+    {
+      "path": "templates/index.html",
+      "bytes": 1210,
+      "sha256": "8277338c5722e18e3a679dc05a95f4de128456e9cb5ca94a3b0ca342d9c756a4"
+    },
+    {
+      "path": "templates/film-v.js",
+      "bytes": 10595,
+      "sha256": "259bc9729a66499c59d553b2aea44a6de44da78e075c8a24a60d8b86d2fa825c"
+    },
+    {
+      "path": "templates/vertical.html",
+      "bytes": 1366,
+      "sha256": "f874d16d9e92fff3c9af15fba058924d77c5db4bddd28fc6b87edc7131b4284c"
+    }
+  ]
+}

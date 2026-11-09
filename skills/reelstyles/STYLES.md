@@ -1,4 +1,4 @@
-# Styles (6)
+# Styles (7)
 
 Kit folder: `kits/<id>/`. Aspects = the frame sizes the kit is tested in. Best for = format ids from `formats.json`.
 
@@ -10,8 +10,9 @@ Kit folder: `kits/<id>/`. Aspects = the frame sizes the kit is tested in. Best f
 | `kinetic-type` | Kinetic type | Launch & product | 16:9, 9:16 | easy-actually, pain-word-silent |
 | `stick-metaphor` | Stick-figure metaphor Short | Cartoon | 16:9, 9:16 | then-vs-now-short, pain-word-silent, easy-actually |
 | `guess-quiz` | Countdown guessing quiz | Motion graphics | 16:9, 9:16 | every-x-explained |
+| `comic-panels` | Pop comic panels | Paper & print | 16:9, 9:16 | money-disaster, animated-movie |
 
-## Not in this tier (118)
+## Not in this tier (117)
 
 These styles come with ReelStyles Starter or Full: https://reelstyles.com/pricing?utm_source=free-kit
 
@@ -29,7 +30,7 @@ These styles come with ReelStyles Starter or Full: https://reelstyles.com/pricin
 | `silent-film` | 1920s silent film | Painterly | 16:9, 9:16 |
 | `ink-wash` | Chinese ink wash | Painterly | 16:9, 9:16 |
 | `ukiyoe` | Ukiyo-e | Paper & print | 16:9, 9:16 |
-| `papercut-red` | Red paper-cut | Paper & print | 16:9, 9:16 |
+| `papercut-red` | Red paper-cut | Paper & print | 16:9 |
 | `urban-sketch` | Urban sketch, pen and wash | Painterly | 16:9, 9:16 |
 | `impasto` | Impasto palette knife | Painterly | 16:9, 9:16 |
 | `dataviz` | Data storytelling | Motion graphics | 16:9 |
@@ -46,7 +47,7 @@ These styles come with ReelStyles Starter or Full: https://reelstyles.com/pricin
 | `saas-launch` | Neon Deck | Launch & product | 16:9, 9:16 |
 | `product-cinematic` | Product Cinematic | Launch & product | 16:9, 9:16 |
 | `device-demo` | Device Demo | Launch & product | 16:9 |
-| `rubber-hose` | Rubber hose | Cartoon | 16:9, 9:16 |
+| `rubber-hose` | Rubber hose | Cartoon | 16:9 |
 | `brand-film` | Hollow Light | Launch & product | 16:9 |
 | `risograph` | Risograph | Paper & print | 16:9 |
 | `hologram-hud` | Hologram HUD | Code art | 16:9 |
@@ -60,7 +61,7 @@ These styles come with ReelStyles Starter or Full: https://reelstyles.com/pricin
 | `woodcut` | Woodcut | Paper & print | 16:9, 9:16 |
 | `pixel-rpg` | Ember Cart pixel RPG | Code art | 16:9 |
 | `ascii-crt` | Phosphor Terminal | Code art | 16:9 |
-| `three-procedural` | three-procedural | 3D & cutaway | 16:9 |
+| `three-procedural` | Toy studio | 3D & cutaway | 16:9 |
 | `brand-world-3d` | Brand World 3D | 3D & cutaway | 16:9, 9:16 |
 | `tilt-shift` | Tilt-shift town | 3D & cutaway | 16:9 |
 | `game-trailer` | Arena Zero | 3D & cutaway | 16:9 |
@@ -88,7 +89,6 @@ These styles come with ReelStyles Starter or Full: https://reelstyles.com/pricin
 | `satisfying-loop` | Oddly satisfying 3D loops | 3D & cutaway | 16:9 |
 | `vaporwave` | Vaporwave dream | Retro & internet | 16:9 |
 | `anime-sky` | Painted anime sky | Painterly | 16:9, 9:16 |
-| `comic-panels` | Pop comic panels | Paper & print | 16:9, 9:16 |
 | `origami` | Origami fold | Craft | 16:9, 9:16 |
 | `voxel-diorama` | Voxel diorama | 3D & cutaway | 16:9 |
 | `blocky-avatar` | Blocky avatar game | 3D & cutaway | 16:9, 9:16 |

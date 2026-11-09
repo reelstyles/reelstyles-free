@@ -13,7 +13,7 @@
 //
 //    track(kind, x0, y0, x1, y1)  call INSIDE your character's / prop's transform with its LOCAL box; it is stored in screen px.
 //                                 kinds: 'hero' (main character, whole body), 'face' (its head), 'key' (the beat's key object),
-//                                 'panel' (screen box of a stacked panel). The kit characters already call it.
+//                                 'panel' (screen box of a stacked panel), 'extra' (other people, pip({extra:true}) does it), 'prop' (a big set piece that must fit whole: a tank, a house; track('prop', ..., name)). The kit characters already call it.
 //    labelY(h)                    screen y (centre) for a label of height h: above the hero's head, inside the label band.
 //                                 The kit label helpers use it when you give no y.
 //    keys(t0, dt, list)           list[i] for TT in [t0 + i*dt, ...): one shot per <= 2 s (dt 2.0), so no picture sits on 3 neighbouring 1-s stills.
@@ -31,6 +31,8 @@ function track(kind, x0, y0, x1, y1, name = '') {
   const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
   LAYOUT.push({ kind, name, x0: Math.min(...xs), y0: Math.min(...ys), x1: Math.max(...xs), y1: Math.max(...ys) });
 }
+const NOTES = [];
+function qaNote(msg) { NOTES.push(msg); }   // any engine/character code can fail the frame with a one-line fix (e.g. pip: feet float)
 const vertical = () => H > W;
 const firstOf = (k) => LAYOUT.find((b) => b.kind === k);
 
@@ -59,7 +61,7 @@ function drawEnd() {
 
 const ov = (a, b) => Math.max(0, Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0)) * Math.max(0, Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0));
 function qaFrame() {
-  const t = Math.round(TT * 100) / 100, out = [];
+  const t = Math.round(TT * 100) / 100, out = NOTES.splice(0);
   if (!vertical() || (END && TT >= END.t0)) { QAV[t] = out; return; }
   const heroes = LAYOUT.filter((b) => b.kind === 'hero'), faces = LAYOUT.filter((b) => b.kind === 'face');
   const labels = LAYOUT.filter((b) => b.kind === 'label'), panels = LAYOUT.filter((b) => b.kind === 'panel');
@@ -69,8 +71,10 @@ function qaFrame() {
     const vis = Math.min(h.y1, pan ? pan.y1 : H) - Math.max(h.y0, pan ? pan.y0 : 0);
     if (vis < VSAFE.hero * ref) out.push(`hero ${Math.round(vis)} px tall = ${Math.round(100 * vis / ref)}% of the ${pan ? 'panel' : 'frame'} (need >= 25%): move the camera in a little`);
     if (h.x0 < 0 || h.x1 > W) out.push(`hero cut by the ${h.x0 < 0 ? 'left' : 'right'} edge (box x ${Math.round(h.x0)}-${Math.round(h.x1)}): centre him or pull the camera back`);
+    if (h.y0 < 0) out.push(`hero cut by the top edge (box y ${Math.round(h.y0)}): pull the camera back or lower him`);
     if (h.y0 < VSAFE.fy0 - 135) out.push(`hero top at y ${Math.round(h.y0)} (head in the top UI band): lower him so the head top is at y >= ${VSAFE.headTop}`);
   }
+  for (const e of LAYOUT.filter((b) => b.kind === 'extra' || b.kind === 'prop')) if (e.x0 < 0 || e.x1 > W || e.y0 < 0) out.push(`${e.kind} ${e.name || 'figure'} cut by the ${e.x0 < 0 ? 'left' : e.x1 > W ? 'right' : 'top'} edge (box x ${Math.round(e.x0)}-${Math.round(e.x1)}, top ${Math.round(e.y0)}): widen the shot or move it inward (only sky, ground and feet bleed)`);
   const main = heroes.length ? heroes : LAYOUT.filter((b) => b.kind === 'key');   // the main subject: biggest hero, else biggest key object
   if (main.length) {
     const m = main.reduce((a, b) => (b.y1 - b.y0 > a.y1 - a.y0 ? b : a)), pan = panels.find((p) => m.y0 >= p.y0 - 40 && m.y0 < p.y1);

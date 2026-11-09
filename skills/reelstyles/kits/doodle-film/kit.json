@@ -70,8 +70,8 @@
     },
     {
       "path": "STYLE.md",
-      "bytes": 9104,
-      "sha256": "ccf053967e72c2eef827113a59b1839cf46041a5d709cd614fac3da571210acb"
+      "bytes": 12904,
+      "sha256": "4ecc008b1c345dd8fe0aa9f67ef69d74044477830c1f9a9ba43b8040b3a62ed6"
     },
     {
       "path": "audio/score.wav",
@@ -80,8 +80,8 @@
     },
     {
       "path": "characters/pip.js",
-      "bytes": 7611,
-      "sha256": "444bd0b01bfde3e20ef7b840660c1cc82492f92d8cf6913614566cebbea01875"
+      "bytes": 10204,
+      "sha256": "2a1bb0df3d4a0d1d29b515ecf12a5b6c28b004792e7abbe1ce7a4448f2fcaba9"
     },
     {
       "path": "engine/doodle.js",

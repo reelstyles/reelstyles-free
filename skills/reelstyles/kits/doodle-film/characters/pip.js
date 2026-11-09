@@ -6,20 +6,34 @@
 //    armL/R   arm angle from hanging down, radians, positive swings forward   look [lx,ly] -1..1 pupils
 //    mouth    'smile' | 'grin' | 'o' | 'flat' | 'sad'      brow 0..1 (0 calm, 1 startled)   hop 0..1 height of a jump   lean radians
 //    hold     function(handX, handY) drawn in the right hand (local, upright), for the prop being carried
+//  y        optional: default is the ground under x (groundY(x) + 10). A y more than 45 px off the ground fails the layout check
+//           ("feet float") unless you pass hop (a jump), air:true or your own ground:fn. The contact shadow is always drawn.
+//  Costume  tint, hat ('cap'|'bowler'|'helmet'), hatC, stache, legC, scarf (colour). ONE definition per person:
+//           const WORKER = cast('worker', { tint, hat });  then WORKER({ x, ... }) in every shot. A cast figure ignores costume
+//           keys passed at the call, so the costume cannot drift between shots. extra:true = a figure that is not the hero
+//           (still edge-checked, still gets its shadow).
 //  Seeds are fixed per body part so the hand-drawn wobble stays on-model between frames.
 // =====================================================================
+const CASTS = {};
+function cast(name, look) {                 // one costume per person for the whole film; call keys cannot override it
+  if (CASTS[name]) throw new Error('cast "' + name + '" defined twice: one costume per person');
+  CASTS[name] = Object.freeze({ ...look });
+  return (o) => pip({ ...o, ...CASTS[name] });
+}
 function pip(o) {
-  const { x, y, s = 1, face = 1, ph = 0, armL = 0.25, armR = -0.25, look = [0.3, 0.1], mouth = 'smile', brow = 0, hop = 0, lean = 0, hold = null, tint = PAL.coral } = o;
+  const gnd = (o.ground || groundY)(o.x) + 10;
+  const { x, y = gnd, s = 1, face = 1, ph = 0, armL = 0.25, armR = -0.25, look = [0.3, 0.1], mouth = 'smile', brow = 0, hop = 0, lean = 0, hold = null, tint = PAL.coral, hat = null, hatC = PAL.pencil, stache = false, legC = PAL.ink, scarf = PAL.mustard } = o;
   const breathe = Math.sin(TT * 3.1 + 1) * 3, walking = ph !== 0, bob = walking ? Math.abs(Math.sin(ph)) * -10 : breathe * 0.5;
   const blink = (TT % 2.6) > 2.5;
   ctx.save(); ctx.translate(x, y - hop * 120); ctx.scale(face * s, s); ctx.rotate(lean);
-  if (typeof track === 'function' && !o.extra) { track('hero', -72, -345, 72, 12); track('face', -68, -312, 68, -182); }   // engine/safe.js layout QA (o.extra: a second Pip that is not the hero)
-  // shadow scribble on the ground (shrinks as he jumps)
+  if (typeof track === 'function') { track(o.extra ? 'extra' : 'hero', -72, -345, 72, 12); if (!o.extra) track('face', -68, -312, 68, -182); }   // engine/safe.js layout QA
+  if (typeof qaNote === 'function' && !hop && !o.air && Math.abs(y - gnd) > 45) qaNote(`feet float: the figure at x ${Math.round(x)} is ${Math.round(y - gnd)} px off the ground: omit y (it snaps to the ground) or pass air:true`);
+  // contact shadow on the ground, always drawn (shrinks as he jumps)
   ctx.save(); ctx.translate(0, hop * 120); ink(ellP(0, 4, 70 - hop * 20, 12), { c: PAL.faint, w: 4, seed: 3, dbl: false, a: 0.7 }); ctx.restore();
   const hip = [[-18, -66 + bob], [18, -66 + bob]], leg = (i, f) => {
     const sw = walking ? Math.sin(ph + (i ? Math.PI : 0)) : 0, lift = walking ? Math.max(0, Math.cos(ph + (i ? Math.PI : 0))) * 16 : 0;
     const fx = hip[i][0] + sw * 40 * f + (hop ? (i ? 12 : -4) : 0), fy = -lift - hop * 0;
-    ink(splineP([hip[i], [(hip[i][0] + fx) / 2 + 6, (hip[i][1] + fy) / 2], [fx, fy - 6]]), { w: 9, seed: 11 + i, dbl: false });
+    ink(splineP([hip[i], [(hip[i][0] + fx) / 2 + 6, (hip[i][1] + fy) / 2], [fx, fy - 6]]), { w: 9, seed: 11 + i, dbl: false, c: legC });
     ink(ellP(fx + 12, fy - 3, 15, 8, 14), { w: 6, seed: 13 + i, dbl: false });          // shoe
   };
   leg(0, 1); leg(1, 1);
@@ -37,12 +51,12 @@ function pip(o) {
   if (hold) hold(rh[0], rh[1]);
   // scarf: a mustard band with a tail that flutters on its own
   const fl = Math.sin(TT * 5) * 10, tail = splineP([[-24, -176 + bob], [-60, -168 + fl + bob], [-92, -150 + fl * 1.6 + bob], [-120, -158 + fl * 0.6 + bob]], 6);
-  ink(tail, { c: PAL.mustard, w: 16, seed: 41, dbl: false, a: 0.95 }); ink(tail, { w: 3.5, seed: 42, dbl: false, a: 0.8 });
-  shape(rectP(-40, -188 + bob, 80, 24), { c: PAL.mustard, seed: 43, hc: PAL.coral, w: 5, hatch: true });
+  ink(tail, { c: scarf, w: 16, seed: 41, dbl: false, a: 0.95 }); ink(tail, { w: 3.5, seed: 42, dbl: false, a: 0.8 });
+  shape(rectP(-40, -188 + bob, 80, 24), { c: scarf, seed: 43, hc: PAL.coral, w: 5, hatch: true });
   // head
   const hy = -246 + bob + (hop ? -6 : 0), head = ellP(0, hy, 66, 62, 34);
   shape(head, { c: PAL.blush, seed: 51, w: 6, off: [5, 4], hatch: false });
-  for (let k = 0; k < 3; k++) ink(splineP([[-6 + k * 14, hy - 60], [-12 + k * 20 + Math.sin(TT * 4 + k) * 4, hy - 88 - k * 2], [-2 + k * 22, hy - 96 + (k === 1 ? -8 : 0)]]), { w: 6, seed: 55 + k, dbl: false });   // hair tuft
+  if (!hat) for (let k = 0; k < 3; k++) ink(splineP([[-6 + k * 14, hy - 60], [-12 + k * 20 + Math.sin(TT * 4 + k) * 4, hy - 88 - k * 2], [-2 + k * 22, hy - 96 + (k === 1 ? -8 : 0)]]), { w: 6, seed: 55 + k, dbl: false });   // hair tuft
   ink(ellP(-30, hy + 22, 13, 9, 12), { c: PAL.coral, w: 8, seed: 58, a: 0.55, dbl: false }); ink(ellP(36, hy + 22, 13, 9, 12), { c: PAL.coral, w: 8, seed: 59, a: 0.55, dbl: false });
   const ex = [-22, 26], ey = hy - 4;
   ex.forEach((e, i) => {
@@ -57,6 +71,10 @@ function pip(o) {
   else if (mouth === 'flat') ink([[-12, my + 2], [16, my]], { w: 6, seed: 74, dbl: false });
   else if (mouth === 'sad') ink(splineP([[-14, my + 8], [2, my - 2], [18, my + 8]]), { w: 6, seed: 75, dbl: false });
   else ink(splineP([[-14, my], [2, my + 9], [18, my - 1]]), { w: 6, seed: 76, dbl: false });
+  if (stache) ink(splineP([[-22, my - 10], [2, my - 17], [26, my - 10]]), { w: 10, seed: 70, dbl: false });
+  if (hat === 'cap') { shape(splineP([[-66, hy - 34], [-58, hy - 66], [0, hy - 84], [56, hy - 64], [64, hy - 36], [-66, hy - 34]], 5), { c: hatC, seed: 77, hatch: false, w: 5 }); shape(splineP([[28, hy - 40], [100, hy - 34], [102, hy - 24], [36, hy - 28], [28, hy - 40]], 3), { c: hatC, seed: 78, hatch: false, w: 5 }); }
+  else if (hat === 'bowler') { shape(splineP([[-52, hy - 44], [-46, hy - 92], [0, hy - 108], [46, hy - 92], [52, hy - 44], [-52, hy - 44]], 5), { c: hatC, seed: 79, hatch: false, w: 5, mult: false }); ink([[-82, hy - 42], [82, hy - 42]], { w: 13, seed: 80, dbl: false }); }
+  else if (hat === 'helmet') { shape(splineP([[-68, hy - 32], [-60, hy - 76], [0, hy - 98], [56, hy - 76], [64, hy - 36], [-68, hy - 32]], 5), { c: hatC, seed: 81, hatch: false, w: 5 }); shape([[-66, hy - 38], [-124, hy - 10], [-116, hy + 2], [-58, hy - 22], [-66, hy - 38]], { c: hatC, seed: 82, hatch: false, w: 5 }); }
   ctx.restore();
 }
 

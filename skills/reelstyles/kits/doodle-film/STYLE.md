@@ -98,4 +98,7 @@ Six built Shorts scored 10-15/20 with a strict editor; these were the repeat def
 - **Edges:** key props and faces at least 65 px inside the frame; only sky, ground and feet bleed off. Mark the beat's key object with `track('key', ...)`: it must also be >= 20% of the frame height (a thin lever or rope does not read on a phone: draw it thick, or cut in close).
 - **Transitions seen as glitches:** a wipe frame that lands on a whole second is a full-frame empty tile on the contact sheet. Shorts cut hard on the beat; any wipe stays under 0.3 s.
 - **Weak hook:** frame 0 must already move (vcheck compares 0 s with 0.5 s); open mid-fall, mid-throw, mid-push, never on a title.
+- **One costume per person (11-08: coat green then blue):** `const WORKER = cast('worker', { tint, hat: 'cap', legC, stache })` once at the top, then `WORKER({ x, ... })` in every shot. Never pass `tint`/`hat` at the call, never write a second figure function (hats: `cap`, `bowler`, `helmet`).
+- **Feet on the ground (11-08: floating figures):** leave `y` out of `pip()`: it snaps to `groundY(x) + 10` and the contact shadow is always drawn. A `y` more than 45 px off fails vcheck ("feet float"); only `hop` or `air:true` leave the ground.
+- **Nothing cut (11-08: tanks, wave, figures at the edges):** passers-by are `pip({ extra: true })` (edge-checked too); a big set piece (tank, house, boat) gets `track('prop', x0, y0, x1, y1, 'tank')` inside its transform and must fit whole in the frame. Hero top at y >= 0.
 - Kit lessons from real builds: `LESSONS.md` (newest last).

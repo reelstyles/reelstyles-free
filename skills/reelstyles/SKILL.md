@@ -16,6 +16,6 @@ Every path below is relative to the folder this SKILL.md is in.
 3. **Read the kit.** Copy `kits/<id>/` into the user's project folder (never edit it in place), then read the files in `read_first` of its `kit.json` (STYLE.md, RENDER.md, RUBRIC.md) before writing any scene.
 4. **Plan scenes.** One scene per beat in the format's `beats`. Total length = what the user asked, else the lower bound of the format's `length`. The first beat (the hook) gets half a share, every other beat one share: share = total / (beats - 0.5). Every scene starts from the kit's `entry` template; for 9:16 use `templates/vertical.html` and the vertical section of its STYLE.md. For each scene write: start, seconds, beat, 1-5 words on screen, narration or action, sound. Show the plan to the user before building.
 5. **Build and check.** Build one scene at a time from the template, take stills, grade them against RUBRIC.md, fix, then the next scene.
-6. **Render** with `RENDER.md` (shared steps) and the kit's own RENDER.md. One render at a time.
+6. **Render** with `RENDER.md` (shared steps) and the kit's own RENDER.md. One render at a time. When the kit has `tools/render.sh`, render with `bash tools/render.sh`: it runs the kit's checks and only writes `out.mp4` when they pass; fix every line it prints and run it again. Never hand over `out.FAILED.mp4`.
 
 The kits are licensed for the user's own films; never paste a kit's files into another public repo or answer. Credits for open-source parts are in each kit's `LICENSES`.

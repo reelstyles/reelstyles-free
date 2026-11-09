@@ -60,15 +60,15 @@ shot(2.8, 5.4, () => {
   if (tt > 1.0 && tt < 2.0) say('whoa!', { size: 130, pop: EZ.back(seg(tt, 1.0, 1.25)), rot: 0.05, maxW: 400 });
 }, 'the spark lands', (t) => { const z = lerp(2.55, 2.75, EZ.io(seg(t, 2.8, 5.4))); return [lerp(1330, 1340, seg(t, 2.8, 5.4)), camY(gy(1300) + 10, z), z, lerp(-0.04, 0.02, seg(t, 2.8, 5.4))]; });
 
-// 3. CLOSE-TALL (5.4 - 8 s): the spark hums; hearts, notes and swirls rise out of it in a column up the frame
+// 3. CLOSE-TALL (5.4 - 8 s, zoom 2.95: at 3.2 the scarf tail crossed the left edge, 11-09): the spark hums; hearts, notes and swirls rise out of it in a column up the frame
 const P3 = { x: 1300 };
 shot(5.4, DUR, () => {
   sceneryV(PAL.lilac, 1, 0, [[1080, 1.3, PAL.teal], [1900, 1.3, PAL.mint]]); const g = gy(P3.x), tt = TT - 5.4, rise = EZ.o3(seg(tt, 0, 0.5));
   const sp = [P3.x + 87, g - 237];
   pip({ x: P3.x, y: g + 10, s: 1, face: 1, armL: 0.5 + Math.sin(TT * 3) * 0.08, armR: 2.4, look: [0.7, 0.1], mouth: tt > 0.3 ? 'grin' : 'smile', brow: 0.3 * (1 - rise),
     hold: (hx, hy) => {
-      ctx.save(); ctx.beginPath(); ctx.rect(hx - 30, hy - 700, 4 * 120, 760); ctx.clip();      // rays fan up and out, never across Pip's face
-      rays(hx, hy - 30, 50, 80, 12, seg(tt, 0.2, 0.9), TT * 0.6); ctx.restore();
+      unmeasured(() => { ctx.save(); ctx.beginPath(); ctx.rect(hx - 30, hy - 700, 4 * 120, 760); ctx.clip();      // rays fan up and out, never across Pip's face (an effect: not part of Pip's box)
+      rays(hx, hy - 30, 50, 80, 12, seg(tt, 0.2, 0.9), TT * 0.6); ctx.restore(); });
       spark(hx, hy - 30, 46 + Math.sin(TT * 9) * 3, TT * 0.8, { glowA: 0.4 + 0.2 * Math.sin(TT * 6) });
     } });
   // doodles loop upward from the spark, staggered; each pops in, sways, shrinks away near the top
@@ -79,7 +79,7 @@ shot(5.4, DUR, () => {
   });
   if (tt < 1.9) say('a small idea hums', { size: 100, pop: EZ.back(seg(tt, 0.85, 1.15)), maxW: 640 });
   else say('keep it.', { size: 130, color: PAL.glow, plate: PAL.night, pop: EZ.back(seg(tt, 1.9, 2.2)), rot: 0.02, maxW: 640 });
-}, 'it hums', (t) => { const z = lerp(3.2, 3.35, EZ.io(seg(t, 5.4, DUR))); return [lerp(1335, 1345, seg(t, 5.4, DUR)), gy(1300) - 225, z]; });
+}, 'it hums', (t) => { const z = lerp(2.95, 3.05, EZ.io(seg(t, 5.4, DUR))); return [lerp(1335, 1345, seg(t, 5.4, DUR)), gy(1300) - 225, z]; });
 
 // scribble wipe over each cut: a fat marker zig-zags down the tall frame (more rows than in 16:9) and sweeps off
 function wipe(tc, d, c) {

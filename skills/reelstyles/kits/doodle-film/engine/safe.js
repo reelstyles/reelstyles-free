@@ -11,9 +11,15 @@
 //    deliberate beats, at most 40% of the film; never under 25%. The hero box stays clear of all four edges on most frames.
 //    key object   >= 12% of the frame height (230 px) and >= 65 px inside every edge
 //
+//    figure(kind, fn, name)       draw a whole thing inside fn: the engine MEASURES every mark drawn in it and stores the real
+//                                 screen box (kits whose marks report through measure(), MEASURES = true: doodle-film). In those
+//                                 kits a hero/extra/prop/key box typed by hand with track() fails the frame: a typed box can miss
+//                                 the body (11-09: a tail and back ran off the left edge while the typed box sat inside).
+//    unmeasured(fn)               draw an effect inside a figure without growing its box (rays, glows that may bleed).
 //    track(kind, x0, y0, x1, y1)  call INSIDE your character's / prop's transform with its LOCAL box; it is stored in screen px.
 //                                 kinds: 'hero' (main character, whole body), 'face' (its head), 'key' (the beat's key object),
 //                                 'panel' (screen box of a stacked panel), 'extra' (other people, pip({extra:true}) does it), 'prop' (a big set piece that must fit whole: a tank, a house; track('prop', ..., name)). The kit characters already call it.
+//  Edges are checked in 16:9 too (hero, extras, props, key objects whole inside the frame); the other rules are vertical only.
 //    labelY(h)                    screen y (centre) for a label of height h: above the hero's head, inside the label band.
 //                                 The kit label helpers use it when you give no y.
 //    keys(t0, dt, list)           list[i] for TT in [t0 + i*dt, ...): one shot per <= 2 s (dt 2.0), so no picture sits on 3 neighbouring 1-s stills.
@@ -26,13 +32,34 @@ const LAYOUT = [], QAV = (window.__qa = window.__qa || {}), QAS = (window.__qs =
 const VSAFE = { lx0: 108, lx1: 918, ly0: 270, ly1: 500, headTop: 520, fx0: 65, fx1: 940, fy0: 250, fy1: 1470, edge: 65, hero: 0.25, wide: 0.55, close: 0.7, key: 0.12 };
 let END = null;
 
+const WHOLE = ['hero', 'extra', 'prop', 'key'], FIGS = [];   // FIGS: figures being drawn right now (nested: a prop in a hand grows both)
+const measuring = () => typeof MEASURES !== 'undefined' && MEASURES === true;
 function track(kind, x0, y0, x1, y1, name = '') {
   const m = ctx.getTransform(), pts = [[x0, y0], [x1, y0], [x0, y1], [x1, y1]].map(([x, y]) => [m.a * x + m.c * y + m.e, m.b * x + m.d * y + m.f]);
   const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
-  LAYOUT.push({ kind, name, x0: Math.min(...xs), y0: Math.min(...ys), x1: Math.max(...xs), y1: Math.max(...ys) });
+  LAYOUT.push({ kind, name, x0: Math.min(...xs), y0: Math.min(...ys), x1: Math.max(...xs), y1: Math.max(...ys), typed: !FIGS.length });
 }
-const NOTES = [];
-function qaNote(msg) { NOTES.push(msg); }   // any engine/character code can fail the frame with a one-line fix (e.g. pip: feet float)
+// the kit's mark functions call measure(localPts, pad) for every mark; pad = half the stroke plus the wobble, in local px
+function measure(pts, pad = 0) {
+  if (!FIGS.length) return;
+  const m = ctx.getTransform(), p = pad * Math.hypot(m.a, m.b);
+  for (const [x, y] of pts) {
+    const X = m.a * x + m.c * y + m.e, Y = m.b * x + m.d * y + m.f;
+    for (const f of FIGS) { if (X - p < f.x0) f.x0 = X - p; if (X + p > f.x1) f.x1 = X + p; if (Y - p < f.y0) f.y0 = Y - p; if (Y + p > f.y1) f.y1 = Y + p; }
+  }
+}
+// effects that may bleed past the figure on purpose (light rays, glows, a scribble wipe): drawn, not measured
+function unmeasured(fn) { const open = FIGS.splice(0); try { fn(); } finally { FIGS.push(...open); } }
+function figure(kind, fn, name = '') {
+  const f = { kind, name, x0: 1e9, y0: 1e9, x1: -1e9, y1: -1e9 };
+  FIGS.push(f);
+  try { fn(); } finally { FIGS.splice(FIGS.lastIndexOf(f), 1); }
+  if (f.x1 > f.x0) LAYOUT.push(f);
+  else if (measuring()) QA_NOTES.push(`${kind} ${name || ''} drew no measured marks: draw it with the kit's ink/shape/fillLoose so the check can see it`);
+  return f;
+}
+const QA_NOTES = [];
+function qaNote(msg) { QA_NOTES.push(msg); }   // any engine/character code can fail the frame with a one-line fix (e.g. pip: feet float)
 const vertical = () => H > W;
 const firstOf = (k) => LAYOUT.find((b) => b.kind === k);
 
@@ -61,11 +88,18 @@ function drawEnd() {
 
 const ov = (a, b) => Math.max(0, Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0)) * Math.max(0, Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0));
 function qaFrame() {
-  const t = Math.round(TT * 100) / 100, out = NOTES.splice(0);
-  if (!vertical() || (END && TT >= END.t0)) { QAV[t] = out; return; }
+  const t = Math.round(TT * 100) / 100, out = QA_NOTES.splice(0);
+  if (END && TT >= END.t0) { QAV[t] = out; return; }
+  if (measuring()) for (const b of LAYOUT) if (b.typed && WHOLE.includes(b.kind))
+    out.push(`${b.kind} ${b.name || ''} box typed by hand with track(): draw it inside figure('${b.kind}', () => { ... }) so the engine measures what is really drawn`);
+  if (!vertical()) {   // 16:9: whole things stay inside the frame (ground, sky and feet may bleed)
+    for (const e of LAYOUT) if (WHOLE.includes(e.kind) && (e.x0 < 0 || e.x1 > W || e.y0 < 0))
+      out.push(`${e.kind} ${e.name || ''} cut by the ${e.x0 < 0 ? 'left' : e.x1 > W ? 'right' : 'top'} edge (box x ${Math.round(e.x0)}-${Math.round(e.x1)}, top ${Math.round(e.y0)}): move it inward or pull the camera back`);
+    QAV[t] = out; return;
+  }
   const heroes = LAYOUT.filter((b) => b.kind === 'hero'), faces = LAYOUT.filter((b) => b.kind === 'face');
   const labels = LAYOUT.filter((b) => b.kind === 'label'), panels = LAYOUT.filter((b) => b.kind === 'panel');
-  if (!heroes.length && !LAYOUT.some((b) => b.kind === 'key')) out.push('nothing tracked: call track("hero", ...) + track("face", ...) in your character, or track("key", ...) on the main object of the shot (engine/safe.js)');
+  if (!heroes.length && !LAYOUT.some((b) => b.kind === 'key')) out.push(measuring() ? 'nothing tracked: draw the main character inside figure("hero", () => { ... }) (the kit characters do it), or the main object inside figure("key", ...)' : 'nothing tracked: call track("hero", ...) + track("face", ...) in your character, or track("key", ...) on the main object of the shot (engine/safe.js)');
   for (const h of heroes) {
     const pan = panels.find((p) => h.y0 >= p.y0 - 40 && h.y0 < p.y1), ref = pan ? pan.y1 - pan.y0 : H;
     const vis = Math.min(h.y1, pan ? pan.y1 : H) - Math.max(h.y0, pan ? pan.y0 : 0);

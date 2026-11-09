@@ -60,8 +60,8 @@
     },
     {
       "path": "RENDER.md",
-      "bytes": 3957,
-      "sha256": "1b035aae892105a62d5c240082c9b992b3e7d1b919e774cc45442efc8f47bb08"
+      "bytes": 3795,
+      "sha256": "01959ade00ce0fb81e4f554cdb65803b7581714158afeea14529ccb9f89f674b"
     },
     {
       "path": "RUBRIC.md",
@@ -70,8 +70,8 @@
     },
     {
       "path": "STYLE.md",
-      "bytes": 12904,
-      "sha256": "4ecc008b1c345dd8fe0aa9f67ef69d74044477830c1f9a9ba43b8040b3a62ed6"
+      "bytes": 13512,
+      "sha256": "96dc3015fca154e40600d50034c964f9aaa16ba19971bfcbab917c4b56c6293c"
     },
     {
       "path": "audio/score.wav",
@@ -80,18 +80,18 @@
     },
     {
       "path": "characters/pip.js",
-      "bytes": 10204,
-      "sha256": "2a1bb0df3d4a0d1d29b515ecf12a5b6c28b004792e7abbe1ce7a4448f2fcaba9"
+      "bytes": 10946,
+      "sha256": "eac6bb66d51c5ee1ea56a3b3f82023f75122de22f7835512a92ef4fd8a916999"
     },
     {
       "path": "engine/doodle.js",
-      "bytes": 12312,
-      "sha256": "0561d10a59a5117a3e9ba8c2e5d46f1a0e62430505f25631c67e9071cdf031dd"
+      "bytes": 13285,
+      "sha256": "7dbe4f73fcb4dacd8d73b43e833ae4dd34226c9091f73409e26865960cfbda3b"
     },
     {
       "path": "engine/runtime.js",
-      "bytes": 4060,
-      "sha256": "7c6ed81913300ff87e77cc72a6fa93fddb870d800d1766156cc19133e0e7082d"
+      "bytes": 4219,
+      "sha256": "d4779e06341be53c69a64c60f1fd3e56ace250e71cbbbbc401b8abd8745647a5"
     },
     {
       "path": "fonts/Caveat.ttf",
@@ -105,23 +105,23 @@
     },
     {
       "path": "templates/film-v.js",
-      "bytes": 8763,
-      "sha256": "2826b504c9e0cf6b46b1eaf292bb959be34731daa7785efcd9833fa32cf5bf08"
+      "bytes": 8885,
+      "sha256": "15a35c6de966a96ffca08f67158f3cce4269f2f4276e14e4913f713de0bf6667"
     },
     {
       "path": "templates/film.js",
-      "bytes": 6714,
-      "sha256": "b84abf38edecac3b0837d67c68adee649ca0269b3fed297c3615fdb5f3c74644"
+      "bytes": 6732,
+      "sha256": "fff0e5e93246ef905c078d39597f81b8746d870ce7758960d834943ed1b4d742"
     },
     {
       "path": "templates/index.html",
-      "bytes": 1223,
-      "sha256": "1b182a1a6269fb9d3449d6696474bc9600fc0817430954771c8b85a67999a5e7"
+      "bytes": 1264,
+      "sha256": "37767713801f1f62d63857fbb25e8ecde429b0d078862dc3b6e732af870696d6"
     },
     {
       "path": "templates/vertical.html",
-      "bytes": 1286,
-      "sha256": "d08f72e502e878a7f80a8e73fe4e2e13acb4b13fe5e12c359a2db712d33c7ed8"
+      "bytes": 1428,
+      "sha256": "ef5b059fd0e61a6280c3e3ab5ba256a70cfe15fc02d26ea60445c9de219fddda"
     },
     {
       "path": "tools/deadhold.sh",
@@ -132,6 +132,11 @@
       "path": "tools/score.sh",
       "bytes": 2199,
       "sha256": "7ba1b1d2f43d12fc49b2dd0a2a03a880b85dbd70c9e1c45340aa272d1f844f62"
+    },
+    {
+      "path": "tools/render.sh",
+      "bytes": 2120,
+      "sha256": "4d05f837b72e9498fcef6f4458e3550303ffdb9b936af8b6ae900085ec385f0e"
     }
   ]
 }

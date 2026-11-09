@@ -75,8 +75,8 @@
     },
     {
       "path": "STYLE.md",
-      "bytes": 7889,
-      "sha256": "bba9e4970a7418b6eca5fe968aa9fe3720c3055990e7eed000023b39e4a18151"
+      "bytes": 8500,
+      "sha256": "54022c5c0b4cef241de205e0d7b4f67b32d3e24638d5f42fa1c646ffdbd56ad3"
     },
     {
       "path": "engine/kinetic.js",

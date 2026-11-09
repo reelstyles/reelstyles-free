@@ -64,8 +64,8 @@
     },
     {
       "path": "STYLE.md",
-      "bytes": 10188,
-      "sha256": "883d7fb8d4d3a885ed3f1af33b0e3e3af8c9a5b0b370b6ca5533b539e81d6432"
+      "bytes": 10799,
+      "sha256": "058d31ca489ca97c5e074d0aca0124b8e124ce5e193eadefba15c202584517ba"
     },
     {
       "path": "engine/wb.js",

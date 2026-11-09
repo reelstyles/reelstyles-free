@@ -53,7 +53,7 @@ shot(5.4, 7.9, () => {
   scenery(PAL.lilac); const g = gy(P3.x), tt = TT - 5.4, rise = EZ.o3(seg(tt, 0, 0.5));
   const sp = [P3.x + 87, g - 237];
   pip({ x: P3.x, y: g + 10, s: 1, face: 1, armL: 0.5 + Math.sin(TT * 3) * 0.08, armR: 2.4, look: [0.7, 0.1], mouth: tt > 0.3 ? 'grin' : 'smile', brow: 0.3 * (1 - rise),
-    hold: (hx, hy) => { rays(hx, hy - 30, 54, 120, 12, seg(tt, 0.2, 0.9), TT * 0.6); spark(hx, hy - 30, 34 + Math.sin(TT * 9) * 3, TT * 0.8, { glowA: 0.4 + 0.2 * Math.sin(TT * 6) }); } });
+    hold: (hx, hy) => { unmeasured(() => rays(hx, hy - 30, 54, 120, 12, seg(tt, 0.2, 0.9), TT * 0.6)); spark(hx, hy - 30, 34 + Math.sin(TT * 9) * 3, TT * 0.8, { glowA: 0.4 + 0.2 * Math.sin(TT * 6) }); } });
   const orb = (k, t0, f) => { const a = TT * 1.5 + k * 2.1, r = 150 + Math.sin(TT * 3 + k) * 14, q = EZ.back(seg(tt, t0, t0 + 0.4)); return [sp[0] + Math.cos(a) * r * 1.2, sp[1] - 30 + Math.sin(a) * r * 0.7, q]; };
   let [x, y, q] = orb(0, 0.7); if (q > 0) heart(x, y, q * 1.1, PAL.coral, 1);
   [x, y, q] = orb(1, 1.0); if (q > 0) note(x, y, q * 1.2, 2);

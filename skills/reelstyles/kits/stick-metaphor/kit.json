@@ -85,8 +85,8 @@
     },
     {
       "path": "engine/safe.js",
-      "bytes": 8507,
-      "sha256": "ea09032cfae046f8a0680f3c18bc0857f3aa50cf8fe8e2092fe4298c3e427fdc"
+      "bytes": 12274,
+      "sha256": "faf4be00c87ceeb252329a1416e2350d40d93b2090b3f692336a245b43ba894f"
     },
     {
       "path": "fonts/Inter-500.woff2",
@@ -145,13 +145,18 @@
     },
     {
       "path": "tools/layout-check.mjs",
-      "bytes": 5922,
-      "sha256": "155440e7a69db31b7251b99817207833f80068ce3fee6966bf7f456a5a2f03f0"
+      "bytes": 9193,
+      "sha256": "cd69e026e262dcb39ba4b2d75718ac2fbff12b25da4ed95fea957e998dd3b84b"
     },
     {
       "path": "tools/vcheck.sh",
-      "bytes": 3251,
-      "sha256": "38da72adbaf64045d8d423ba78f57237fa891cd4562347c598d841320d65a9cc"
+      "bytes": 3403,
+      "sha256": "b9060be6f6e1874b956138d148fc5d29742c7eaa2278aa4b7f0294dcf33ae3b2"
+    },
+    {
+      "path": "tools/render.sh",
+      "bytes": 2120,
+      "sha256": "4d05f837b72e9498fcef6f4458e3550303ffdb9b936af8b6ae900085ec385f0e"
     }
   ]
 }

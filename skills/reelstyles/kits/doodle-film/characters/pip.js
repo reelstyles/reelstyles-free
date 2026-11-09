@@ -12,6 +12,8 @@
 //           const WORKER = cast('worker', { tint, hat });  then WORKER({ x, ... }) in every shot. A cast figure ignores costume
 //           keys passed at the call, so the costume cannot drift between shots. extra:true = a figure that is not the hero
 //           (still edge-checked, still gets its shadow).
+//  dot({x, s, face, ph, look, mouth, hero})  the cat; hero:true when it is the main character. Your own character: draw it with
+//           ink/shape/fillLoose inside figure('hero', () => { ... }) and track('face', ...) on its head; a typed track('hero') box fails.
 //  Seeds are fixed per body part so the hand-drawn wobble stays on-model between frames.
 // =====================================================================
 const CASTS = {};
@@ -20,13 +22,16 @@ function cast(name, look) {                 // one costume per person for the wh
   CASTS[name] = Object.freeze({ ...look });
   return (o) => pip({ ...o, ...CASTS[name] });
 }
-function pip(o) {
+// pip()/dot() draw inside figure(): engine/safe.js measures every mark, so the checked box is what is really on screen
+const pipFig = (kind, fn, name) => (typeof figure === 'function' ? figure(kind, fn, name) : fn());
+function pip(o) { pipFig(o.extra ? 'extra' : 'hero', () => pipDraw(o), o.name || ''); }
+function pipDraw(o) {
   const gnd = (o.ground || groundY)(o.x) + 10;
   const { x, y = gnd, s = 1, face = 1, ph = 0, armL = 0.25, armR = -0.25, look = [0.3, 0.1], mouth = 'smile', brow = 0, hop = 0, lean = 0, hold = null, tint = PAL.coral, hat = null, hatC = PAL.pencil, stache = false, legC = PAL.ink, scarf = PAL.mustard } = o;
   const breathe = Math.sin(TT * 3.1 + 1) * 3, walking = ph !== 0, bob = walking ? Math.abs(Math.sin(ph)) * -10 : breathe * 0.5;
   const blink = (TT % 2.6) > 2.5;
   ctx.save(); ctx.translate(x, y - hop * 120); ctx.scale(face * s, s); ctx.rotate(lean);
-  if (typeof track === 'function') { track(o.extra ? 'extra' : 'hero', -72, -345, 72, 12); if (!o.extra) track('face', -68, -312, 68, -182); }   // engine/safe.js layout QA
+  if (typeof track === 'function' && !o.extra) track('face', -68, -312, 68, -182);   // engine/safe.js: the head box (labels keep off it); the body box is measured by figure()
   if (typeof qaNote === 'function' && !hop && !o.air && Math.abs(y - gnd) > 45) qaNote(`feet float: the figure at x ${Math.round(x)} is ${Math.round(y - gnd)} px off the ground: omit y (it snaps to the ground) or pass air:true`);
   // contact shadow on the ground, always drawn (shrinks as he jumps)
   ctx.save(); ctx.translate(0, hop * 120); ink(ellP(0, 4, 70 - hop * 20, 12), { c: PAL.faint, w: 4, seed: 3, dbl: false, a: 0.7 }); ctx.restore();
@@ -79,8 +84,9 @@ function pip(o) {
 }
 
 // Dot the cat: a small white sidekick with a tail that never stops, ears that twitch. Sits or walks (ph).
-function dot(o) {
-  const { x, y, s = 1, face = 1, ph = 0, sit = false, look = [0.4, 0], mouth = false } = o, bob = ph ? Math.abs(Math.sin(ph)) * -6 : Math.sin(TT * 2.6) * 2;
+function dot(o) { pipFig(o.hero ? 'hero' : 'extra', () => dotDraw(o), o.name || 'Dot'); }   // hero:true when Dot is the main character
+function dotDraw(o) {
+  const { x, y = groundY(o.x) + 10, s = 1, face = 1, ph = 0, sit = false, look = [0.4, 0], mouth = false } = o, bob = ph ? Math.abs(Math.sin(ph)) * -6 : Math.sin(TT * 2.6) * 2;
   ctx.save(); ctx.translate(x, y); ctx.scale(face * s, s);
   const tw = Math.sin(TT * 4.2) * 24, tail = splineP([[-50, -46 + bob], [-90, -60], [-112 + tw * 0.3, -110 + tw], [-92 + tw * 0.6, -150 + tw * 1.2]], 6);
   ink(tail, { w: 12, seed: 81, c: PAL.ink, dbl: false }); ink(tail, { w: 6, seed: 82, c: PAL.white, dbl: false });

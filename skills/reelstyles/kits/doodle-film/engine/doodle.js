@@ -12,6 +12,8 @@ const PAL = {
   coral: '#F0645A', mustard: '#F4B63F', teal: '#2EA5A0', sky: '#8FCBEA', lilac: '#A99BD8', mint: '#9ADBB2', blush: '#F7C3B5',
   night: '#2C3150', white: '#FFFCF4', glow: '#FFE08A',
 };
+// every ink/fill mark reports its points to engine/safe.js measure(): figure('hero', () => ...) gets the real drawn box
+var MEASURES = true;
 const boilN = () => Math.floor(TT * 8 + 1e-6) % 3;   // which of 3 redrawings we are on (8 fps)
 
 // ---- shapes → point lists (local coordinates)
@@ -73,6 +75,7 @@ function trace(pts) {
 function ink(pts, o = {}) {
   const { c = PAL.ink, w = 5, seed = 1, amp = 2.4, p = 1, dbl = true, a = 1 } = o;
   const q = cut(pts, p); if (q.length < 2) return;
+  if (typeof measure === 'function') measure(q, w / 2 + amp * 1.4 + 1);
   ctx.save(); ctx.strokeStyle = c; ctx.globalAlpha *= a;
   ctx.lineWidth = w; if (trace(wob(q, seed, amp))) ctx.stroke();
   if (dbl) { ctx.lineWidth = w * 0.55; ctx.globalAlpha *= 0.5; if (trace(wob(q, seed + 50, amp * 1.4))) ctx.stroke(); }
@@ -82,6 +85,7 @@ function fillLoose(pts, o = {}) {
   const { c = PAL.mustard, seed = 1, off = [6, 5], hatch = true, a = 0.9, hc = null, gap = 26, p = 1, base = true, mult = true } = o;
   const w = wob(pts, seed + 9, 3.2, 16), b = boilN();
   const dx = off[0] + (b - 1) * 1.2, dy = off[1] + (1 - b) * 1.0;
+  if (typeof measure === 'function') measure(w, Math.max(Math.abs(dx), Math.abs(dy)) + 2);
   if (base && p >= 1) {                                                // opaque paper under the marker so shapes hide what is behind them
     ctx.save(); ctx.fillStyle = PAL.paper; ctx.beginPath(); w.forEach(([x, y], i) => (i ? ctx.lineTo(x + dx, y + dy) : ctx.moveTo(x + dx, y + dy))); ctx.closePath(); ctx.fill(); ctx.restore();
   }

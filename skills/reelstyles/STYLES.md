@@ -88,7 +88,7 @@ These styles come with ReelStyles Starter or Full: https://reelstyles.com/pricin
 | `satisfying-loop` | Oddly satisfying 3D loops | 3D & cutaway | 16:9 |
 | `vaporwave` | Vaporwave dream | Retro & internet | 16:9 |
 | `anime-sky` | Painted anime sky | Painterly | 16:9, 9:16 |
-| `comic-panels` | Pop comic panels | Paper & print | 16:9 |
+| `comic-panels` | Pop comic panels | Paper & print | 16:9, 9:16 |
 | `origami` | Origami fold | Craft | 16:9, 9:16 |
 | `voxel-diorama` | Voxel diorama | 3D & cutaway | 16:9 |
 | `blocky-avatar` | Blocky avatar game | 3D & cutaway | 16:9, 9:16 |

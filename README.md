@@ -9,7 +9,7 @@
 [![Stick-figure metaphor Short](https://reelstyles.com/samples/stick-metaphor-example.jpg)](https://reelstyles.com/style/stick-metaphor)
 [![Countdown guessing quiz](https://reelstyles.com/samples/guess-quiz-example.jpg)](https://reelstyles.com/style/guess-quiz)
 
-To try it in Claude Code, run the two /plugin lines below and ask for "a 20 s video about coffee in the whiteboard style". It takes about 30 seconds.
+To try it in Claude Code, run the two /plugin lines below and ask for "a 20 s video about coffee in the whiteboard style". It takes a few minutes.
 
 Each kit is a set of plain files: a style guide, scene templates, render steps and a rubric the agent checks its own frames against. Any agent that can read files and use a terminal can work with them, for example Claude Code, Codex, Cursor, Roo Code, Cline, Gemini CLI or GitHub Copilot. The agent writes each scene in code and HyperFrames renders it on your computer. You don't need an AI video model for this.
 

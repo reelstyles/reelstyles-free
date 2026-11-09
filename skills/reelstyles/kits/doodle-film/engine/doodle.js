@@ -166,7 +166,7 @@ function flushText() {
     if (typeof LAYOUT !== 'undefined' && H > W) LAYOUT.push({ kind: 'label', name: String(str), x0: bx, y0: by, x1: bx + bw, y1: by + bh });
     const pop = o.pop === undefined ? 1 : o.pop; if (pop <= 0) { ctx.restore(); continue; }
     ctx.translate(bx + bw / 2, by + bh / 2); ctx.rotate(o.rot || 0); ctx.scale(0.85 + 0.15 * pop, 0.85 + 0.15 * pop); ctx.globalAlpha = clamp(pop * 2);
-    if (plate) { const r = rectP(-bw / 2, -bh / 2, bw, bh); fillLoose(r, { c: plate, seed: 4, hatch: false, off: [8, 7], a: 1 }); ink(r, { w: 4, seed: 5, amp: 1.8 }); }
+    if (plate) unmeasured(() => { const r = rectP(-bw / 2, -bh / 2, bw, bh); fillLoose(r, { c: plate, seed: 4, hatch: false, off: [8, 7], a: 1 }); ink(r, { w: 4, seed: 5, amp: 1.8 }); });   // text has its own label check
     ctx.fillStyle = o.color || PAL.ink; ctx.textBaseline = 'middle'; ctx.textAlign = 'center';
     let left = Math.round(clamp(V && !o.type ? 1 : o.p ?? 1) * String(str).length + (o.p === undefined ? 0 : 0.0001));
     lines.forEach((l, i) => {

@@ -85,8 +85,8 @@
     },
     {
       "path": "engine/doodle.js",
-      "bytes": 13285,
-      "sha256": "7dbe4f73fcb4dacd8d73b43e833ae4dd34226c9091f73409e26865960cfbda3b"
+      "bytes": 13338,
+      "sha256": "fa71ab62a032b5582e29a7710f35d1a23dec8a779bcc95d24468b34ab1d8240b"
     },
     {
       "path": "engine/runtime.js",
@@ -100,18 +100,18 @@
     },
     {
       "path": "sets/sets.js",
-      "bytes": 7219,
-      "sha256": "3f27a3ee03d85a0c456d6f707af44002bf1a61e77187e099b1dc884375e4c77d"
+      "bytes": 7601,
+      "sha256": "533957f6b153f5380cd63c571ce8e1b09f8b0a0c6b5fd564ec7d91e80de4d2ab"
     },
     {
       "path": "templates/film-v.js",
-      "bytes": 8885,
-      "sha256": "15a35c6de966a96ffca08f67158f3cce4269f2f4276e14e4913f713de0bf6667"
+      "bytes": 9186,
+      "sha256": "ac0b767b22ffcf62a907bc4546171ae06c492286bb0a0b102b002ccacd68d564"
     },
     {
       "path": "templates/film.js",
-      "bytes": 6732,
-      "sha256": "fff0e5e93246ef905c078d39597f81b8746d870ce7758960d834943ed1b4d742"
+      "bytes": 6917,
+      "sha256": "8fe781d058a8dc642c5fcda398707f0af7ff5127a7d3948b24620a00a8ba2381"
     },
     {
       "path": "templates/index.html",

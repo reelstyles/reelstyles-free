@@ -85,8 +85,8 @@
     },
     {
       "path": "engine/safe.js",
-      "bytes": 12274,
-      "sha256": "faf4be00c87ceeb252329a1416e2350d40d93b2090b3f692336a245b43ba894f"
+      "bytes": 13769,
+      "sha256": "dec05b9f70ce387e6308bdfb6f6892d4b1cec1ff823dd6cec79f01f5b26b5a79"
     },
     {
       "path": "fonts/Inter-500.woff2",

@@ -15,7 +15,8 @@
 //                                 screen box (kits whose marks report through measure(), MEASURES = true: doodle-film). In those
 //                                 kits a hero/extra/prop/key box typed by hand with track() fails the frame: a typed box can miss
 //                                 the body (11-09: a tail and back ran off the left edge while the typed box sat inside).
-//    unmeasured(fn)               draw an effect inside a figure without growing its box (rays, glows that may bleed).
+//    unmeasured(fn)               draw something that may bleed (ground, sky wash, rays, glows) without being measured. Any mark drawn
+//                                 OUTSIDE a figure() that a frame edge cuts through also fails the frame (11-09: a bowl, an oven and the loaf ran off the edge).
 //    track(kind, x0, y0, x1, y1)  call INSIDE your character's / prop's transform with its LOCAL box; it is stored in screen px.
 //                                 kinds: 'hero' (main character, whole body), 'face' (its head), 'key' (the beat's key object),
 //                                 'panel' (screen box of a stacked panel), 'extra' (other people, pip({extra:true}) does it), 'prop' (a big set piece that must fit whole: a tank, a house; track('prop', ..., name)). The kit characters already call it.
@@ -40,16 +41,21 @@ function track(kind, x0, y0, x1, y1, name = '') {
   LAYOUT.push({ kind, name, x0: Math.min(...xs), y0: Math.min(...ys), x1: Math.max(...xs), y1: Math.max(...ys), typed: !FIGS.length });
 }
 // the kit's mark functions call measure(localPts, pad) for every mark; pad = half the stroke plus the wobble, in local px
+// A mark drawn outside any figure() (a bowl, an oven, a loaf the builder never declared) is checked too: one that straddles the
+// left/right/top edge is a cut-off object and fails the frame. A mark wholly off screen (the world strip) is fine.
 function measure(pts, pad = 0) {
-  if (!FIGS.length) return;
-  const m = ctx.getTransform(), p = pad * Math.hypot(m.a, m.b);
+  if (UNM) return;
+  const m = ctx.getTransform(), p = pad * Math.hypot(m.a, m.b), b = { x0: 1e9, y0: 1e9, x1: -1e9, y1: -1e9 };
   for (const [x, y] of pts) {
     const X = m.a * x + m.c * y + m.e, Y = m.b * x + m.d * y + m.f;
-    for (const f of FIGS) { if (X - p < f.x0) f.x0 = X - p; if (X + p > f.x1) f.x1 = X + p; if (Y - p < f.y0) f.y0 = Y - p; if (Y + p > f.y1) f.y1 = Y + p; }
+    if (X - p < b.x0) b.x0 = X - p; if (X + p > b.x1) b.x1 = X + p; if (Y - p < b.y0) b.y0 = Y - p; if (Y + p > b.y1) b.y1 = Y + p;
   }
+  if (!FIGS.length) { if ((b.x0 < 0 && b.x1 > 0) || (b.x0 < W && b.x1 > W) || (b.y0 < 0 && b.y1 > 0)) LAYOUT.push({ kind: 'loose', ...b }); return; }
+  for (const f of FIGS) { if (b.x0 < f.x0) f.x0 = b.x0; if (b.x1 > f.x1) f.x1 = b.x1; if (b.y0 < f.y0) f.y0 = b.y0; if (b.y1 > f.y1) f.y1 = b.y1; }
 }
-// effects that may bleed past the figure on purpose (light rays, glows, a scribble wipe): drawn, not measured
-function unmeasured(fn) { const open = FIGS.splice(0); try { fn(); } finally { FIGS.push(...open); } }
+// things that may bleed past the frame or their figure on purpose (ground, sky wash, light rays, drifting motes): drawn, not measured
+let UNM = 0;
+function unmeasured(fn) { const open = FIGS.splice(0); UNM++; try { fn(); } finally { UNM--; FIGS.push(...open); } }
 function figure(kind, fn, name = '') {
   const f = { kind, name, x0: 1e9, y0: 1e9, x1: -1e9, y1: -1e9 };
   FIGS.push(f);
@@ -92,6 +98,10 @@ function qaFrame() {
   if (END && TT >= END.t0) { QAV[t] = out; return; }
   if (measuring()) for (const b of LAYOUT) if (b.typed && WHOLE.includes(b.kind))
     out.push(`${b.kind} ${b.name || ''} box typed by hand with track(): draw it inside figure('${b.kind}', () => { ... }) so the engine measures what is really drawn`);
+  if (measuring()) for (const [side, hit] of [['left', (b) => b.x0 < 0 && b.x1 > 0], ['right', (b) => b.x0 < W && b.x1 > W], ['top', (b) => b.y0 < 0 && b.y1 > 0]]) {
+    const c = LAYOUT.filter((b) => b.kind === 'loose' && hit(b));
+    if (c.length) out.push(`${c.length} mark(s) of something not drawn inside figure() are cut by the ${side} edge (x ${Math.round(Math.min(...c.map((b) => b.x0)))}-${Math.round(Math.max(...c.map((b) => b.x1)))}, y ${Math.round(Math.min(...c.map((b) => b.y0)))}-${Math.round(Math.max(...c.map((b) => b.y1)))}): move the object inward or pull the camera back; wrap it in figure('prop', () => ...) to check it whole, or in unmeasured(() => ...) if it may bleed (ground, sky)`);
+  }
   if (!vertical()) {   // 16:9: whole things stay inside the frame (ground, sky and feet may bleed)
     for (const e of LAYOUT) if (WHOLE.includes(e.kind) && (e.x0 < 0 || e.x1 > W || e.y0 < 0))
       out.push(`${e.kind} ${e.name || ''} cut by the ${e.x0 < 0 ? 'left' : e.x1 > W ? 'right' : 'top'} edge (box x ${Math.round(e.x0)}-${Math.round(e.x1)}, top ${Math.round(e.y0)}): move it inward or pull the camera back`);

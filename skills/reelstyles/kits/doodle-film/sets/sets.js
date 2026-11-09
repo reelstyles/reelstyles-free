@@ -63,3 +63,6 @@ function motes(x0, x1, y0, y1, n = 46, c = PAL.pencil) {
     else ink(ellP(x, y, r * 0.6, r * 0.6, 8), { c, w: 3, seed: i, dbl: false, a: 0.5 });
   }
 }
+// backdrop pieces may bleed past any edge (engine/safe.js: any other mark drawn outside a figure() that an edge cuts fails the frame)
+{ const bg = (f) => (...a) => unmeasured(() => f(...a));
+  ground = bg(ground); wash = bg(wash); tuft = bg(tuft); cloud = bg(cloud); tree = bg(tree); flower = bg(flower); sun = bg(sun); moon = bg(moon); twinkle = bg(twinkle); motes = bg(motes); }

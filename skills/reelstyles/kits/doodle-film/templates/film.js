@@ -42,7 +42,8 @@ shot(2.8, 5.4, () => {
     mouth: tt < 1.0 ? 'flat' : picked ? 'smile' : 'o', brow: tt > 1.0 && !picked ? 1 : 0, hold: picked ? (hx, hy) => spark(hx + 0, hy - 30, 34, TT * 0.8, { glowA: 0.55 }) : null });
   if (!picked) {
     const x = lerp(sx, hand[0], pick), y = lerp(landed ? g - 40 + land * 0 : sy, hand[1], pick);
-    spark(x, landed ? lerp(g - 40, hand[1], pick) : y, 30 + (landed ? Math.sin(tt * 14) * 2 : 0), TT * 1.6, { glowA: 0.5, tail: landed ? 0 : 150 });
+    const dropSpark = () => spark(x, landed ? lerp(g - 40, hand[1], pick) : y, 30 + (landed ? Math.sin(tt * 14) * 2 : 0), TT * 1.6, { glowA: 0.5, tail: landed ? 0 : 150 });
+    landed ? dropSpark() : unmeasured(dropSpark);   // while it falls it enters through the top edge on purpose
   }
   if (tt > 1.0 && tt < 2.0) say('whoa!', { at: [P2.x + 30, g - 400], size: 90, pop: EZ.back(seg(tt, 1.0, 1.25)), rot: 0.05, maxW: 400 });
 }, 'the spark lands', (t) => [lerp(1380, 1500, seg(t, 2.8, 5.4)), 640, lerp(1.2, 1.38, EZ.io(seg(t, 2.8, 5.4)))]);
@@ -77,7 +78,7 @@ function wipe(tc, d, c) {
   const a = seg(TT, tc - d, tc), b = seg(TT, tc, tc + d); if (a <= 0 || b >= 1) return;
   const pts = []; for (let i = 0; i <= 14; i++) pts.push([(i / 14) * (W + 300) - 150, 80 + (i % 2) * (H - 160)]);
   ctx.save(); ctx.beginPath(); ctx.rect(b * (W + 200) - 100, 0, W + 400, H); ctx.clip();
-  ink(cut(pts, a), { c, w: 260, seed: 3, amp: 6, dbl: false, a: 0.96 }); ctx.restore();
+  unmeasured(() => ink(cut(pts, a), { c, w: 260, seed: 3, amp: 6, dbl: false, a: 0.96 })); ctx.restore();   // a wipe crosses every edge
 }
 [2.8, 5.4, 7.9].forEach((t, i) => trans(() => wipe(t, 0.22, [PAL.mustard, PAL.coral, PAL.teal][i])));
 

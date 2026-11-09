@@ -10,7 +10,7 @@
 [![Countdown guessing quiz](https://reelstyles.com/samples/guess-quiz-example.jpg)](https://reelstyles.com/style/guess-quiz)
 [![Pop comic panels](https://reelstyles.com/samples/comic-panels-example.jpg)](https://reelstyles.com/style/comic-panels)
 
-To try it in Claude Code, run the two /plugin lines below and ask for "a 20 s video about coffee in the whiteboard style". It takes a few minutes.
+To try it in Claude Code, run the two /plugin lines below and ask for "a 20 s video about coffee in the whiteboard style". The first video takes about 20 minutes, setup included. After that a short video renders in a few minutes.
 
 Each kit is a set of plain files: a style guide, scene templates, render steps and a rubric the agent checks its own frames against. Any agent that can read files and use a terminal can work with them, for example Claude Code, Codex, Cursor, Roo Code, Cline, Gemini CLI or GitHub Copilot. The agent writes each scene in code and HyperFrames renders it on your computer. You don't need an AI video model for this.
 
@@ -35,4 +35,4 @@ Node.js 22 or newer, ffmpeg, and Chrome or Chromium (HyperFrames uses it to rend
 MIT. You can use, change and share these kits, also for commercial work. The full text is in LICENSE.md.
 
 ## More styles
-Starter has 31 styles for $19. Full has all 124 and every style added later. It costs $49 for the first 20 buyers and $79 after that. You pay once. Current prices are at https://reelstyles.com/pricing?utm_source=free-kit
+Starter has 31 styles for $19. Full has all 125 and every style added later. It costs $49 for the first 20 buyers and $79 after that. You pay once. Current prices are at https://reelstyles.com/pricing?utm_source=free-kit

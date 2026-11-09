@@ -12,7 +12,7 @@ Kit folder: `kits/<id>/`. Aspects = the frame sizes the kit is tested in. Best f
 | `guess-quiz` | Countdown guessing quiz | Motion graphics | 16:9, 9:16 | every-x-explained |
 | `comic-panels` | Pop comic panels | Paper & print | 16:9, 9:16 | money-disaster, animated-movie |
 
-## Not in this tier (117)
+## Not in this tier (118)
 
 These styles come with ReelStyles Starter or Full: https://reelstyles.com/pricing?utm_source=free-kit
 
@@ -84,6 +84,7 @@ These styles come with ReelStyles Starter or Full: https://reelstyles.com/pricin
 | `ranking-race` | Ranking Race | Motion graphics | 16:9 |
 | `map-history` | Territory Map | Motion graphics | 16:9 |
 | `horror-story` | Illustrated true-horror story | Cartoon | 16:9 |
+| `legend-flip` | Legend Flip | Cartoon | 9:16 |
 | `object-metaphor` | Everyday-object money explainer | Cartoon | 16:9 |
 | `synthwave-drive` | Neon synthwave drive | Retro & internet | 16:9 |
 | `satisfying-loop` | Oddly satisfying 3D loops | 3D & cutaway | 16:9 |

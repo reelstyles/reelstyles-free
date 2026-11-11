@@ -28,9 +28,7 @@
   ],
   "example_video": "samples/kinetic-type-example.mp4",
   "read_first": [
-    "STYLE.md",
-    "RENDER.md",
-    "RUBRIC.md"
+    "STYLE.md"
   ],
   "files": [
     {
@@ -64,19 +62,9 @@
       "sha256": "33d6cd35a20903b5e968a76a1e584a7aeae2c83e3e58ea58ecc50b889b83e668"
     },
     {
-      "path": "RENDER.md",
-      "bytes": 4082,
-      "sha256": "72eff2ae5f35f20479ebec5595a618e1df8eabdf410cedbcecc631cf0de20f12"
-    },
-    {
-      "path": "RUBRIC.md",
-      "bytes": 2554,
-      "sha256": "46fe177534e3ad9f1c7fff6f2cd6bbe4b766e175aafc2b8a2d3def18d0330a21"
-    },
-    {
       "path": "STYLE.md",
-      "bytes": 8500,
-      "sha256": "54022c5c0b4cef241de205e0d7b4f67b32d3e24638d5f42fa1c646ffdbd56ad3"
+      "bytes": 5825,
+      "sha256": "72a3ca40b779ff863d94f3546ba62d3b6497305eae58c10ba06db10c2b8010e2"
     },
     {
       "path": "engine/kinetic.js",

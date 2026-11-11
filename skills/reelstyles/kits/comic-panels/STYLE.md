@@ -1,59 +1,75 @@
-# Pop comic panels: style guide
+# Pop comic panels
 
-## Essence
-The frame is a printed comic page: flat colour in four process inks on aged newsprint, thick black outlines, black gutters. The camera never leaves the page; it pushes into one panel until it fills the screen, then moves on to the next. Limited animation (poses on twos) lives inside each panel, loud lettering pops in on the beat.
+Four process inks on aged newsprint, thick black outlines, black gutters. You draw flat shapes back to front; the engine prints the look. No gradients, 3D, photos or glows (a glow is a halftone ring).
 
-## What it is not
-Not a motion-graphics "comic filter" over video, not smooth gradients, not 3D, not anime. No photos. Every colour is a real ink or an overprint of two inks. Nothing glows (a glow is a halftone ring).
+## Look
 
-## Materials (what the engine does for you, `engine/comic.js`)
-- **Four inks, multiplied onto paper**: cyan `#00ADEF`, magenta `#EC0A8C`, yellow `#FFE600`, black `#15110E`; paper `#EDE0BE`. Yellow + magenta = red, cyan + magenta = blue/purple, cyan + yellow = green.
-- **Ben-Day dots**: any colour layer with tone < 1 prints as a dot screen (pitch 9 px, screen angles c 15°, m 75°, y 0°, k 45°). Tone 1 = solid.
-- **Misregistration**: each ink is shifted 4-5 px (and wobbles 1 px, 12 times a second), so coloured edges peek out from under the black line.
-- **Ink boil**: each group of shapes gets a new 1-2 px wobble 8 times a second. Outlines scale with the art (so tiny art keeps a thin line).
-- **Paper**: speckle/fibre grain that changes 8 times a second, aged-edge vignette.
-- Shapes knock out what is under them (painter's order), so draw back to front.
+- A colour layer with tone 1 is solid. Tone below 1 prints as a Ben-Day dot screen.
+- Dot pitch `DOT`: 9 px in 16:9, 12 px in 9:16. Screen angles: c 15°, m 75°, y 0°, k 45°.
+- Misregistration `REG`: each ink shifts 4-5 px and wobbles 1 px, so colour peeks out from under the black line.
+- Ink boil: every `grp(id)` gets a new 1-2 px wobble 8 times a second. Art under scale 0.3 needs a simpler drawing.
+- Paper grain (`paperPost`) swaps 8 times a second.
+- Panel border 12 px black, gutters 16-28 px, on a 1920 x 1080 page.
+- Poses and boil run on twos (`q12`); camera and dots every frame.
 
-## Palette recipes (`L` in comic.js)
-night, navy, deep (backgrounds); blue, cyan, red, yellow, orange, purple, pink, skin, steel (subjects); black, grey, white (= bare paper). Mix your own as `[['c',1],['m',0.4]]`. Keep one dominant ink pair per panel; the hero is always blue/red/yellow.
+## Palette
+
+- Inks: cyan `#00ADEF`, magenta `#EC0A8C`, yellow `#FFE600`, black `#15110E`. Paper `#EDE0BE`. Lettering red `#E8261C`.
+- Overprints: y+m = red, c+m = purple, c+y = green.
+- Recipes in `L`: night, navy, deep, dusk (backgrounds); blue, cyan, red, yellow, orange, purple, pink, green, skin, skinSh, steel, steelD (subjects); black, grey, white (bare paper).
+- Mix as `[['c', 1], ['m', 0.4]]`. One dominant ink pair per panel. No other hex colour.
 
 ## Type
-Hand-lettered all-caps comic lettering: **Bangers** (SIL OFL, shipped in `fonts/`). Captions: yellow boxes with a thick ink border, 30-44 px. Balloons: paper white, ellipse + tail, 34-44 px. Sound effects: star-burst with red lettering, black outline and a black extrusion, 50-150 px. **Minimum 28 px at 1080p everywhere**; `fitText()` wraps and shrinks to a box but never below 28, `balloon()`/`caption()` size themselves around the text and are clamped into the part of the panel that is on screen (`K.safe`), so text is never clipped by a panel edge.
 
-## Motion grammar
-- Poses and boil on twos (12 fps); camera, dots, whoosh lines every frame.
-- Pops: `spring()` overshoot (balloons 0.5 s, bursts 0.45 s). Captions slide open from their left edge.
-- Impact: 3-frame blank "impact frame", burst pops, camera shake on twos (`SHAKES`), sparks.
-- Idle in every held shot: camera drift/push, character breathing, eye scan, antenna blink, window flicker, star twinkle, rotating sunburst, moving glint.
-- Panels pop in staggered at the start; the page turn is a 0.4 s slide with a cast shadow.
+- Bangers, all caps, in `fonts/`. Draw it with `txt()` and `fitText()`.
+- Captions: yellow box, thick ink border, 30-44 px, slide open from the left in 0.28 s.
+- Balloons: white ellipse with tail, 34-44 px, `spring()` pop in 0.5 s.
+- Sound effects: star burst, red lettering, black outline and extrusion, 50-150 px, pop in 0.45 s.
+- `fitText()` wraps and shrinks to a box, never below `MIN_TEXT` (28 px; 64 px in 9:16).
+- `balloon()` and `caption()` clamp themselves into `K.safe`.
 
-## Camera and shot grammar
-World = the 1920 x 1080 page. `PANELS` lists the quads; `SHOTS` gives for each panel the time the camera lands (`a`) and leaves (`d`). Landing = the panel covers the screen (cover zoom, starts at 0.93 so the border and gutter are visible, pushes to 1.03 during the hold). Moves between panels take about 0.45 s (ease in/out, slight roll, whoosh streaks). Things that break the border (claw, burst) are drawn in `overlay()` after all panels. One focal point per shot, at most 3 study elements (e.g. robot + balloon + sfx).
+## Cast and props
 
-## Sound palette
-Silent is valid. If you add sound: a paper rustle on the page turn, a short thump + noise burst on each burst, a pop on each balloon (see `RENDER.md`).
+- `hero(o)`: the courier, blue suit, red cape, yellow bolt, domino mask, about 278 units tall, origin at the feet. Options `{x, y, s, flip, t, id, pose, ex, track}`. Poses: idle, walk, run, reach, punch, cheer, slump, think, shake. Faces `ex`: smirk, happy, shock, ouch, think.
+- `robot(o)`: the brute, about 600 x 380 units. Adds `mad`, `power` (0 = off, it sags), `stomp` (raised leg), `cable`.
+- `robotHead(o)`: the head alone, 300 x 240, scanning red eye. `claw(o)`: an arm reaching in (`curl`).
+- 16:9 sets (local units): `nightSky()`, `skyline()`, `sparks()`.
+- 9:16 sets (screen units, bleeding past the edges): `setStreet()`, `setRoof()`, `setPlant()`, `setSky()`, `setPop()`, `setDawn()`, `bigSkyline()`.
+- Furniture: `balloon()` (`shout`), `caption()`, `burst()`, `speedLines()` (radial), `streaks()` (parallel), `sunburst()`.
+- No other people exist. Build new ones with `shape()`, `poly()`, `blob()`, `ell()`, `rect()`, `rrect()` inside `grp()`.
 
-## Native moves menu
-Push into a panel · border-break burst · impact frame · speed-line radial and parallel · balloon pop · caption slide · sunburst backdrop · eye close-up with glint · page turn to a splash/end card · tumbling exit with streaks.
+## Camera and motion
 
-## Variation space
-Change the story panels and layout (any quads), the cast (draw new characters with `shape()`), the ink pair per panel, dot pitch `DOT`, misregistration `REG`, paper colour `PAPER`, balloon kinds (`shout: true`), burst words.
+- The world is the page. `PANELS` holds the quads; `SHOTS` gives per panel the landing time `a` and leave time `d`. Shots tile the film.
+- Landing: the panel covers the screen. Zoom starts at 0.93 of cover (border and gutter show) and pushes to 1.03.
+- Moves between panels: 0.45 s, eased, slight roll, whoosh streaks. Page turn: 0.4 s slide with a cast shadow.
+- Panel `view` is `[centre x, centre y, width, height]` of the part that must be on screen.
+- `lt` is the time since landing (below 0 before, so balloons stay hidden).
+- Impact: a 3-frame blank frame, a burst, a shake on twos (`SHAKES`), `sparks()`.
+- Idle in every hold: drift, breathing, eye scan, twinkling stars, turning sunburst.
+- 9:16 is a different film: a full-frame panel every 2 s, hard cut, small slam. Panel `cam(lt)` returns `[cx, cy, zoom]`.
 
-## Kit details that are easy to miss
-- Every shot needs motion for its whole length; if you add a static prop, give it boil (put it in a `grp()`), breathing, or a drift. Run the freeze check in `RENDER.md` and fix every hit.
-- `lt` (time since the camera landed) gates events; before landing `lt < 0`, so page-view panels show their resting art without balloons. Keep the 0 to 1.5 s page view readable: the caption in panel A uses film time on purpose.
-- Do not put text outside `K.safe`; do not make a panel's text smaller than 28 px to make it fit, shorten the words.
-- Stroke widths scale with art; very small art (< 0.3) needs a simpler drawing.
-- Frame must stay a pure function of `t`: use `hash()`, never `Math.random`/`Date`.
-- The panel `view` = [centre x, centre y, width, height of the part that must be on screen].
+## Native moves
 
-## Vertical pitfalls (9:16 Shorts, machine-checked, 2026-11-09)
-The 16:9 film is a page of panels the camera pushes into; on a phone that crops the hero to a sliver of a tall frame. The vertical template (`templates/vertical.html` + `templates/film-v.js`) is a different film shape: **every 2 s a new full-frame panel** (a hard cut with a small slam), the scene drawn in screen units on a set that bleeds past the edges. `tools/vcheck.sh out.mp4` checks the rest with exact times; fix every line it prints.
-- **Hero size (owner 11-02: wide, never a crop):** ground y 1560-1640, hero `s` 2.3-3.0, zoom 1.0-1.26 = the whole hero at 33-48% of the frame with the set around him. `hero()` calls `track('hero')` + `track('face')` through `kTrack()` (the shape queue's matrix x the camera); call `kTrack()` in any character or prop you draw (`'key'` for the main object of a shot without the hero, like the whole robot).
-- **Labels:** `vlabel()` in screen space after the scene (`kBegin(0, 0, t)` on an identity transform), y 400 = the label band 270-500, x 108-918, lettering >= 64 px (`MIN_TEXT` is 64 in vertical), complete from the first frame. Kinds: yellow caption, balloon with a tail, shout. Keep the hero's head top under y 520.
-- **Bursts are art, not labels:** keep sound words off faces and out of the label band; give a 6-letter word r >= 190.
-- **Edges:** the robot at s 1.35 is 540 px wide; keep its box 65 px inside the frame after the camera zoom, or pass `track: false` when it is a looming extra cut by the edge on purpose. A leaning hero (`kTr(x, y, rot)`) swings his head sideways: start him further in.
-- **Same picture three seconds running:** two panels in a row on the same set must differ in side, scale and pose, or switch the set (the `setPop()` ray panel is the cheap contrast cut).
-- **Weak hook:** frame 0 is mid-stomp (a raised leg, a burst popping, a camera shake), with the fact caption on it, never a title.
-- **Dots and lines for a phone:** `DOT` is 12 in vertical (9 in 16:9), outlines scale with the art (`s` 2.5 = about 12 px lines); poses: idle, walk, run, reach, punch, cheer, slump, think, shake; faces: smirk, happy, shock, ouch, think.
-- Kit lessons from real builds: `LESSONS.md` (newest last).
+- Push into a panel until it fills the screen; break the border with a burst or claw in `overlay()`.
+- Impact frame, radial and parallel speed lines, sunburst backdrop.
+- Eye close-up with a moving glint; page turn to a splash.
+
+## Pitfalls
+
+- Dead holds: `ffmpeg -hide_banner -i out.mp4 -vf freezedetect=n=0.003:d=1.0 -an -f null - 2>&1 | grep freeze_start` must print nothing. Fix hits with drift, breathing, a staggered build, or a `grp()` boil on a static prop.
+- 9:16 hero size: ground y 1560-1640, `s` 2.3-3.0, zoom 1.0-1.26 (whole hero at 33-48% of the frame).
+- 9:16 tracking: `hero()` tracks itself. Call `kTrack()` in any other character or prop you draw; pass `'key'` for the main object of a shot without the hero.
+- 9:16 labels: `vlabel()` in screen space after the scene, with `kBegin(0, 0, t)` on an identity transform. Band y 270-500, x 108-918, lettering at least 64 px. Kinds `cap`, `shout`, or any other for a balloon (with `tail`). Keep the hero's head top under y 520.
+- Keep bursts off faces and out of the label band. A 6-letter word needs r at least 190.
+- The robot at `s` 1.35 is 540 px wide. Keep it 65 px inside the frame after zoom, or pass `track: false` to loom off the edge. A leaning hero (`kTr(x, y, rot)`) swings his head sideways: start him further in.
+- Two 9:16 panels in a row on one set must differ in side, scale and pose, or switch the set (`setPop()` is the cheap cut).
+- Past defects: `LESSONS.md`.
+
+## Files
+
+- 16:9: copy `templates/index.html` and `templates/film.js` to the kit root. Edit `film.js`: `PANELS`, `SHOTS`, `overlay()`, the end card. `DUR` must equal `data-duration` in `index.html`.
+- 9:16: copy `templates/vertical.html` as `index.html` and `templates/film-v.js` as `film.js`. Same `DUR` rule; 31-38 s for a Short.
+- `bash tools/render.sh` renders and checks. `node tools/layout-check.mjs .` prints layout problems per 0.25 s.
+- Sound is optional. Foley with ffmpeg only: a thump (70 Hz sine plus pink noise, faded out) per burst, a rustle (white noise, highpass 2000 Hz) on the page turn. Delay each to its time with `adelay`, then add one `<audio class="clip">` inside `#root`.
+- Code: `engine/`, `characters/`, `sets/sets.js`.

@@ -27,9 +27,7 @@
     }
   ],
   "read_first": [
-    "STYLE.md",
-    "RENDER.md",
-    "RUBRIC.md"
+    "STYLE.md"
   ],
   "files": [
     {
@@ -53,19 +51,9 @@
       "sha256": "0e441ae9f18ad0c294cc5b6ae3974c2db1614cab220598578b1b58c4cc334485"
     },
     {
-      "path": "RENDER.md",
-      "bytes": 4589,
-      "sha256": "2bb51b4152c96ef38ec5cad98c2ab2759f25b427c4b40c056c6881c5c0e5c9fb"
-    },
-    {
-      "path": "RUBRIC.md",
-      "bytes": 2081,
-      "sha256": "b205b6b1168557c12f7106d634b3cd278bccc27d4d53a6c87fbec69261667e7c"
-    },
-    {
       "path": "STYLE.md",
-      "bytes": 10799,
-      "sha256": "058d31ca489ca97c5e074d0aca0124b8e124ce5e193eadefba15c202584517ba"
+      "bytes": 5663,
+      "sha256": "903bb763a981073ec6e73f4bfbf450627e8a35e64b80a7ef4373e6b6751f83b8"
     },
     {
       "path": "engine/wb.js",

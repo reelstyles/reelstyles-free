@@ -18,9 +18,7 @@
   ],
   "fps": 30,
   "read_first": [
-    "STYLE.md",
-    "RENDER.md",
-    "RUBRIC.md"
+    "STYLE.md"
   ],
   "entry": "templates/index.html",
   "licence": "LICENSES/",
@@ -59,19 +57,9 @@
       "sha256": "f81431826bb4afed84752d3bad4a8e1afe1f2d19ba5eb8897d60e1f1647c2d9b"
     },
     {
-      "path": "RENDER.md",
-      "bytes": 3831,
-      "sha256": "2ed2858979002b344f9f99d23b245e8d066bd6cba612c9d925489a9dfaa5a3cd"
-    },
-    {
-      "path": "RUBRIC.md",
-      "bytes": 1888,
-      "sha256": "a71665d91d94c1297e557fbb37f23628ee31ee71f29dcb4a009d7c6f52f9ad08"
-    },
-    {
       "path": "STYLE.md",
-      "bytes": 7323,
-      "sha256": "b7bc8a2fcb29d0279c557558958364f3810d89142467cef4697433b51f4dd478"
+      "bytes": 5749,
+      "sha256": "edd4645693bc03a4bfe479cc773489b0f0f0404534c4ed4dcee3066ee9fb5e6a"
     },
     {
       "path": "characters/stick.js",
@@ -149,14 +137,14 @@
       "sha256": "cd69e026e262dcb39ba4b2d75718ac2fbff12b25da4ed95fea957e998dd3b84b"
     },
     {
-      "path": "tools/vcheck.sh",
-      "bytes": 3403,
-      "sha256": "b9060be6f6e1874b956138d148fc5d29742c7eaa2278aa4b7f0294dcf33ae3b2"
-    },
-    {
       "path": "tools/render.sh",
       "bytes": 2120,
       "sha256": "4d05f837b72e9498fcef6f4458e3550303ffdb9b936af8b6ae900085ec385f0e"
+    },
+    {
+      "path": "tools/vcheck.sh",
+      "bytes": 3403,
+      "sha256": "b9060be6f6e1874b956138d148fc5d29742c7eaa2278aa4b7f0294dcf33ae3b2"
     }
   ]
 }

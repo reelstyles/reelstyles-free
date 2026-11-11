@@ -27,9 +27,7 @@
   ],
   "example_video": "samples/dark-keynote-example.mp4",
   "read_first": [
-    "STYLE.md",
-    "RENDER.md",
-    "RUBRIC.md"
+    "STYLE.md"
   ],
   "files": [
     {
@@ -58,19 +56,9 @@
       "sha256": "14c9ff6f14bfb2391e74fedb01c256891d2a3bba1c2acf5789901bdf77e54e33"
     },
     {
-      "path": "RENDER.md",
-      "bytes": 1800,
-      "sha256": "a089814ef59f4db7848dd91d976bd3f67b06bb15c3a2c4f831e3054acc0e237a"
-    },
-    {
-      "path": "RUBRIC.md",
-      "bytes": 1581,
-      "sha256": "52937611c3c3e445aa1d95dbeb041a779bc5622e70ca7eb8ccb41c892dfcb263"
-    },
-    {
       "path": "STYLE.md",
-      "bytes": 4799,
-      "sha256": "8d1ee788ce100964fe8bbe367669a138dedfd4fc9aa79284038a6f4082958dd3"
+      "bytes": 5889,
+      "sha256": "e4438fe4d1152637367e74ae5d59d0924e2430eabe467e2f733f319bcff7bed2"
     },
     {
       "path": "engine/dk.css",

@@ -1,105 +1,65 @@
-# Doodle film: style guide
+# Doodle film
 
-## Essence
-A film that looks drawn by one person with one pen and a pack of markers on a sheet of cream paper, redrawn eight times a second. Lines tremble (line boil), colour never quite stays inside the outline, shapes are lumpy, the paper has grain. The charm is imperfection that keeps moving. It is a **scored mini story** (a beginning, a surprise, a small change, an exit) told with a round-headed kid, a cat and a few props, not a slide show of doodles.
+A scored mini story drawn with one pen and markers on cream paper: a beginning, a surprise, a small change, an exit. A round-headed kid, a cat, a few props.
 
-## What it is not
-Not clean vector art, not a whiteboard explainer with a hand wiping text in, not a sketch-to-photo effect, not a chart style. No gradients on characters, no shadows with blur, no 3D, no thin hairlines.
+## Look
 
-## Materials
-- **Pen:** blue-black ink, 4-7 px at 1080p, drawn twice (a thick pass and a thinner, fainter second pass: "re-gone-over"). Every line is a point list that is resampled and nudged by smooth noise; the noise re-seeds on 3 drawings at 8 fps. Wide hand: `amp` 2-3 px; fast scribble: `amp` 3-5.
-- **Marker:** `fillLoose` = opaque paper underlay, then the colour multiplied, shifted 5-8 px off the outline, plus a lighter diagonal scribble inside. Skin and cloth always miss the line a little.
-- **Pencil grey** for shadows, clouds' squiggle underside, motes.
-- **Paper:** seeded grain + fibres that shift with the boil, a soft vignette. Always on, drawn last.
-- **Glow** is the only soft thing: a radial yellow halo around the one magic object.
+- Pen: blue-black ink, 4-7 px at 1080p, drawn twice (a thick pass, a fainter thinner one). Smooth noise nudges every line and re-seeds on 3 drawings at 8 fps (line boil). `amp` 2-3 px calm, 3-5 scribble.
+- Marker: `fillLoose` = paper underlay, colour multiplied and shifted 5-8 px off the outline, a lighter diagonal hatch. Colour misses the line a little.
+- Never: clean vector edges, gradients on characters, blurred shadows, 3D, lines under 3 px.
+- Pip is about 300-360 px tall at `s: 1`. Ground is near y 830: feet at `groundY(x) + 10`, tufts and flowers below.
 
 ## Palette
-| role | hex |
-|---|---|
-| paper | `#F4EEDF` |
-| ink | `#232734` |
-| pencil | `#5E6272` |
-| coral (hero cloth, warm accents) | `#F0645A` |
-| mustard (scarf, the spark, sun) | `#F4B63F` |
-| teal (trees, night grass) | `#2EA5A0` |
-| sky | `#8FCBEA` |
-| lilac (dusk) | `#A99BD8` |
-| mint (day grass) | `#9ADBB2` |
-| blush (skin, cheeks) | `#F7C3B5` |
-| night | `#2C3150` |
-| glow | `#FFE08A` |
-Rule: **mustard + glow only on the magic object and what it lights.** The sky goes sky → lilac → night as the story turns.
+
+Only `PAL`: paper `#F4EEDF`, ink `#232734`, pencil `#5E6272`, coral `#F0645A` (hero cloth), mustard `#F4B63F` (scarf, spark, sun), teal `#2EA5A0` (trees), sky `#8FCBEA`, lilac `#A99BD8` (dusk), mint `#9ADBB2` (grass), blush `#F7C3B5` (skin), night `#2C3150`, glow `#FFE08A`.
+
+Mustard and glow only on the magic object and what it lights (`glow()` is the one soft thing). The sky goes sky, lilac, night. Night is a solid wash: `wash(x, y, w, h, c, seed, a, false)`.
 
 ## Type
-Caveat (OFL, `fonts/`). Text is always on a loose paper plate (or glowing on a night plate), tilted 1-3°, typing on. Minimum 34 px at 1080p, baked in: `say()` clamps the size, wraps to fit and pushes the plate inside a 40 px margin. Titles 84-120 px, labels/captions 60-90 px. 5 words max per plate.
 
-## Motion grammar
-- Line boil on every mark, always. Characters pose on ones but boil on threes.
-- **Idle life everywhere:** breathing, blinking every 2.6 s, scarf flutter, cat tail and ear twitch, grass and tree sway, cloud drift, motes drifting up through the sky (`motes()`), sun rays turning, star twinkle, paper grain shift.
-- **Builds are staggered** (rays one after another 60-100 ms apart, orbiting doodles pop with `EZ.back`), and `p` (0..1) draws a line on.
-- Squash/anticipation through `spring()`: landings, startles, pops.
-- Camera: never still. Every shot has `cam(t)` that pushes or trucks (1.0 → 1.06 wide, 1.2 → 1.4 medium, 1.5 → 1.85 close).
-- Cuts: hard cut under a **scribble wipe** (a fat marker zig-zag sweeps across and off, 0.44 s).
+Caveat (`fonts/`), only through `say(str, opts)`. Text sits on a loose paper plate tilted 1-3 degrees; on night use `plate: PAL.night, color: PAL.glow`. Titles 84-120 px, captions 60-90 px. In 9:16 `say()` places the plate above the hero's head by itself: use 100-130 px and `maxW` 560-640.
 
-## Shot grammar
-Wide (walk, orientation) → medium (event) → close (feeling) → wide (exit). One focal point per shot; at most 3 study elements (hero, one prop, one orbiting doodle group). Background scenery is a calm wash with outline, never the loudest thing.
+## Cast and props
 
-## Sound palette
-Procedural, rights-free (`tools/score.sh`): plucked pentatonic tune (sine plucks), bass drone, whoosh (filtered pink noise) on falls, soft pop on landings, three-note chime on a pick-up, swell chord on a reveal, footsteps (noise ticks). Cues are listed in `templates/film.js`; re-time them when you re-time shots.
+- `pip({ x, s, face, ph, armL, armR, look, mouth, brow, hop, lean, hold })`: the kid. `ph: TT * 9` walks. `mouth`: `'smile'`, `'grin'`, `'o'`, `'flat'`, `'sad'`. `brow` 0-1 is startle. `hold(handX, handY)` draws the carried prop.
+- `cast(name, { tint, hat, hatC, stache, legC, scarf })` returns a figure function. Define each person once, call it in every shot. Hats: `cap`, `bowler`, `helmet`.
+- `dot({ x, s, face, ph, sit, look, mouth, hero })`: the cat.
+- Passers-by: `pip({ extra: true })`. Leave `y` out so feet snap to the ground.
+- Your own character or prop: draw with `ink`, `shape`, `fillLoose` inside `figure('hero' | 'prop' | 'key', () => {...}, name)`, with `track('face', ...)` on a hero's head. Wrap bleeding effects in `unmeasured(() => ...)`.
+- Sets: `wash`, `ground`, `tuft`, `cloud`, `tree`, `flower`, `sun`, `moon`, `twinkle`, `rays`, `motes`.
+- Doodles: `heart`, `swirl`, `note`, `sparkle`, `arrow`. Magic object: `spark(x, y, r, rot, { glowA, tail })`.
+- Marks: `ink`, `fillLoose`, `shape`, `scribble`, `glow`; points from `ellP`, `rectP`, `blobP`, `splineP`, `starP`. Every mark takes `seed` and `p` (0-1 draws on).
+
+## Camera and motion
+
+- `shot(t0, t1, draw, title, cam)`; `cam(t)` returns `[x, y, zoom, tilt]`. Shots tile `0..DUR`.
+- 16:9 zoom: wide 1.0-1.06, medium 1.2-1.4, close 1.5-1.85.
+- 9:16 zoom: wide 2.45-2.6, medium 2.55-2.75 with tilt -0.04 to 0.02 rad, close 2.95-3.05 (3.2 cuts the scarf). Feet near screen y 1640. `camY(groundWorldY, zoom, feetScreenY)` in `templates/film-v.js` gives the camera y.
+- Builds stagger: rays 60-100 ms apart, doodles pop with `EZ.back`, landings and startles use `spring(t, k, z)`; `EZ.io`, `EZ.i2`, `seg`, `lerp` time the rest.
+- Idle life in every shot: `motes()` over empty sky, cloud drift, grass and tree sway, turning rays, star twinkle.
+- Cut: a scribble wipe, 0.22 s each side. 16:9: `w` 260, 14 turns, left to right. 9:16: `w` 150, 9 turns, top to bottom.
+
+## Native moves
+
+A line that draws itself on. A spark falling with a scribbled comet tail. Startle: hop, wide eyes, `'o'` mouth, a word plate pops. Rays staggered out of an object. Doodles orbiting the hero (16:9) or rising in a column out of the spark (9:16). Scribble wipe. Dusk turn where the glow lights the path. The cat reacts a beat late. An arrow that curls and arrives.
 
 ## Pitfalls
-- A multiply fill without the paper underlay turns muddy over a coloured sky (the engine adds the underlay; keep `base: true` except for washes).
-- Night must be a **solid** wash (`mult: false`), not a multiply, or it goes grey.
-- Do not mix 3 or 4 hero poses with no idle motion: a character with `ph = 0` still breathes and blinks, keep it that way.
-- Wide empty sky freezes: always call `motes()` or place a cloud there.
-- `say()` text is queued and drawn after the camera resets; do not draw text with `ctx.fillText` in a shot.
 
-## Native moves menu
-1. Line draws itself on (`p`) · 2. spark falls with a scribbled comet tail · 3. startle: hop + wide eyes + "o" mouth + a word plate pops · 4. rays staggered out of an object · 5. doodles orbit the hero (heart, note, swirl) · 6. scribble wipe cut · 7. dusk turn (sky → night, glow lights the path) · 8. cat reacts a beat late · 9. title typed on a plate · 10. arrow that curls and arrives.
+- A multiply fill with no paper underlay goes muddy over coloured sky. Keep `base: true` except for washes.
+- 9:16 with a 16:9 camera gives a tiny hero and a flat green band. Re-zoom and re-stage.
+- 9:16 sets: `sceneryV(dusk, p, sunP, trees)` in `templates/film-v.js`. Keep trees off Pip's head. The sun rides the camera at screen x about 680; draw it before clouds and trees or it multiplies dark. Ground under about 28% of the frame.
+- 9:16 cat or side prop: offset 250 world px from Pip's x or it hides his body. Give Dot her own shot. Spark, rays and glow stay left of x 940, never across the face.
+- 9:16 spark falls the whole frame (`tail` 330); doodles rise a short way out of it. No tall stems or poles.
+- Keep wipes under 0.3 s, or a wipe frame on a whole second reads as an empty tile.
+- `endCard(DUR - 2, DUR)` dims the payoff shot, which keeps running behind it.
+- A new picture every 2 s: `keys(t0, 2.0, [shotA, shotB])`, each shot its own camera.
+- A beat's key object goes in `figure('key', ...)`, at least 20% of the frame height: draw thin levers and ropes thick. A big set piece (tank, house, boat) goes in `figure('prop', ...)` and fits whole.
 
-## Variation space
-Hero tint (`tint`), skin, scarf; palette swap sky/lilac/night for a morning or a storm; replace Pip's props with your own via `hold`; two-character scenes with `face: -1`; a notebook-ruled paper (draw `scribble` rules in a wash); a chalk-on-slate variant (`PAL.paper` dark, `PAL.ink` white).
+## Files
 
-## Kit details that are easy to miss
-- `data-duration` in `index.html` must equal `DUR` in `film.js`; shots tile `0..DUR` with no gap (the console warns).
-- Everything is a pure function of `TT`: use `hash`/`nz` for randomness, never `Math.random`, `Date`, `performance.now`.
-- Run `sh tools/deadhold.sh out.mp4` on the render (see `RENDER.md`); the paper boil alone does not excuse a frozen element: if a hit appears, drift the camera or build something there.
-- World ground is `groundY(x)` (y ≈ 830); put feet at `groundY(x) + 10`, tufts/flowers below it.
-- The audio `<audio>` tag points to `audio/score.wav`; delete the tag for a silent film, or rerun `tools/score.sh` after editing notes.
-- Frame size comes from the canvas size (`engine/runtime.js` reads it), so the same engine, sets and Pip serve 1920×1080 and 1080×1920.
-
-## Vertical 9:16 (Shorts, Reels, TikTok)
-A vertical Short is its own film composed for the tall frame (`templates/vertical.html` + `templates/film-v.js`), never the 16:9 film scaled or letterboxed. Size 1080×1920 is set in three places: html/body CSS, `data-width`/`data-height` on the root, and the canvas attributes.
-
-**Safe area (same in every kit):** Shorts/Reels/TikTok cover the top 250 px, the bottom 450 px and the right 140 px with UI. All text, captions, numbers and faces stay inside x 90-940, y 250-1470; centred captions at most 800 px wide (x 140-940). Background art, sky, ground and motion still fill the full frame edge to edge. Text ≥ 44 px (the kit uses 100-130), max about 4 words per line.
-
-**Framing (same in every kit, 2026-10-19):** the main subject (the character as seen in the shot: full body, knees-up or close-up; or the one key object) spans at least 60% of the frame height (>= 1150 px, measure it on the stills). Feet and lower body may run under the bottom UI band; only text and faces must stay in the safe area. One character per shot by default; a two-shot or split screen only as a short cut-in (<= 1.5 s). Frame 0 is mid-action: something is already moving in the first frame, never a standing establishing shot. Where a number below gives a smaller subject, move the camera closer.
-
-**Layout rules**
-- **Camera:** feet line `FEET = 1850` (feet in the bottom UI band), zoom 3.4-3.6 for the walk, 3.5-3.8 medium (a slight tilt, `cam` fourth value, -0.04 → 0.02 rad), 3.9-4.2 close-up: Pip (357 px at s 1) spans at least 1150 px. Zoom 2.8 or less makes him under 55% of the frame (the old numbers here did; measured 2026-10-21). Use `camY(groundWorldY, zoom, feetScreenY)` for wide/medium; the close-up sets the camera y straight on the head. Vary the framing per shot (wide walk, tilted medium, big close-up): neighbouring shots never share a layout.
-- **Subject:** Pip stands at screen x 450-650 in wide/medium shots and about 330 in the close-up (face inside x 90-940); the raised spark lands at x ≤ 900 and the rays (`rays(…, 50, 80, …)` clipped to the upper/right side) and glow stay left of x ≈ 940, never crossing the face. The cat does not fit next to a full-size Pip in the tall frame: give Dot her own shot (or a stacked panel), never a squeezed two-shot; side props never touch the right edge.
-- **Height is the event axis:** the spark falls the whole frame (`tail` 330), a column of doodles (heart, plus-sparkle, swirl; no tall stems or poles) rises a short way out of the spark (loop `v = u % 1`), the title sits in the sky above Pip, captions in the sky above Pip's head (y ≈ 300-520), never over his torso or face. Wipes zig-zag top to bottom with a thinner marker (w 150, 9 turns) so scenery shows between the strokes instead of a flat purple screen.
-- **Sets:** `sceneryV(dusk, p, sunP, trees)` stacks clouds in tiers, passes a per-shot tree list (keep trees off Pip's head; a tree edge may bleed off the frame), a sun that rides the camera at screen x ≈ 680 (left of the right UI strip; draw it before the clouds and trees), twinkles in the dusk sky, `motes()` over 20-820 world y. The ground stays under about 28% of the frame: a narrow dirt path (solid `paperD`, `mult: false`), tuft rows, and big foreground flowers (scale 3) on tall swaying stems that fill the lowest band.
-- **Type:** titles 112 px, captions 100-130 px (never below 56 px), `maxW` 560-640 so they wrap to two lines; plates stay x 90-940, y 250-1470.
-
-**Pitfalls**
-- Plates drawn in the bottom 450 px or the right 140 px are covered by the app UI.
-- A 16:9 camera (zoom 1.0-1.4) in the tall frame shows a flat green band and a tiny hero: re-zoom and re-stage.
-- Trees directly behind Pip's head hurt the read; one focal point only, keep set colours calmer than Pip.
-- A cat or prop placed at Pip's x hides his body; offset it by 250 world px. A sun drawn after the clouds multiplies dark: draw it first.
-- Keep every band moving: motes in the sky, tuft sway in the foreground, camera drift in every shot; run the freezedetect step.
-
-## Vertical pitfalls (machine-checked, 2026-10-21)
-Six built Shorts scored 10-15/20 with a strict editor; these were the repeat defects. The kit now prevents most of them; the checks find the rest with exact times. Render with `bash tools/render.sh`: it runs every check and only writes `out.mp4` when all pass (a failing film becomes `out.FAILED.mp4`).
-- **Hero too small / empty bands:** the old vertical numbers gave a 30-58% hero. Keep the template's camera numbers; `pip()` and `dot()` measure themselves; any character you draw yourself goes inside `figure('hero', () => { ... })` with `track('face', ...)` on its head, so the layout check measures him (>= 60% of the frame, or >= 60% of its panel: `track('panel', ...)` on each stacked panel).
-- **Labels over faces, bodies, raised hands:** in vertical the label helper ignores your y and lands above the tracked hero's head, inside x 108-918 (the right edge holds the like/comment buttons), at least 64 px, complete from its first frame (no typing in). Raise his head top to y >= 520 so the label has room.
-- **Same picture three seconds running (10-24, the proven rival format):** a contact sheet shows 1 frame per second; ambient motion (scraps, clouds, breathing) and a moving limb in the same framing do not count. Cut to a new picture at least every 2 s: a new framing or angle, or a big visible result (`keys(t0, 2.0, [shotA, shotB])` per beat, each shot its own camera). vcheck flags 3 neighbouring 1-s frames with blurred SSIM >= 0.75.
-- **End card on an empty screen or held still:** `endCard(DUR - 2, DUR)` dims the payoff shot (keep it running to DUR, so the result stays behind and moving) and puts two centred lines over it.
-- **Edges:** key props and faces at least 65 px inside the frame; only sky, ground and feet bleed off. Draw the beat's key object inside `figure('key', () => { ... }, 'loaf')`: it must also be >= 20% of the frame height (a thin lever or rope does not read on a phone: draw it thick, or cut in close).
-- **Transitions seen as glitches:** a wipe frame that lands on a whole second is a full-frame empty tile on the contact sheet. Shorts cut hard on the beat; any wipe stays under 0.3 s.
-- **Weak hook:** frame 0 must already move (vcheck compares 0 s with 0.5 s); open mid-fall, mid-throw, mid-push, never on a title.
-- **One costume per person (11-08: coat green then blue):** `const WORKER = cast('worker', { tint, hat: 'cap', legC, stache })` once at the top, then `WORKER({ x, ... })` in every shot. Never pass `tint`/`hat` at the call, never write a second figure function (hats: `cap`, `bowler`, `helmet`).
-- **Feet on the ground (11-08: floating figures):** leave `y` out of `pip()`: it snaps to `groundY(x) + 10` and the contact shadow is always drawn. A `y` more than 45 px off fails vcheck ("feet float"); only `hop` or `air:true` leave the ground.
-- **Nothing cut (11-08: tanks, wave, figures at the edges):** passers-by are `pip({ extra: true })` (edge-checked too); a big set piece (tank, house, boat) is drawn inside `figure('prop', () => { ... }, 'tank')` and must fit whole in the frame. Hero top at y >= 0.
-- **Measured, never typed (11-09: a cold run's own cat had a typed `track('hero')` box that sat inside the frame while its back and tail ran off the left edge):** in this kit every `ink`/`shape`/`fillLoose` mark reports where it lands, `figure()` turns that into the real box, and a hero/extra/prop/key box typed with `track()` fails the check. Draw with the kit marks (raw canvas calls are not measured); wrap an effect that may bleed (rays, glow) in `unmeasured(() => ...)`.
-- Kit lessons from real builds: `LESSONS.md` (newest last).
+- 16:9: copy `templates/index.html` and `templates/film.js` to the kit root.
+- 9:16: copy `templates/vertical.html` as `index.html` and `templates/film-v.js` as `film.js`.
+- Edit `film.js`. Keep `data-duration` (root and `<audio>`) equal to `DUR`.
+- Render with `bash tools/render.sh`: lint, render, then `tools/deadhold.sh` (16:9) or `tools/vcheck.sh` (9:16) and `tools/layout-check.mjs`. It writes `out.mp4` only when all pass, else `out.FAILED.mp4` and the fixes. A dead hold is a tile unchanged for 1.2 s: add motes, a cloud, a camera push or a staggered build.
+- Score: `audio/score.wav` is procedural (pentatonic tune, whoosh, pop, chime, swell, footsteps). Re-time it in `tools/score.sh` (`add <freq> <start> <dur> <vol>`, `noise <start> <dur> <vol> <lowpass> <highpass>`), then `bash tools/score.sh` (needs ffmpeg, bc). Delete the `<audio>` tag for a silent film.
+- Lessons from real builds: `LESSONS.md`.

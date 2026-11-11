@@ -28,15 +28,18 @@
   "licence": "LICENSES/",
   "example_video": "samples/doodle-film-example.mp4",
   "read_first": [
-    "STYLE.md",
-    "RENDER.md",
-    "RUBRIC.md"
+    "STYLE.md"
   ],
   "files": [
     {
       "path": "EXAMPLES.md",
       "bytes": 1072,
       "sha256": "82375028658f2e47863dcc2e0ea315eaedc2eb531ed83ef1fc8c7c5db72ba7f2"
+    },
+    {
+      "path": "LESSONS.md",
+      "bytes": 5798,
+      "sha256": "f3c0a7d83321143a7814f10c9c4eabb8182bcbddc749f72f9a32dadb44f21020"
     },
     {
       "path": "LICENSES/ASSETS.md",
@@ -59,19 +62,9 @@
       "sha256": "1f9d81d094273d82f3898a1ee8b598a717d050ecbf5ff7bede105b704880157b"
     },
     {
-      "path": "RENDER.md",
-      "bytes": 3795,
-      "sha256": "01959ade00ce0fb81e4f554cdb65803b7581714158afeea14529ccb9f89f674b"
-    },
-    {
-      "path": "RUBRIC.md",
-      "bytes": 2508,
-      "sha256": "79ddcb079dcf661e7a5714129ada195e199fc3aa041a73b18f05f31d2368ef8d"
-    },
-    {
       "path": "STYLE.md",
-      "bytes": 13512,
-      "sha256": "96dc3015fca154e40600d50034c964f9aaa16ba19971bfcbab917c4b56c6293c"
+      "bytes": 5965,
+      "sha256": "8e080d820cfb7a263fe81effcaac978a950ef880e72cedf343b4446bc69efef3"
     },
     {
       "path": "audio/score.wav",
@@ -92,6 +85,11 @@
       "path": "engine/runtime.js",
       "bytes": 4219,
       "sha256": "d4779e06341be53c69a64c60f1fd3e56ace250e71cbbbbc401b8abd8745647a5"
+    },
+    {
+      "path": "engine/safe.js",
+      "bytes": 13769,
+      "sha256": "dec05b9f70ce387e6308bdfb6f6892d4b1cec1ff823dd6cec79f01f5b26b5a79"
     },
     {
       "path": "fonts/Caveat.ttf",
@@ -129,14 +127,24 @@
       "sha256": "7732acc5b62407f0c338d89c93d471c37b63a1b495422a9a329a806e3e1258fc"
     },
     {
-      "path": "tools/score.sh",
-      "bytes": 2199,
-      "sha256": "7ba1b1d2f43d12fc49b2dd0a2a03a880b85dbd70c9e1c45340aa272d1f844f62"
+      "path": "tools/layout-check.mjs",
+      "bytes": 9193,
+      "sha256": "cd69e026e262dcb39ba4b2d75718ac2fbff12b25da4ed95fea957e998dd3b84b"
     },
     {
       "path": "tools/render.sh",
       "bytes": 2120,
       "sha256": "4d05f837b72e9498fcef6f4458e3550303ffdb9b936af8b6ae900085ec385f0e"
+    },
+    {
+      "path": "tools/score.sh",
+      "bytes": 2199,
+      "sha256": "7ba1b1d2f43d12fc49b2dd0a2a03a880b85dbd70c9e1c45340aa272d1f844f62"
+    },
+    {
+      "path": "tools/vcheck.sh",
+      "bytes": 3403,
+      "sha256": "b9060be6f6e1874b956138d148fc5d29742c7eaa2278aa4b7f0294dcf33ae3b2"
     }
   ]
 }

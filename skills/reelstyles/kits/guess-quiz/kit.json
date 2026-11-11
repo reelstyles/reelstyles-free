@@ -28,9 +28,7 @@
   ],
   "example_video": "samples/guess-quiz-example.mp4",
   "read_first": [
-    "STYLE.md",
-    "RENDER.md",
-    "RUBRIC.md"
+    "STYLE.md"
   ],
   "files": [
     {
@@ -49,19 +47,9 @@
       "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
     },
     {
-      "path": "RENDER.md",
-      "bytes": 3264,
-      "sha256": "9b0253b165e554eef3b3df1164b614f5e9fd5f541f525e97a46f140e4c191c18"
-    },
-    {
-      "path": "RUBRIC.md",
-      "bytes": 2156,
-      "sha256": "565d6926ca17825d9ac5d89148ea498a83447e2847e3e22c98b193ebfa1ed85f"
-    },
-    {
       "path": "STYLE.md",
-      "bytes": 4717,
-      "sha256": "9a04abf72da8e554c21aeee8c7cba8597730a7e53bc5203e795e1eeca420559f"
+      "bytes": 6101,
+      "sha256": "6ca7246a3926173cc8fb8d7aa8149d23d5e60272c5ed45ad4b0146df57c24799"
     },
     {
       "path": "characters/README.md",

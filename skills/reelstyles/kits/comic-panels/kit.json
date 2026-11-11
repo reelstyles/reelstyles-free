@@ -28,15 +28,18 @@
   ],
   "example_video": "samples/comic-panels-example.mp4",
   "read_first": [
-    "STYLE.md",
-    "RENDER.md",
-    "RUBRIC.md"
+    "STYLE.md"
   ],
   "files": [
     {
       "path": "EXAMPLES.md",
       "bytes": 757,
       "sha256": "ef4c2398b66bcde78d477e76c2984082d34dc17e18b4380fc6d700fc28b517a1"
+    },
+    {
+      "path": "LESSONS.md",
+      "bytes": 325,
+      "sha256": "10e7ba95f192bdbf6a964919831c1ca577d2a25b965016084050f0e85811f6a4"
     },
     {
       "path": "LICENSES/ASSETS.md",
@@ -49,19 +52,9 @@
       "sha256": "c36ad22ae5daf9bb19fa6decb3d9ec51cb9dc5b89c04c630aebe34ef26fb962e"
     },
     {
-      "path": "RENDER.md",
-      "bytes": 3776,
-      "sha256": "67e0f50d2df3da08da4e3dabd90ebf6bf6f415af3b7809e3d70d913c41b5b01c"
-    },
-    {
-      "path": "RUBRIC.md",
-      "bytes": 1837,
-      "sha256": "fa976b72ca40033c2c295d282aa0f33189dd4765f29de1648b6c71e137c1f411"
-    },
-    {
       "path": "STYLE.md",
-      "bytes": 7134,
-      "sha256": "87ca23a1d538905fd4d63bafed891445f8bdbe495b211469fd078c2d2a9133c9"
+      "bytes": 5805,
+      "sha256": "733d2ffee67ed07624a18498e87d843d5ce9638b8b7eedc95f0299a6fc46e4c2"
     },
     {
       "path": "characters/hero.js",
@@ -84,6 +77,16 @@
       "sha256": "035b334e9810f5e3fba513fc9bc354279e19a808f009b43dd44c921e8fcb5be9"
     },
     {
+      "path": "engine/safe.js",
+      "bytes": 13769,
+      "sha256": "dec05b9f70ce387e6308bdfb6f6892d4b1cec1ff823dd6cec79f01f5b26b5a79"
+    },
+    {
+      "path": "film.js",
+      "bytes": 10595,
+      "sha256": "259bc9729a66499c59d553b2aea44a6de44da78e075c8a24a60d8b86d2fa825c"
+    },
+    {
       "path": "fonts/Bangers-Regular.ttf",
       "bytes": 93148,
       "sha256": "4160a7311de9342674cce9160cde9fcbb30f48190397d86ff1b70b455af65824"
@@ -94,9 +97,19 @@
       "sha256": "c36ad22ae5daf9bb19fa6decb3d9ec51cb9dc5b89c04c630aebe34ef26fb962e"
     },
     {
+      "path": "index.html",
+      "bytes": 1366,
+      "sha256": "f874d16d9e92fff3c9af15fba058924d77c5db4bddd28fc6b87edc7131b4284c"
+    },
+    {
       "path": "sets/sets.js",
       "bytes": 8533,
       "sha256": "c3dbe4a7c40f9fd3f353a9065c57d11bc24277ca62af15e9bb746ea7c15edccd"
+    },
+    {
+      "path": "templates/film-v.js",
+      "bytes": 10595,
+      "sha256": "259bc9729a66499c59d553b2aea44a6de44da78e075c8a24a60d8b86d2fa825c"
     },
     {
       "path": "templates/film.js",
@@ -109,19 +122,24 @@
       "sha256": "8277338c5722e18e3a679dc05a95f4de128456e9cb5ca94a3b0ca342d9c756a4"
     },
     {
-      "path": "templates/film-v.js",
-      "bytes": 10595,
-      "sha256": "259bc9729a66499c59d553b2aea44a6de44da78e075c8a24a60d8b86d2fa825c"
-    },
-    {
       "path": "templates/vertical.html",
       "bytes": 1366,
       "sha256": "f874d16d9e92fff3c9af15fba058924d77c5db4bddd28fc6b87edc7131b4284c"
     },
     {
+      "path": "tools/layout-check.mjs",
+      "bytes": 9193,
+      "sha256": "cd69e026e262dcb39ba4b2d75718ac2fbff12b25da4ed95fea957e998dd3b84b"
+    },
+    {
       "path": "tools/render.sh",
       "bytes": 2120,
       "sha256": "4d05f837b72e9498fcef6f4458e3550303ffdb9b936af8b6ae900085ec385f0e"
+    },
+    {
+      "path": "tools/vcheck.sh",
+      "bytes": 3403,
+      "sha256": "b9060be6f6e1874b956138d148fc5d29742c7eaa2278aa4b7f0294dcf33ae3b2"
     }
   ]
 }

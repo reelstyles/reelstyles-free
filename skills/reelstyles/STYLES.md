@@ -83,7 +83,7 @@ These styles come with ReelStyles Starter or Full: https://reelstyles.com/pricin
 | `line-face-life` | Crude line-face life story | Cartoon | 16:9 |
 | `ranking-race` | Ranking Race | Motion graphics | 16:9 |
 | `map-history` | Territory Map | Motion graphics | 16:9 |
-| `horror-story` | Illustrated true-horror story | Cartoon | 16:9 |
+| `horror-story` | Illustrated true-horror story | Cartoon | 16:9, 9:16 |
 | `legend-flip` | Legend Flip | Cartoon | 9:16 |
 | `object-metaphor` | Everyday-object money explainer | Cartoon | 16:9 |
 | `synthwave-drive` | Neon synthwave drive | Retro & internet | 16:9 |

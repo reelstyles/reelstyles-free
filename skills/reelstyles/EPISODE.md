@@ -31,7 +31,7 @@ Order: `fit → say what's coming → facts → script → stop 1 (board) → vo
 
 ## 4. Stop 1: the board
 
-Copy the kit into the project (`kits/<id>/`, never edit it in place), read its `read_first` files, then write the shot plan:
+Copy the kit into the project (`kits/<id>/`, never edit it in place), read `FILM.md` and its `read_first` files, then write the shot plan:
 one row per line of the script (start, seconds, what the picture shows, the kit template or helper that makes it, 1-5
 words on screen). Build the first beat and take one still per beat with `npx -y hyperframes@0.8.96 snapshot`. Show the
 user the stills and the plan and wait for their go. Times are estimates until the voice exists; say so.
@@ -46,7 +46,7 @@ say it is theirs. Never imitate a real person's voice.
 ## 6. Build
 
 Time every shot to the word timings. Follow the kit's STYLE.md and its beats; a new picture at least every 2-4 s (the kit
-says which). Build one beat at a time, take stills, grade them against the kit's RUBRIC.md, fix, then the next beat.
+says which). Build one beat at a time, take stills, review them with `REVIEW.md` (and the kit's RUBRIC.md if it has one), fix, then the next beat.
 
 ## 7. Checks and stop 2
 

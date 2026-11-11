@@ -1,74 +1,83 @@
 # Stick metaphor Short: style guide
 
-A vertical-first, silent motivational Short built from six to eight separate visual metaphors of about 4 s each. White round-head stick figures on pure black, one to three grey props per beat, and a single yellow accent used only for the part that carries the point (the wheels, the goal, the door, the flag, the first domino). Drawn in code on one `<canvas>` (2D), rendered by HyperFrames. Everything here (figure, props, palette, type) is our own; nothing comes from any real channel.
+A silent motivational Short of six to eight separate visual metaphors. White round-head stick figures on pure black, one to three grey props per beat, one yellow accent on the part that carries the point. All drawn in code on one 2D canvas.
 
-Read this file, then `RENDER.md`, `RUBRIC.md`, then the header comments of `engine/runtime.js`, `characters/stick.js`, `sets/props.js`, `sets/metaphors.js`. `templates/film.js` is a working 28 s Short: copy and edit it.
+## Look
 
-## Essence
-One idea per beat, shown as a picture, never explained in sentences. The viewer reads a two-word label and the motion does the rest. Six metaphors in a row, each with its own layout and camera feel, then a reversal question over a hold that plays straight back into frame one (the loop).
+- Stage: 1000 x 1000 logical units, scaled to the frame. Ground at y 700-800 (vertical sets: y 855).
+- Figure: head r 24, torso 78, arms 44 + 42, legs 62 + 62. Line weight 11 (vertical hero 8, `sc` 1.85-1.95, about 1300 px tall).
+- Props: line 8, dark fill, grey outline.
+- Beats of 3-5 s (sample 4 s), each a different layout: split, three-column row, stacked lanes, tall stack, wall with a door, chain.
+- Per beat: 1-3 grey props, one focal point.
+- Beat 1 is up at t = 0 with its labels. The last beat replays beat 1's scene under a reversal question and ends exactly on frame one, so the Short loops.
+- Vertical sample: 34 s, seven beats, two pictures per beat (weak way 0-2 s, strong way 2-4 s).
+- Never: outfits, brands, voiceover, sentences, gradients, 3D, a second figure colour.
 
-## What it is not
-Not one metaphor stretched over 30 s. Not a slideshow of cards. No faces, outfits, brands, voiceover or on-screen sentences. No second accent colour, no gradients, no 3D.
+## Palette
 
-## Materials and palette (`PAL`)
-| Role | Hex |
-|---|---|
-| Background | `#000000` (pure black) |
-| Figure, labels | `#F4F4F0` |
-| Prop outline / mid grey / dark grey | `#9A9A9A` / `#5C5C5C` / `#2E2E2E` |
-| Prop fill | `#121212` |
-| Accent (the point only) | `#FFD21F`, fill `#2B2300` |
-Red can replace yellow for a whole film (change `PAL.accent`/`accentDeep`), never both in one film.
+`PAL` in `engine/runtime.js`.
+
+- Background `#000000`. Figure and labels `#F4F4F0`.
+- Prop outline `#9A9A9A`, mid grey `#5C5C5C`, dark grey `#2E2E2E`, fill `#121212`.
+- Accent `#FFD21F`, fill `#2B2300`: the point only, one thing per beat.
+- Red may replace yellow for a whole film (change `PAL.accent`, `PAL.accentDeep`). Never both in one film.
 
 ## Type
-Inter 800 for labels, Inter 500 available (OFL, shipped). Upper case, tracking 0.06 em, 2-4 words. Sizes: labels 40-44, question 60 (logical units). `text()` is the only way to draw text: it enforces **>= 28 px at 1080p**, wraps to the box, shrinks to fit and clamps inside the safe x range, so nothing is ever clipped.
 
-## Motion grammar
-- Figures use eased keyframe poses (`poseKeys()`), snappy `EZ.o3` / `EZ.back`, and squash on every landing (`land()`). They never freeze: idle breathing and head sway run on top of every pose.
-- Props rock a fraction of a degree (`wob`), the ground ticks scroll, the divider dashes crawl, grey dust drifts across the frame, the beat dots pulse. A hold that has nothing else still has the camera push.
-- Builds are staggered (blocks drop one after another, dominoes cascade, words leave the stack one by one).
-- Camera: locked or a slow push (1.0 to ~1.05). A beat starts with a 0.28 s pop (1.05 to 1.0) on a hard cut. No fades between beats.
+- Inter 800 for labels, Inter 500 available (`fonts/`). Upper case, tracking 0.06 em, 2-4 words.
+- Landscape sizes: labels 40-44, question 60. Draw text only with `text()`: it enforces 28 px at 1080p, wraps, shrinks and clamps. `ctx.fillText` skips all that.
+- Vertical: `labelV(str, t0, t1)`. Caps of at least 64 px with a short yellow bar, above the head (band y 270-500, x 108-918). Call it after the figure.
 
-## Shot grammar
-Each beat is a different layout: left/right split, a three-column row, two stacked lanes, one tall stack, a wall with a door, a left-to-right chain. 1-3 grey props, one focal point, at most 3 study elements. Beat 1 is up at t = 0 with its labels (cold open). The last beat replays beat 1's scene under the question and ends exactly on frame one, so the Short loops.
+## Cast and props
 
-## Sound palette
-No voice. Soft music bed plus tiny SFX on landings, throws and the domino chain (procedural recipe in `RENDER.md`). A silent render is valid.
+The figure is Pip (`characters/stick.js`).
 
-## Native moves (`sets/metaphors.js`)
-`split` hard vs smart (wheels = point) · `grow` today / a month / a year (last block = point) · `stairs` stairs vs slope (flag) · `drop` throw off weights, keep the goal · `door` force the wall, find the door · `domino` one small push (first domino = point).
-Ideas to add by copying a move: bridge vs jump, seed vs shortcut, ladder against the right wall, two doors, tug of war with a rope, crowd vs one.
+- `figure(x, ground, pose, o)`: the lowest foot lands on `ground` by itself. Options `dir sc sq air ph seed a far lw ex`.
+- `ex` adds a face: `calm happy sad shock firm`. None gives the classic single eye.
+- `POSES`: `idle reach cheer slump crouch recoil push`. Crouch is short; use it inside a blend.
+- `poseKeys(list, L)` tweens `[[t, pose, ease?], ...]`. `mixPose(a, b, u)` blends. `walk(phase, o)` is the walk cycle. `P(p)` completes a partial pose.
+- Effects: `sweat(x, y, L)`, `puff(x, y, L, t0)`.
+- Props (`sets/props.js`): `ground`, `block`, `wheel`, `door`, `wall`, `domino`, `flag`, `chev`, `ramp`.
+- 16:9 moves (`sets/metaphors.js`): `M.split M.grow M.stairs M.drop M.door M.domino`.
+- 9:16 sets (`sets/metaphors-v.js`): `MV.wall MV.stairs MV.weight MV.domino MV.gap MV.summit`. Each has `.at(L, side)`, `.draw(L, side)`, optional `.top(L, side, J)` over the hero. Side `'A'` weak way, `'B'` strong way.
+- `heroV(at, o)` draws Pip for a vertical set. `o` = `{ sc, pose, ex, dir, ph }`; `pose` is a `POSES` name, `'walk'`, a pose object or `{ from, to, k }`.
 
-## Variation space
-Accent yellow or red · label words · beat order (keep split first, question last) · 6-8 beats (4-5 s each, update `data-duration` and `mountFilm`) · camera per beat · figure scale `sc` · a second figure colour is NOT allowed.
+## Camera and motion
+
+- Poses are eased (`EZ.o3`, `EZ.back`). `land()` squashes every landing. Idle breathing and head sway run under every pose.
+- Props rock a fraction of a degree (`wob`). Ground ticks scroll, `chev` crawls, grey dust drifts.
+- Builds are staggered: blocks drop one by one, dominoes cascade.
+- Camera: locked or a slow push (1.0 to about 1.05). Each beat opens with a 0.28 s pop (1.05 to 1.0) on a hard cut. No fades between beats.
+- Vertical: `frameV(at, o, draw)` measures Pip's pose, centres its box on x 540 and puts his top at y about 525. The camera only zooms: 2.2-2.4 times `WIDE` 0.72 in `film-v.js`.
+
+## Native moves
+
+- `split`: hard vs smart way (wheels = point).
+- `grow`: today / a month / a year (last block = point).
+- `stairs`: stairs vs slope to a flag.
+- `drop`: throw off weights, keep the goal.
+- `door`: force the wall, find the door.
+- `domino`: one small push (first domino = point).
+- Vertical extras: `gap` (fear it, build a bridge) and `summit` (payoff).
+- To add one, copy a move.
 
 ## Pitfalls
-- Text drawn with `ctx.fillText` directly bypasses the 28 px / fit-to-box guards. Always `text()`.
-- A prop that never moves is a dead hold: give it `wob`, a scroll or a build.
-- Accent on more than one thing per beat kills the point.
-- Keep content between logical x 85 and 915 (9:16 crops the rest on push).
 
-## Kit details that are easy to miss
-- 16:9 uses `templates/index.html` + `templates/film.js`; 9:16 uses `templates/vertical.html` + `templates/film-v.js` (copied to `film.js`). HyperFrames allows only one root html: copy exactly one to the kit root as `index.html`.
-- `data-duration` in the html = sum of `beat()` lengths = `mountFilm()` argument.
-- The loop: the final beat calls `M.split(L - d, ...)` (negative L) so the scene continues and ends at the same state as t = 0; its camera must end at zoom 1.0 and `pop: false` on beats 1 and 7.
-- Run the freeze check (`RENDER.md` step 4) after every render and fix every hit.
-- Figures plant their lowest foot on `ground` automatically; do not compute hip heights by hand.
+- A prop that never moves is a dead hold. Give it `wob`, a scroll or a build.
+- Keep content between logical x 85 and 915; 9:16 crops the rest on a push.
+- Loop: the last beat calls `M.split(L - d, ...)` so the scene ends in the state of t = 0. Its camera ends at zoom 1.0. Beats 1 and 7 use `pop: false`.
+- `data-duration` = sum of the `beat()` lengths = the `mountFilm()` argument.
+- Hero too small: `sc` at least 1.85 at zoom 2.2.
+- Wide poses cut by the edge: draw through `frameV()`. A pose box wider than 950 px still clips, so the push bends the elbows.
+- Keep the point of the metaphor within about 250 logical px of Pip.
+- Same picture three seconds running: one beat = `keys(TT - L, 2.0, [A, B])`. (`keys()` is from `engine/safe.js`; pose keyframes are `poseKeys()`.)
+- Vertical end card: `endCard(DUR - 2, DUR, ['Made by Claude Code', 'No video model'])`.
 
-## Vertical 9:16 (Shorts, Reels, TikTok)
-`templates/vertical.html` + `templates/film-v.js` (copy film-v.js to film.js; the 16:9 sample keeps `templates/film.js`). The sample is the VS proverb Short (34 s, "Small steps beat one giant leap"): one big Pip, six metaphor sets, a new picture every 2 s.
+## Files
 
-**The kit pieces for vertical**
-- `characters/stick.js`: `POSES` (`idle reach cheer slump crouch recoil push`), `figure(..., { ex })` adds a face to the round head (`calm happy sad shock firm`; no `ex` = the classic single eye), `lw` sets the line weight, and the figure calls `track('hero')` / `track('face')` (engine/safe.js) unless `extra`. Pose keyframes are `poseKeys(list, L)` (renamed: `keys()` belongs to engine/safe.js).
-- `sets/metaphors-v.js`: `MV.wall stairs weight domino gap summit`, each with `.at(L, side)` (where Pip stands for side 'A' weak / 'B' strong), `.draw(L, side)` and an optional `.top()` drawn over him. `frameV(at, o, draw)` AUTO-FRAMES: it measures Pip's pose first (an invisible pass), then shifts the stage so his pose box is centred on x 540 with his top at y ~525; the camera only zooms (2.2-2.4). Pip at `sc` 1.95 is ~1300 px tall.
-- `labelV(text, t0, t1)` (engine/runtime.js): Inter 800 caps >= 64 px with a short yellow bar, above his head (label band y 270-500, x 108-918), complete from its first frame, reported to the layout check.
-- In vertical with engine/safe.js loaded the beat pips are off (they sat in the bottom UI band).
-
-## Vertical pitfalls (machine-checked, 2026-10-25)
-The old vertical film was the 16:9 film width-fitted: a 300 px figure and 11 px lines on a black phone screen. The kit now prevents it; `bash tools/vcheck.sh out.mp4` finds the rest with exact times.
-- **Hero too small:** keep `sc` >= 1.85 at zoom 2.2 (>= 1150 px). Crouch is short: use it only inside a blend.
-- **Wide poses cut by the edge:** draw through `frameV()`; a pose box wider than ~950 px (push with straight arms) still clips, so the push pose bends the elbows.
-- **Props off-frame:** sets are drawn relative to where Pip stands; keep the point of the metaphor within ~250 logical px of him.
-- **Same picture three seconds running:** one beat = `keys(TT - L, 2.0, [A, B])`, each picture its own zoom, pose and label.
-- **End card:** `endCard(DUR - 2, DUR, ['Made by Claude Code', 'No video model'])` over the payoff picture.
-- Kit lessons from real builds: `LESSONS.md` (newest last).
+- 16:9: copy `templates/index.html` and `templates/film.js` to the kit root (28 s sample).
+- 9:16: copy `templates/vertical.html` as `index.html` and `templates/film-v.js` as `film.js` (34 s sample, `vbeat()`). HyperFrames allows one root html only.
+- Edit `film.js`; new moves go in `sets/metaphors.js` or `sets/metaphors-v.js`.
+- `bash tools/render.sh` runs `tools/vcheck.sh` and `tools/layout-check.mjs`. 16:9 has no dead-hold script: run `ffmpeg -hide_banner -i out.mp4 -vf freezedetect=n=-60dB:d=0.4 -f null - 2>&1 | grep -a freeze_` and fix every hit with a bounce, walk, scroll, build or slower push.
+- Sound is optional, no voice. Music: ffmpeg `sine` pad at 110, 165, 220 Hz with `tremolo`, `lowpass=f=700`, about -20 LUFS. SFX: a `sine=f=70` thud on landings, a high-passed `anoisesrc` tick on dominoes.
+- Lessons: `LESSONS.md`.

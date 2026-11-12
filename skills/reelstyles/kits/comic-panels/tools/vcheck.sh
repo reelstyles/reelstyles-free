@@ -19,6 +19,6 @@ awk -v end="$end" '{ split($3, a, ":"); t = NR - 1; same = a[2] >= 0.75 && t + 1
 # the hook: frame 0 vs 0.5 s must differ (something already moving in the first frame)
 s0=$(nice -n 19 ffmpeg -v error -i "$f" -filter_complex "[0:v]trim=end=0.6,fps=2,scale=72:128,format=gray,split[a][b];[b]trim=start_frame=1,setpts=PTS-STARTPTS[c];[a][c]ssim=stats_file=-" -f null - 2>/dev/null | head -1 | grep -oE "All:[0-9.]+" | cut -d: -f2)
 [ -n "$s0" ] && [ "$(echo "$s0 > 0.97" | bc)" = 1 ] && echo "0-0.5 s: the opening barely moves (ssim $s0): frame 0 must be mid-action" >> /tmp/vcheck.$$
-[ -f index.html ] && grep -q engine/safe.js index.html && { node tools/layout-check.mjs . >> /tmp/vcheck.$$ 2>&1 || true; }
+[ -z "${LAYOUT_DONE:-}" ] && [ -f index.html ] && grep -q engine/safe.js index.html && { node tools/layout-check.mjs . >> /tmp/vcheck.$$ 2>&1 || true; }
 grep -v "^$" /tmp/vcheck.$$ | sort -n | while read -r l; do echo "$l"; done; c=$(grep -cv "^$" /tmp/vcheck.$$); rm -f /tmp/vcheck.$$ /tmp/vcheck.$$.ss
 [ $((n + c)) -eq 0 ] && echo "vcheck: pass" || { echo "vcheck: $((n + c)) problem(s)"; exit 1; }

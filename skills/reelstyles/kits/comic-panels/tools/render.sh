@@ -11,15 +11,17 @@ o=${1:-out.mp4}; o=${o%.mp4}; v=$(grep -o 'hyperframes@[0-9.]*' RENDER.md 2>/dev
 HF=${HF:-npx -y hyperframes@${v:-0.8.96}}
 [ -f index.html ] && [ -f film.js ] || { echo "render: no index.html + film.js here (RENDER.md step 1 copies them from templates/)"; exit 1; }
 $HF lint . || { echo "render: fix the lint errors first"; exit 1; }
+# 11-12: the layout check needs only the browser, not the video: run it BEFORE the render (a 35 s film failed 15 layout rules after a full render)
+if grep -q engine/safe.js index.html; then lc=$(node tools/layout-check.mjs . 2>&1) || { echo "$lc"; echo "render: layout rules failed before rendering (no video made): fix film.js and run bash tools/render.sh again"; exit 1; }; export LAYOUT_DONE=1; fi
 rm -f "$o.mp4" "$o.FAILED.mp4" "$o.part.mp4"
-$HF render . -o "$o.part.mp4" --quality looks --workers "${WORKERS:-2}" && [ -s "$o.part.mp4" ] || { echo "render: hyperframes render failed (RENDER.md, Troubleshooting)"; exit 1; }
+$HF render . -o "$o.part.mp4" --quality looks --workers "${WORKERS:-3}" && [ -s "$o.part.mp4" ] || { echo "render: hyperframes render failed (RENDER.md, Troubleshooting)"; exit 1; }
 wh=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 "$o.part.mp4")
 if [ "$wh" = 1080x1920 ]; then
   VCHECK_LEN=0 bash tools/vcheck.sh "$o.part.mp4"; rc=$?
 else
   p=""
   [ -f tools/deadhold.sh ] && p+=$(sh tools/deadhold.sh "$o.part.mp4" 2>&1 | grep -vx 'OK')
-  grep -q 'engine/safe.js' index.html && p+=$(node tools/layout-check.mjs . 2>&1)
+  grep -q 'engine/safe.js' index.html && [ -z "${LAYOUT_DONE:-}" ] && p+=$(node tools/layout-check.mjs . 2>&1)
   rc=0; [ -n "$p" ] && { echo "$p"; rc=1; }
 fi
 if [ $rc -eq 0 ]; then

@@ -58,18 +58,23 @@
     },
     {
       "path": "STYLE.md",
-      "bytes": 5749,
-      "sha256": "edd4645693bc03a4bfe479cc773489b0f0f0404534c4ed4dcee3066ee9fb5e6a"
+      "bytes": 6062,
+      "sha256": "b4463cc520d19093afaba1ec7a3d43d51283d678c1363041b08e992d40291840"
     },
     {
       "path": "characters/stick.js",
-      "bytes": 10445,
-      "sha256": "118fdd2dd32a9de7ed51039c40a5fb728220ff50059f3838d2508d3e33861b4f"
+      "bytes": 11282,
+      "sha256": "51374b418266f4448e36d1d1639d3e14da7150f8ea5cbaaa0c8d9af26f0e35ea"
+    },
+    {
+      "path": "engine/look.js",
+      "bytes": 17523,
+      "sha256": "b8c852c3b735f78b9f513ccb4ac131e4794a2bd33a48d3f91c8a15ea48e24b36"
     },
     {
       "path": "engine/runtime.js",
-      "bytes": 9694,
-      "sha256": "8605d551bfa48557e5b0b06cfb5c5536ef2734d15dcf345f87e3a7a4916d1762"
+      "bytes": 10589,
+      "sha256": "8768ab39476a2711940fd6bed3e1cdfa8b1ae553aed8e8a7854776273b7f9377"
     },
     {
       "path": "engine/safe.js",
@@ -112,24 +117,29 @@
       "sha256": "0ab6ac10cf744739136ba44d2ebf0458500dcc852e8e50dc92f56243266d194e"
     },
     {
+      "path": "sets/scenes.js",
+      "bytes": 17046,
+      "sha256": "6a2aef5ef4f50093ee1399125f73a76abae11a7805880979eef9be76631af264"
+    },
+    {
       "path": "templates/film-v.js",
       "bytes": 4173,
       "sha256": "67eaf9b8b6e187174e06af63db4a49ba64c3a53ccc2a14eb896b85a30c08d1a3"
     },
     {
       "path": "templates/film.js",
-      "bytes": 1562,
-      "sha256": "9a755b749a214adb71c6df876dbd4c678dbe09a4e30e2770998614bcbcb76507"
+      "bytes": 1772,
+      "sha256": "851cd569644f3ed7ae9b2ef34459b310ff8f48d9fb44cca38d9f0657f446b253"
     },
     {
       "path": "templates/index.html",
-      "bytes": 1195,
-      "sha256": "02624a71de439267c878e7844c00ea46ebbcf5329e6707b4f69561034d3dbb8e"
+      "bytes": 1481,
+      "sha256": "55eaf6e68123562946c5763b53e4014f566292ee311d2412dea1119b3ffca453"
     },
     {
       "path": "templates/vertical.html",
-      "bytes": 1437,
-      "sha256": "675f448059cf06b420cf3183bb211ed08cb97234585425199b4c1129bbfcbd17"
+      "bytes": 1608,
+      "sha256": "7f0d5b25f565edf0c775dbdd6e14d8104dd7d163ac7d778adc5e95380a10e35e"
     },
     {
       "path": "tools/layout-check.mjs",

@@ -66,16 +66,27 @@ function figure(x, ground, pose, o = {}) {
   const pt = (q) => T(q);
   const J = { hip: pt([0, 0]), neck: pt(neck), head: pt(head), sh: pt(sh), hand: [pt(aN[1]), pt(aF[1])], elbow: [pt(aN[0]), pt(aF[0])], knee: [pt(lN[0]), pt(lF[0])], foot: [pt(lN[1]), pt(lF[1])] };
   J.top = J.head[1] - FIG.head * s;
+  // engine/look.js: contact + cast shadow on the floor, then a rim in the light's colour on the side that faces the light
+  const lit = typeof LOOK !== 'undefined' && (o.a ?? 1) > 0 && o.rim !== false, Lt = lit ? mainLight() : null;
+  if (lit && o.shadow !== false && air < 30) castShadow(x, ground, (J.foot[0][1] - J.top), 46 * s);
   ctx.save();
   alpha(o.a ?? 1);
   ctx.strokeStyle = PAL.white; ctx.lineWidth = (o.lw ?? FIG.lw) * s; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
   const line = (pts, dim) => { ctx.save(); if (dim) ctx.globalAlpha *= (o.far ?? 0.62); ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]); ctx.stroke(); ctx.restore(); };
-  line([J.sh, J.elbow[1], J.hand[1]], true);
-  line([J.hip, J.knee[1], J.foot[1]], true);
-  line([J.hip, J.neck]);
-  line([J.hip, J.knee[0], J.foot[0]]);
-  line([J.sh, J.elbow[0], J.hand[0]]);
-  ctx.fillStyle = PAL.white; ctx.beginPath(); ctx.arc(J.head[0], J.head[1], FIG.head * s, 0, TAU); ctx.fill();
+  const body = () => {
+    line([J.sh, J.elbow[1], J.hand[1]], true);
+    line([J.hip, J.knee[1], J.foot[1]], true);
+    line([J.hip, J.neck]);
+    line([J.hip, J.knee[0], J.foot[0]]);
+    line([J.sh, J.elbow[0], J.hand[0]]);
+    ctx.beginPath(); ctx.arc(J.head[0], J.head[1], FIG.head * s, 0, TAU); ctx.fill();
+  };
+  if (Lt) {
+    const m = ctx.getTransform(), lx = (Lt.sx - m.e) / m.a, ly = (Lt.sy - m.f) / m.d, dx = lx - J.neck[0], dy = ly - J.neck[1], dl = Math.hypot(dx, dy) || 1, off = 3 * s;
+    ctx.save(); ctx.translate((dx / dl) * off, (dy / dl) * off); ctx.strokeStyle = ctx.fillStyle = Lt.color; ctx.shadowColor = rgba(Lt.color, 0.45); ctx.shadowBlur = 12; ctx.globalAlpha *= 0.85;
+    ctx.lineWidth = ((o.lw ?? FIG.lw) + 1) * s; body(); ctx.restore();
+  }
+  ctx.fillStyle = PAL.white; body();
   if (o.ex) face(J.head, s, dir, o.ex, o.ph || 0);
   else { ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(J.head[0] + dir * (9 + p.look) * s, J.head[1] - 2 * s, 4.4 * s, 0, TAU); ctx.fill(); }   // one eye, looks where the figure faces
   ctx.restore();

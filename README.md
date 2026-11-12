@@ -14,7 +14,7 @@ Each clip below was made with its kit. All 7 kits are complete and MIT licensed,
 
 To try it in Claude Code, run the two /plugin lines below and ask for "a 20 s video about coffee in the whiteboard style". The first video takes about 20 minutes, setup included. After that a short video renders in a few minutes.
 
-Each kit is a set of plain files: a style guide, scene templates, render steps and a rubric the agent checks its own frames against. Any agent that can read files and use a terminal can work with them, for example Claude Code, Codex, Cursor, Roo Code, Cline, Gemini CLI or GitHub Copilot. The agent writes each scene in code and HyperFrames renders it on your computer. You don't need an AI video model for this.
+Each kit is a set of plain files: a style guide, scene templates, render steps and a rubric the agent checks its own frames against. Any agent that can read files and use a terminal can work with them, for example Claude Code, Codex, Cursor, OpenCode, Roo Code, Cline, Gemini CLI or GitHub Copilot. The agent writes each scene in code and HyperFrames renders it on your computer. You don't need an AI video model for this.
 
 **Start here:** tell your agent **"set up ReelStyles"**. It runs the `reelstyles-setup` skill, which checks for Node.js 22+, ffmpeg and Chrome and asks before it installs anything missing. Then it connects ReelStyles to your agent and renders a 5 s test film. You can also run the script yourself: `bash setup/setup.sh install`, then `wire auto`, then `test` (on Windows PowerShell: `powershell -ExecutionPolicy Bypass -File setup\setup.ps1 install`, then the same commands).
 
@@ -27,7 +27,7 @@ After that, ask for a film: **"Read skills/reelstyles/SKILL.md, then make me a 3
 ```
 To update later, run `/plugin marketplace update reelstyles-free`.
 
-## Use it with Codex, Cursor, Roo Code, Cline, Gemini CLI, Copilot or another agent
+## Use it with Codex, Cursor, OpenCode, Roo Code, Cline, Gemini CLI, Copilot or another agent
 Clone this repo (or unzip it) into your project or next to it. Agents that read `AGENTS.md` will find the skill from there. You can also copy `skills/reelstyles/` into the folder where your agent looks for skills or rules. To update, run `git pull`.
 
 ## What you need

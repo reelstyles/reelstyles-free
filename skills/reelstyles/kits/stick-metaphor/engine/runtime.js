@@ -95,18 +95,26 @@ function renderFrame(t) {
   TT = t; GA = 1; if (typeof LAYOUT !== 'undefined') LAYOUT.length = 0;
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
   ctx.fillStyle = PAL.bg; ctx.fillRect(0, 0, W, H);
-  const b = beatAt(t), L = t - b.t0;
-  const c = b.cam ? b.cam(L, b.dur) : { z: 1 + 0.045 * EZ.io(L / b.dur) };
+  const b = beatAt(t), L = t - b.t0, lk = typeof post === 'function';   // lk: engine/look.js loaded (grade, light, depth, grain)
+  const c = b.cam ? b.cam(L, b.dur) : { z: 1 + 0.045 * EZ.io(L / b.dur), x: 490 + 20 * EZ.io(L / b.dur) };
   const pop = b.pop === false ? 1 : 1 + 0.05 * (1 - EZ.o3(L / 0.28));
   CAMZ = (c.z || 1) * pop;
+  if (lk) { grade(b.grade || 'night'); LOOK.lights.length = 0; CAMR = { z: c.z || 1, pop, x: c.x ?? 500, y: c.y ?? 500, sx: c.sx || 0, sy: c.sy || 0 }; }
   const k = S * CAMZ, cx = c.x ?? 500, cy = c.y ?? 500;
   ctx.setTransform(k, 0, 0, k, CX - cx * k + (c.sx || 0) * S, CY - cy * k + (c.sy || 0) * S);
   ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-  dust(t);
+  if (lk && b.stage !== false) stageBack(L);   // the default lit stage under a metaphor move (scene recipes paint their own set)
+  if (!lk || b.stage !== false) dust(t);
   b.draw(L, b.dur);
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
-  if (!VERT || typeof LAYOUT === 'undefined') pips(b.index);   // vertical Shorts: no progress dots (they sit in the bottom UI band)
-  if (typeof LAYOUT !== 'undefined') { ctx.setTransform(1, 0, 0, 1, 0, 0); drawEnd(); qaFrame(); }   // engine/safe.js: end card + layout QA
+  if (lk) post();
+  if ((!VERT || typeof LAYOUT === 'undefined') && (!lk || window.PIPS)) pips(b.index);   // look.js films: no dots unless window.PIPS   // vertical Shorts: no progress dots (they sit in the bottom UI band)
+  if (typeof LAYOUT !== 'undefined') {
+    ctx.setTransform(1, 0, 0, 1, 0, 0); drawEnd();
+    if (!VERT) { const hs = LAYOUT.filter((e) => e.kind === 'hero'), m = hs.length && hs.reduce((a, e) => (e.y1 - e.y0 > a.y1 - a.y0 ? e : a));   // 16:9 framing stats (tools/layout-check.mjs)
+      if (m && !(END && TT >= END.t0)) QAS[Math.round(TT * 100) / 100] = { h: (Math.min(m.y1, H) - Math.max(m.y0, 0)) / H, edge: m.x0 <= 2 ? 'left' : m.x1 >= W - 2 ? 'right' : m.y0 <= 2 ? 'top' : '' }; }
+    qaFrame();
+  }
 }
 
 // labelV(str, t0, t1): the vertical label, screen space: Inter 800 caps >= 64 px, white on the black stage with a short

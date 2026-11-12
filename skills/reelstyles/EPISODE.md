@@ -46,7 +46,7 @@ say it is theirs. Never imitate a real person's voice.
 ## 6. Build
 
 Time every shot to the word timings. Follow the kit's STYLE.md and its beats; a new picture at least every 2-4 s (the kit
-says which). Build one beat at a time, take stills, review them with `REVIEW.md` (and the kit's RUBRIC.md if it has one), fix, then the next beat.
+says which). Build one beat at a time, take stills, review them with `REVIEW.md`, fix, then the next beat.
 
 ## 7. Checks and stop 2
 

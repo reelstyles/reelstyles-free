@@ -7,7 +7,7 @@
 # 11-09: a cold run skipped the checks and shipped a hero cut by the left edge; the checks are part of the render now.
 set -u
 cd "$(dirname "$0")/.." || exit 1
-o=${1:-out.mp4}; o=${o%.mp4}; v=$(grep -om1 'hyperframes@[0-9.]*' RENDER.md 2>/dev/null | cut -d@ -f2)
+o=${1:-out.mp4}; o=${o%.mp4}; v=$(grep -o 'hyperframes@[0-9.]*' RENDER.md 2>/dev/null | head -1 | cut -d@ -f2)   # head -1: -m1 still printed every match on the line (11-11)
 HF=${HF:-npx -y hyperframes@${v:-0.8.96}}
 [ -f index.html ] && [ -f film.js ] || { echo "render: no index.html + film.js here (RENDER.md step 1 copies them from templates/)"; exit 1; }
 $HF lint . || { echo "render: fix the lint errors first"; exit 1; }

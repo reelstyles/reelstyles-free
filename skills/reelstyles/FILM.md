@@ -7,6 +7,8 @@ These hold in every kit. The kit's STYLE.md says how things look. This file says
 - Read the script once and list its people, places, era and objects. Draw only those. No cutaway to another time or place unless the narration goes there.
 - Dress, buildings, tools and faces fit the era and region of the story. Use the kit's own people and props; if the kit has none for that era, build them in the kit's line, colours and detail level.
 - One through-line: every shot shows what the narration says at that moment.
+- Prove every new thing before you use it. For each person, animal, prop or place the story needs that the kit does not already have, draw it alone on one still first, in the kit's line and colours, and ask a fresh subagent (only the still, no code) "what is this?". Redraw until it names it in one word. A fallen tree that reads as a dome, or a lamp that reads as a toy, sinks the film.
+- Pick the look of each scene for its mood: dark places (caves, night, tombs) stay dark, lit only by the story's light source, with silhouettes and glow. Do not flood them with daylight.
 
 ## Frame
 
@@ -41,3 +43,4 @@ These hold in every kit. The kit's STYLE.md says how things look. This file says
 - Every frame is a pure function of the film time: no `Math.random`, `Date` or `performance.now`.
 - Prefix your own helpers; never redefine kit globals.
 - Render only with `bash tools/render.sh` when the kit has it. It runs the machine checks and refuses a film that fails.
+- Run the render in the foreground and wait for it. Never end your turn while a render runs: the film is only done when `out.mp4` exists and you have reviewed it.

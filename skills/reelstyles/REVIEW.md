@@ -9,6 +9,8 @@ Review like a strict viewer who paid for a studio film. Do it twice: on stills b
 
 Open every picture and look at it. Do not judge from the code.
 
+Use fresh eyes: your own eyes forgive what you meant to draw. When you can start a subagent, give it only the pictures, the narration and this file (not your code or notes) and ask it for the mistakes list. Fix everything it finds, even what you think you already fixed.
+
 ## Mistakes (any one means fix and look again)
 
 1. Wrong for the story: a person, dress, building, tool or object from another era, culture or place; a scene the narration does not mention.

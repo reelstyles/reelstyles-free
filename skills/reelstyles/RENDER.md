@@ -25,7 +25,7 @@ npx -y hyperframes@0.8.96 lint .                                   # must be 0 e
 npx -y hyperframes@0.8.96 snapshot . --at 1,4,8,12 --no-end -o snapshots
 ```
 
-Open the PNGs in `snapshots/` and check them against `RUBRIC.md`. Fix and repeat: plan at least 3 still rounds (blocking → acting/composition → polish). Stills are cheap, full renders are not.
+Open the PNGs in `snapshots/` and check them against `REVIEW.md`. Fix and repeat: plan at least 3 still rounds (blocking → acting/composition → polish). Stills are cheap, full renders are not.
 
 ## 3. Render
 

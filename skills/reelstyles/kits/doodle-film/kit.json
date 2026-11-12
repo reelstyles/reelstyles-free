@@ -133,8 +133,8 @@
     },
     {
       "path": "tools/render.sh",
-      "bytes": 2120,
-      "sha256": "4d05f837b72e9498fcef6f4458e3550303ffdb9b936af8b6ae900085ec385f0e"
+      "bytes": 2191,
+      "sha256": "1e8f39967020b422aef198a1cb357cf3eb932c8253e4e45094b34163d15d60e3"
     },
     {
       "path": "tools/score.sh",

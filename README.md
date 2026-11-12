@@ -2,13 +2,15 @@
 
 7 video styles for Claude Code and other coding agents. You pick a style, give your agent a topic, and it animates the film in code and renders an MP4 on your computer.
 
-[![Dark Keynote](https://reelstyles.com/samples/dark-keynote-example.jpg)](https://reelstyles.com/style/dark-keynote)
-[![Whiteboard explainer](https://reelstyles.com/samples/whiteboard-example.jpg)](https://reelstyles.com/style/whiteboard)
-[![Doodle film](https://reelstyles.com/samples/doodle-film-example.jpg)](https://reelstyles.com/style/doodle-film)
-[![Kinetic type](https://reelstyles.com/samples/kinetic-type-example.jpg)](https://reelstyles.com/style/kinetic-type)
-[![Stick-figure metaphor Short](https://reelstyles.com/samples/stick-metaphor-example.jpg)](https://reelstyles.com/style/stick-metaphor)
-[![Countdown guessing quiz](https://reelstyles.com/samples/guess-quiz-example.jpg)](https://reelstyles.com/style/guess-quiz)
-[![Pop comic panels](https://reelstyles.com/samples/comic-panels-example.jpg)](https://reelstyles.com/style/comic-panels)
+Each clip below was made with its kit. All 7 kits are complete and MIT licensed, so you can use them in paid work too.
+
+[<img src="previews/dark-keynote.webp" alt="Dark Keynote" width="400">](https://reelstyles.com/style/dark-keynote)
+[<img src="previews/whiteboard.webp" alt="Whiteboard explainer" width="400">](https://reelstyles.com/style/whiteboard)
+[<img src="previews/doodle-film.webp" alt="Doodle film" width="400">](https://reelstyles.com/style/doodle-film)
+[<img src="previews/kinetic-type.webp" alt="Kinetic type" width="400">](https://reelstyles.com/style/kinetic-type)
+[<img src="previews/stick-metaphor.webp" alt="Stick-figure metaphor Short" width="400">](https://reelstyles.com/style/stick-metaphor)
+[<img src="previews/guess-quiz.webp" alt="Countdown guessing quiz" width="400">](https://reelstyles.com/style/guess-quiz)
+[<img src="previews/comic-panels.webp" alt="Pop comic panels" width="400">](https://reelstyles.com/style/comic-panels)
 
 To try it in Claude Code, run the two /plugin lines below and ask for "a 20 s video about coffee in the whiteboard style". The first video takes about 20 minutes, setup included. After that a short video renders in a few minutes.
 

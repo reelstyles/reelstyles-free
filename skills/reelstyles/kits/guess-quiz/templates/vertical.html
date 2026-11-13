@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>countdown guessing quiz 9:16</title>
-  <!-- templates/index.html: 9:16 (1080 x 1920, 30 fps). Copy to the kit root (or vertical.html for 9:16), then edit film.js. -->
+  <!-- templates/vertical.html: 9:16 (1080 x 1920, 30 fps). cp templates/vertical.html index.html && cp templates/film-v.js film.js, then edit film.js. -->
   <link rel="stylesheet" href="fonts/fonts.css">
   <style>
     html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #000; }
@@ -13,14 +13,16 @@
   <script>window.__timelines = window.__timelines || {};</script>
 </head>
 <body>
-  <!-- data-duration must equal the sum of the beats in film.js (4 x (1.3 + 5.1) = 25.6) -->
-  <div id="root" data-composition-id="main" data-start="0" data-duration="25.6" data-width="1080" data-height="1920">
+  <!-- data-duration must equal DUR in film.js (the sum of the beats) -->
+  <div id="root" data-composition-id="main" data-start="0" data-duration="36.8" data-width="1080" data-height="1920">
     <canvas id="c" width="1080" height="1920"></canvas>
-    <!-- sound: add an <audio> clip here, see RENDER.md -->
+    <!-- sound: add an <audio> clip here, see STYLE.md -->
   </div>
   <script src="engine/runtime.js"></script>
+  <script src="engine/safe.js"></script>   <!-- vertical layout guard: label band, end card, layout QA (tools/layout-check.mjs) -->
   <script src="sets/items.js"></script>
   <script src="sets/stage.js"></script>
+  <script src="characters/cast.js"></script>   <!-- the hero: the round's item, fitted big (Hero) -->
   <script src="film.js"></script>
 </body>
 </html>

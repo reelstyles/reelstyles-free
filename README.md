@@ -1,4 +1,4 @@
-# ReelStyles Free 2026.11.12
+# ReelStyles Free 2026.11.13
 
 7 video styles for Claude Code and other coding agents. You pick a style, give your agent a topic, and it animates the film in code and renders an MP4 on your computer.
 

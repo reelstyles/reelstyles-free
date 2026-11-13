@@ -1,17 +1,21 @@
 // =====================================================================
 //  engine/runtime.js: frame clock + drawing helpers for the guessing-quiz look.
-//  Classic script. Load order: gsap → engine/runtime.js → sets/items.js → sets/stage.js → film.js.
+//  Classic script. Load order: gsap → engine/runtime.js → (9:16: engine/safe.js) → sets/items.js → sets/stage.js → (9:16: characters/cast.js) → film.js.
+//  9:16: with engine/safe.js loaded every frame clears the layout boxes, draws the end card and runs the layout QA (qaFrame).
+//  The text option for letter spacing is `ls` (safe.js owns the global track()).
 //  Every frame is a pure function of film time t (no Math.random / Date).
 //
 //  Coordinates are plain pixels on a 1080p basis: 1920 x 1080 (16:9) or 1080 x 1920 (9:16). `VERT` tells which.
 //    beat(dur, draw, opts)   register a beat; draw(L, dur) reads local time L (s). opts: { cam(L,d) → {z,x,y} }
 //    mountFilm(total)        waits for the font, paints the canvas on every seek. Call once, last, in film.js.
-//    text(str, x, y, opts)   the ONLY way to put text on screen: min 30 px, wraps + shrinks to maxW, clamped inside the frame
+//    text(str, x, y, opts)   the ONLY way to put text on screen: min 30 px, wraps + shrinks to maxW, clamped inside the frame;
+//                            opts.label = 'name' reports its screen box to the 9:16 guard as a label (x 108-918, never on the hero)
 //    EZ / spring / seg / wob eases + idle wobble;  rng(seed) seeded random;  alpha(a) global-alpha helper
 // =====================================================================
 const _cv = document.getElementById('c');
 const W = _cv.width, H = _cv.height, FPS = 30, TAU = Math.PI * 2;
 const VERT = H > W;
+const HAND = 'Inter';                                   // the font engine/safe.js draws the end card with
 const MIN_PX = 30;                                        // smallest allowed text size in px (rule: >= 28 at 1080p)
 const FONT = 'Inter, "Helvetica Neue", Arial, sans-serif';
 let ctx = null, TT = 0, GA = 1;
@@ -33,11 +37,11 @@ const alpha = (a = 1) => { ctx.globalAlpha = clamp(a * GA); };
 
 // ---- text: chunky rounded look = Inter 900 + a same-colour round-join stroke, soft drop shadow, never clipped
 function text(str, x, y, o = {}) {
-  const { size = 60, weight = 900, color = '#FFFFFF', maxW = W - 160, a = 1, lh = 1.08, track = 0.02, scale = 1, rot = 0, shadow = true, align = 'center' } = o;
+  const { size = 60, weight = 900, color = '#FFFFFF', maxW = W - 160, a = 1, lh = 1.08, ls = 0.02, scale = 1, rot = 0, shadow = true, align = 'center', label = '' } = o;
   let sz = Math.max(size, MIN_PX);
   ctx.save(); alpha(a);
   ctx.textBaseline = 'middle'; ctx.textAlign = 'left'; ctx.lineJoin = 'round'; ctx.miterLimit = 2;
-  const setf = () => { ctx.font = `${weight} ${sz}px ${FONT}`; ctx.letterSpacing = `${sz * track}px`; };
+  const setf = () => { ctx.font = `${weight} ${sz}px ${FONT}`; ctx.letterSpacing = `${sz * ls}px`; };
   setf();
   const words = String(str).split(' '); const lines = []; let cur = '';
   for (const w of words) { const t = cur ? cur + ' ' + w : w; if (ctx.measureText(t).width <= maxW || !cur) cur = t; else { lines.push(cur); cur = w; } }
@@ -51,6 +55,7 @@ function text(str, x, y, o = {}) {
   ctx.fillStyle = color; ctx.strokeStyle = color; ctx.lineWidth = sz * 0.07;
   const y0 = -((lines.length - 1) * sz * lh) / 2;
   lines.forEach((l, i) => { const w = ctx.measureText(l).width; ctx.strokeText(l, -w / 2, y0 + i * sz * lh); ctx.fillText(l, -w / 2, y0 + i * sz * lh); });
+  if (label && typeof track === 'function') { ctx.shadowColor = 'transparent'; const hw = wmax / 2 + sz * 0.05, hh = (lines.length * sz * lh) / 2; track('label', -hw, y0 - sz * lh / 2, hw, y0 - sz * lh / 2 + hh * 2, label); }
   ctx.restore();
   return { w: wmax * scale, h: lines.length * sz * lh * scale, size: sz };
 }
@@ -62,16 +67,17 @@ function beat(dur, draw, opts = {}) { BEATS.push({ t0: _t, t1: _t + dur, dur, dr
 const beatAt = (t) => BEATS.find((b) => t >= b.t0 && t < b.t1) || BEATS[BEATS.length - 1];
 
 function renderFrame(t) {
-  TT = t; GA = 1;
+  TT = t; GA = 1; if (typeof LAYOUT !== 'undefined') LAYOUT.length = 0;
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.shadowColor = 'transparent';
   ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
   const b = beatAt(t), L = t - b.t0;
-  const c = b.cam ? b.cam(L, b.dur) : { z: 1 + 0.04 * (L / b.dur) };
+  const c = b.cam ? b.cam(L, b.dur) : { z: VERT ? 1 : 1 + 0.04 * (L / b.dur) };   // 9:16: the stage pushes the item itself, labels stay put
   const z = c.z || 1, cx = c.x ?? W / 2, cy = c.y ?? H / 2;
   ctx.setTransform(z, 0, 0, z, W / 2 - cx * z, H / 2 - cy * z);
   ctx.lineCap = 'round'; ctx.lineJoin = 'round';
   b.draw(L, b.dur, b);
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
+  if (typeof LAYOUT !== 'undefined') { drawEnd(); qaFrame(); }   // engine/safe.js: end card + layout QA (tools/layout-check.mjs)
 }
 
 function mountFilm(total, id = 'main') {

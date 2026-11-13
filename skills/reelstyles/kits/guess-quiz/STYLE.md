@@ -29,7 +29,10 @@ Inter 900 (OFL, in `fonts/`), made chunky and round by a same-colour round-join 
 
 ## Cast and props
 
-No characters. The items in `ITEMS` (`sets/items.js`) are the cast:
+No people. The items in `ITEMS` (`sets/items.js`) are the cast; in 9:16 the round's item is the hero (`characters/cast.js`):
+
+- `Hero(it, t, o)` (9:16): the item fitted to `o.h` px tall (740) and at most 860 px wide, centred on (`o.cx`, `o.cy`), `o.z` push-in (never past 900 px wide); `o.pose` `idle` | `walk` | `reach` | `cheer` | `slump`, `o.mood` `calm` | `tense` (shivers) | `happy`, `o.in` entrance, `o.sil` silhouette tone, `o.wipe` 0..1 colour reveal. It calls `track('hero', ...)` with the item's measured box (`itemBox(it)`). `quizRound` passes `pose` from the PLAN entry.
+- `text(str, x, y, { label: 'name' })` reports the text box to the 9:16 guard; letter spacing is the option `ls` (safe.js owns `track`).
 
 - Shapes: `apple`, `banana`, `strawberry`, `pineapple`, `elephant`, `cat`, `fish`, `duck`.
 - Flags (340 × 230 cloth on a pole): `japan`, `italy`, `sweden`, `switzerland`.
@@ -48,7 +51,7 @@ Flags: `{ kind:'flag', cols:[{ c, s, r:[x,y,w,h] }] }`. `s` is the dark silhouet
 
 - Hard cuts between title card and round. Every beat pushes 1.0 → 1.04 (the default).
 - 16:9: item left (700, 480), ring and score bar right, text under the item.
-- 9:16: item top (540, 690), then text, ring, score bar. Keep clear of the top 180 px and bottom 150 px platform UI.
+- 9:16: see Vertical pitfalls below (quizRoundV / titleCardV in `sets/stage.js`).
 - `LAY` picks the layout by canvas size.
 - Ease every move (`spring`, `EZ`, `seg`); only the ring is linear.
 
@@ -74,7 +77,8 @@ The rhythm is spring in, 3 s ring, colour wipe, name pop, score tick; the viewer
 - Copy ONE root html, because HyperFrames refuses two:
   - 16:9 (1920 × 1080): `cp templates/index.html .`
   - 9:16 (1080 × 1920): `cp templates/vertical.html index.html`
-- Also `cp templates/film.js .` and edit its `PLAN` list of `{ band, item, prompt }`. The sample is a working 25.6 s film, one round per band.
+- 9:16 (1080x1920, phone Shorts): `cp templates/vertical.html index.html && cp templates/film-v.js film.js`, edit its `PLAN` (`{ band, item, prompt, pose }`); `DUR` is the sum of the beats and must equal `data-duration` on `#root`. The page loads the layout guard `engine/safe.js` right after `engine/runtime.js`, then `characters/cast.js`. Render with `bash tools/render.sh` (lint, layout check before the render, render, `tools/vcheck.sh`); it names the film `out.mp4` only when every check passes. Check again any time: `bash tools/vcheck.sh out.mp4` must print `vcheck: pass`. `engine/safe.js`, `tools/vcheck.sh`, `tools/layout-check.mjs`, `tools/render.sh` are the same file in every kit: do not edit them.
+- 16:9: also `cp templates/film.js .` and edit its `PLAN` list of `{ band, item, prompt }`. The sample is a working 25.6 s film, one round per band.
 - Per band: `beat(1.3, ...titleCard)` then `beat(ROUND_LEN, ...quizRound)`; end with `mountFilm(total)`.
 - Stills: one per round and per title card, for example `--at 0.8,2.2,4.4,5.8,10.5,17.5,24.6` for the sample.
 - Freeze check, mandatory before delivering. It must print nothing:
@@ -94,3 +98,15 @@ ffmpeg -y -f lavfi -i "sine=f=196:d=26" -f lavfi -i "sine=f=294:d=26" -filter_co
 ```
 
   Round start = band × 6.4 + 1.3 s. Ticks at start + 0.6, 1.6, 2.6 s, whoosh at +3.2 s, pop at +3.72 s. Mix with `adelay` and `amix`.
+
+## Vertical pitfalls (machine-checked, 2026-11-13)
+
+The old 9:16 layout was the 16:9 round stacked: a 600 px item in the top third, 40-48 px HUD text, the ring and score bar low in the platform UI, and one unchanged picture for 3.6 s of every round (three identical tiles on a 1-s contact sheet). `templates/film-v.js` (36.8 s, 7 rounds) fixes it in the kit; `bash tools/vcheck.sh out.mp4` finds the rest with exact times.
+- **The hero is the item.** `Hero()` fits every item to 740 px tall (about 40% of the frame), centre (540, 1000), whole and inside x 90-990; a push-in is at most 12% and never wider than 900 px. A banana and a pineapple read the same size.
+- **Label band (y 270-500):** round pill `ROUND 3 OF 7` (66 px, accent on the band's dark tone) at y 310, prompt plate at y 440 (72 px, shrinks to 64 px to stay on one line, two lines grow the plate), after zero the answer plate (`NAME!`, 112 px, band dark on accent). Every label passes `label:` to `text()` so the guard checks it. Nothing over 1470 but the countdown badge and the score pips (decor).
+- **A new picture every <= 1.3 s:** 9:16 rounds are 4.6 s (`T_IN 0.3`, ring 3 s, payoff 1.3 s) and each countdown second is its own set: `calm` (stripes, bubbles), `burst` (flipped gradient, white sunburst, item pushes in), `danger` (dark red, black rays, red pulse, item shivers), `win` (accent rays, colour wipe, confetti, answer). Title cards (1.0 s) are a fifth set; the easy band has none, so frame 0 is round 1 mid-drop.
+- **Entrances never overshoot past the frame:** item, ring, answer and band word use `EZ.back` (about 10%), not `spring()` (40% overshoot cut the item and the answer at the edges for a frame).
+- **Ring:** a 440 px halo behind the item, 40 px line; the number sits in a 200 px badge under it (150 px digits).
+- **Title card:** band word 220 px (max 740 wide), stars 70 px, `LEVEL n` 80 px, sub 64 px; the word + stars are tracked as the `key` object.
+- **End card:** `endCard(DUR - 2, DUR, ['Made by Claude Code', 'No video model'])`; the last round is 1.6 s longer so its payoff keeps playing under it.
+- Kit lessons from real builds: `LESSONS.md` (newest last).

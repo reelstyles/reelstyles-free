@@ -32,8 +32,13 @@
   "files": [
     {
       "path": "EXAMPLES.md",
-      "bytes": 1252,
-      "sha256": "82ab7f94ea419d70e5a70e027be1f10e7d8783740541cbb4312965f27fe430fa"
+      "bytes": 1208,
+      "sha256": "a00913ed02f7de6d07c692b7fa041251912127fef06386499ad210eb0ce9a4b4"
+    },
+    {
+      "path": "LESSONS.md",
+      "bytes": 509,
+      "sha256": "05f3cdd8c48098db0914a0006cb55a8ed8d6e4a80a42565e2a72e0b880d333a5"
     },
     {
       "path": "LICENSES/ASSETS.md",
@@ -52,13 +57,23 @@
     },
     {
       "path": "STYLE.md",
-      "bytes": 5663,
-      "sha256": "903bb763a981073ec6e73f4bfbf450627e8a35e64b80a7ef4373e6b6751f83b8"
+      "bytes": 5670,
+      "sha256": "486e1e19c8244f48eec892b18f19040df2e7eb3cb81554d59415e6fe5d5f3e50"
+    },
+    {
+      "path": "characters/cast.js",
+      "bytes": 12842,
+      "sha256": "8deac0156229e3c4944043394706dcdfe1801d4e49316f9ae5259d192e24b72e"
+    },
+    {
+      "path": "engine/safe.js",
+      "bytes": 13769,
+      "sha256": "dec05b9f70ce387e6308bdfb6f6892d4b1cec1ff823dd6cec79f01f5b26b5a79"
     },
     {
       "path": "engine/wb.js",
-      "bytes": 32563,
-      "sha256": "4cf29d4f34db035ea890efc34470e2d23e83a12251b65f10e2dfada1363fa3af"
+      "bytes": 36857,
+      "sha256": "d57b815f2fec9d886741f29277ab361b3223c0a5302d6b5bb61f6be1b907a80d"
     },
     {
       "path": "fonts/ArchitectsDaughter-Regular.ttf",
@@ -77,8 +92,8 @@
     },
     {
       "path": "templates/film-v.js",
-      "bytes": 4347,
-      "sha256": "8378654234885ac2c3fc758c759f98b65bff11bdb6ff2d9463b74816862398cb"
+      "bytes": 14262,
+      "sha256": "4254b2a05b437d9aec8f8e4e3d8cd2eaf65bfd4277d837d7691f5a37f5a1adbc"
     },
     {
       "path": "templates/film.js",
@@ -92,13 +107,28 @@
     },
     {
       "path": "templates/vertical.html",
-      "bytes": 1091,
-      "sha256": "43521fa37547cffac4bd850cc95e6c293be8eaa7d2226ccb48eb548eb0ecb104"
+      "bytes": 1328,
+      "sha256": "91059ae53f5bbd476a8cb0f8315503aefac38cfd50b7e1c529f217af17089174"
     },
     {
       "path": "tools/foley.mjs",
       "bytes": 5058,
       "sha256": "b15ccb0b5dab15a34556b08260766fa1d5117f29ab12777080e28a9f47400415"
+    },
+    {
+      "path": "tools/layout-check.mjs",
+      "bytes": 9193,
+      "sha256": "cd69e026e262dcb39ba4b2d75718ac2fbff12b25da4ed95fea957e998dd3b84b"
+    },
+    {
+      "path": "tools/render.sh",
+      "bytes": 2621,
+      "sha256": "1b0e0a79d61e9189683123e7c3d2ee8cba93b2a0980c70fb9a0d65d33e2838f4"
+    },
+    {
+      "path": "tools/vcheck.sh",
+      "bytes": 3432,
+      "sha256": "ffbcfbec593284c084713bf8d04e87cf281f9a1378e93b1f3d1b83598e40a3bb"
     }
   ],
   "example_video": "samples/whiteboard-example.mp4"

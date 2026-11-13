@@ -3,6 +3,7 @@
 //    BANDS[id]            { label, g:[top,bottom], dark, accent, stars }
 //    quizRound(L, cfg)    cfg = { band, item, n (round number), score (rounds already won), total, prompt }
 //    titleCard(L, d, cfg) cfg = { band, sub }
+//  9:16 (phone Shorts) runs quizRoundV / titleCardV below: the item is the hero (characters/cast.js), one set per countdown second.
 //  Round timeline (seconds, L = local time): item springs in 0-0.6 · ring drains 0.6-3.6 (3 ticks) · zero at 3.6:
 //  flash, colour wipe, name spring, confetti, score tick · hold with idle motion until the end (5.1 s).
 // =====================================================================
@@ -12,7 +13,8 @@ const BANDS = {
   hard:       { label: 'HARD',       g: ['#FFA63D', '#FF3D86'], dark: '#7A1A4A', accent: '#FFF0A0', stars: 3 },
   impossible: { label: 'IMPOSSIBLE', g: ['#C0143F', '#2A0A55'], dark: '#12041F', accent: '#FFD84A', stars: 4 },
 };
-const T_IN = 0.6, T_RING = 3.0, T_ZERO = T_IN + T_RING, ROUND_LEN = 5.1;
+// 9:16 rounds are tighter (a new picture every <= 1.3 s, see quizRoundV): 0.3 s in, 3 s ring, 1.3 s payoff = 4.6 s
+const T_IN = VERT ? 0.3 : 0.6, T_RING = 3.0, T_ZERO = T_IN + T_RING, ROUND_LEN = VERT ? 4.6 : 5.1;
 
 // layout (1080p basis)
 const LAY = VERT
@@ -72,7 +74,7 @@ function hud(L, cfg, band, scoreNow, fillT) {
   ctx.save(); ctx.translate(tx - tw, ty + tb);
   ctx.fillStyle = band.dark; ctx.beginPath(); ctx.roundRect(0, 0, tw, 96, 48); ctx.fill();
   ctx.restore();
-  text(band.label, tx - tw / 2, ty + 48 + tb, { size: 42, color: band.accent, maxW: tw - 60, shadow: false, track: 0.05 });
+  text(band.label, tx - tw / 2, ty + 48 + tb, { size: 42, color: band.accent, maxW: tw - 60, shadow: false, ls: 0.05 });
   // score bar: 4 pills, new one fills with a spring
   const [bx, by, bw] = LAY.bar, n = cfg.total, gap = 16, pw = (bw - gap * (n - 1)) / n;
   text(`SCORE ${scoreNow} / ${n}`, bx, by - 66, { size: 40 });
@@ -129,6 +131,7 @@ function confetti(dt, band) {
 }
 
 function quizRound(L, cfg) {
+  if (VERT) return quizRoundV(L, cfg);
   const band = BANDS[cfg.band], it = ITEMS[cfg.item], t = TT;
   const wonT = L - T_ZERO;                                          // < 0 before zero
   stageBg(t, band);
@@ -163,6 +166,7 @@ function quizRound(L, cfg) {
 
 // full-screen band title card
 function titleCard(L, d, cfg) {
+  if (VERT) return titleCardV(L, d, cfg);
   const band = BANDS[cfg.band], t = TT;
   stageBg(t * 1.6, band);
   // expanding rings from the centre
@@ -179,4 +183,146 @@ function titleCard(L, d, cfg) {
     star(x, y, 52 * Math.max(0.01, sp) * (1 + 0.06 * Math.sin(t * 5 + i)), Math.sin(t * 2 + i) * 0.12, on ? band.accent : 'rgba(20,10,60,0.35)');
   }
   text(cfg.sub, W / 2, H / 2 + (VERT ? 400 : 345), { size: 48, a: EZ.o2(seg(L, 0.5, 0.8)), maxW: W - 200 });
+}
+
+// =====================================================================
+//  9:16 (1080 x 1920): the phone layout. Owner 11-02: wide, never a crop; labels >= 64 px; a new picture every <= 2 s.
+//    label band y 270-500: round pill (y 310) + prompt / answer plate (y 440)   ·   item (the hero) centre (540, 1000), 740 px tall
+//    ring = a halo around the item (r 440), countdown badge under it (y 1520), score pips (y 1700)
+//  One SET per countdown second, so the 1-s contact sheet never shows the same picture three times:
+//    'calm' (L < 1.3: stripes + bubbles) · 'burst' (sunburst rays, the item pushes in 12%) · 'danger' (dark red, item shivers)
+//    · 'win' (accent rays, colour wipe, answer, confetti). Title cards are their own set (rings + stars).
+// =====================================================================
+const VL = { cx: 540, cy: 1000, h: 740, rr: 440, badge: 1520, pips: 1700, pill: 310, plate: 440 };
+const DANGER = { g: ['#FF4A5E', '#3A0620'], dark: '#2A0614' };
+
+function phaseOf(L) { const e = L - T_IN; return e >= T_RING ? 'win' : e < 1 ? 'calm' : e < 2 ? 'burst' : 'danger'; }
+
+function rays(t, n, col, a, spin) {
+  ctx.save(); ctx.translate(VL.cx, VL.cy); ctx.rotate(t * spin); ctx.fillStyle = col; ctx.globalAlpha = a;
+  const R = 1700;
+  for (let i = 0; i < n; i++) { const a0 = (i / n) * TAU, a1 = a0 + TAU / n / 2; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(a0) * R, Math.sin(a0) * R); ctx.lineTo(Math.cos(a1) * R, Math.sin(a1) * R); ctx.closePath(); ctx.fill(); }
+  ctx.restore(); ctx.globalAlpha = 1;
+}
+function stageBgV(t, band, mode) {
+  const g = mode === 'danger' ? DANGER.g : band.g;
+  stageBg(t, { ...band, g: mode === 'burst' ? [g[1], g[0]] : g });   // burst flips the gradient: the light end jumps to the other corner
+  if (mode === 'burst') rays(t, 14, '#FFFFFF', 0.17, 0.35);
+  if (mode === 'danger') { rays(t, 10, '#000000', 0.18, -0.6); const k = 0.5 + 0.5 * Math.sin(t * 9); ctx.fillStyle = `rgba(255,40,70,${0.1 + 0.12 * k})`; ctx.fillRect(0, 0, W, H); }
+  if (mode === 'win') rays(t, 18, band.accent, 0.3, 0.5);
+}
+
+function plate(x, y, w, h, fill) { ctx.save(); ctx.shadowColor = 'rgba(20,10,60,.35)'; ctx.shadowBlur = 24; ctx.shadowOffsetY = 8; ctx.fillStyle = fill; ctx.beginPath(); ctx.roundRect(x - w / 2, y - h / 2, w, h, h / 2); ctx.fill(); ctx.restore(); }
+
+function hudV(L, cfg, band, scoreNow, fillT) {
+  const t = TT, bob = Math.sin(t * 2.4) * 4;
+  // round pill: "ROUND 3 / 7" in the band's dark tone on white, the band word in its accent beside it
+  plate(540, VL.pill + bob, 600, 100, band.dark);
+  ctx.strokeStyle = 'rgba(255,255,255,0.9)'; ctx.lineWidth = 8; ctx.beginPath(); ctx.roundRect(540 - 300, VL.pill + bob - 50, 600, 100, 50); ctx.stroke();
+  text(`ROUND ${cfg.n} OF ${cfg.total}`, 540, VL.pill + bob, { size: 66, color: band.accent, shadow: false, maxW: 540, ls: 0.04, label: 'round' });
+  // score pips (decor under the badge): one per round, the new one fills with a spring and a shine
+  const n = cfg.total, gap = 14, pw = 84, bw = n * pw + (n - 1) * gap, by = VL.pips;
+  for (let i = 0; i < n; i++) {
+    const x = 540 - bw / 2 + i * (pw + gap);
+    ctx.fillStyle = 'rgba(20,10,60,0.4)'; ctx.beginPath(); ctx.roundRect(x, by - 22, pw, 44, 22); ctx.fill();
+    const f = i < cfg.score ? 1 : i === cfg.score ? spring(fillT, 9, 0.5) : 0;
+    if (f > 0) {
+      ctx.save(); ctx.beginPath(); ctx.roundRect(x, by - 22, pw, 44, 22); ctx.clip();
+      ctx.fillStyle = band.accent; ctx.fillRect(x, by - 22, pw * Math.min(f, 1), 44);
+      ctx.fillStyle = 'rgba(255,255,255,0.55)'; ctx.translate(x + ((t * 160 + i * 40) % (pw + 120)) - 60, by); ctx.rotate(0.5); ctx.fillRect(-9, -50, 18, 100);
+      ctx.restore();
+    }
+  }
+}
+
+// the ring: a halo behind the item, drains over 3 s, pulses on each tick, red in the last second; badge with the number under it
+function ringV(L, band, wonT, phase) {
+  const R = VL.rr, e = L - T_IN, left = clamp(e / T_RING), sec = Math.min(2, Math.floor(Math.max(0, e)));
+  const pulse = e >= 0 && e < T_RING ? Math.exp(-11 * (e - sec)) : 0, danger = phase === 'danger';
+  const appear = EZ.back(seg(L, -0.2, 0.25)), out = wonT >= 0 ? 1 - EZ.i3(seg(wonT, 0.35, 0.8)) : 1;
+  const sc = appear * (1 + 0.04 * pulse) * (0.6 + 0.4 * out);
+  if (out <= 0) return;
+  ctx.save(); ctx.translate(VL.cx + (danger ? Math.sin(TT * 60) * 4 : 0), VL.cy); ctx.scale(sc, sc); ctx.globalAlpha = out;
+  ctx.fillStyle = 'rgba(255,255,255,0.16)'; ctx.beginPath(); ctx.arc(0, 0, R, 0, TAU); ctx.fill();
+  ctx.lineWidth = 40; ctx.strokeStyle = 'rgba(20,10,60,0.28)'; ctx.beginPath(); ctx.arc(0, 0, R, 0, TAU); ctx.stroke();
+  const rem = wonT >= 0 ? 0 : 1 - left;
+  if (rem > 0.002) {
+    const a = -Math.PI / 2 + TAU * rem;
+    ctx.strokeStyle = danger ? '#FFE3E8' : band.accent; ctx.lineWidth = 40; ctx.beginPath(); ctx.arc(0, 0, R, -Math.PI / 2, a); ctx.stroke();
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(Math.cos(a) * R, Math.sin(a) * R, 16, 0, TAU); ctx.fill();
+  }
+  ctx.restore(); ctx.globalAlpha = 1;
+  // badge
+  const bs = appear * (1 + 0.18 * pulse) * (wonT >= 0 ? 1 - EZ.i3(seg(wonT, 0.6, 1.0)) : 1);
+  if (bs <= 0.01) return;
+  ctx.save(); ctx.translate(VL.cx, VL.badge); ctx.scale(bs, bs);
+  plate(0, 0, 200, 200, danger ? '#FF2E4D' : band.dark);
+  ctx.strokeStyle = '#fff'; ctx.lineWidth = 10; ctx.beginPath(); ctx.arc(0, 0, 100, 0, TAU); ctx.stroke();
+  if (wonT >= 0) { ctx.strokeStyle = band.accent; ctx.lineWidth = 26; ctx.beginPath(); ctx.moveTo(-46, 4); ctx.lineTo(-12, 40); ctx.lineTo(50, -34); ctx.stroke(); }
+  ctx.restore();
+  if (wonT < 0) text(String(3 - sec), VL.cx, VL.badge + 6, { size: 150, scale: bs, color: '#fff', maxW: 180 });
+}
+
+function confettiV(dt, band) {
+  if (dt < 0 || dt > 1.7) return;
+  const r = rng(5), cols = [band.accent, '#FFFFFF', '#FF5FA2', '#5CE1FF', '#8DFF7A'];
+  for (let i = 0; i < 44; i++) {
+    const a = r() * TAU, v = 380 + r() * 620, sz = 24 + r() * 22, col = cols[i % 5], sp = 4 + r() * 8;
+    const x = VL.cx + Math.cos(a) * v * Math.min(dt, 0.9) * 0.9, y = VL.cy + Math.sin(a) * v * dt * 0.8 + 900 * dt * dt * 0.5 - 140 * dt;
+    ctx.save(); ctx.globalAlpha = clamp(1.7 - dt); ctx.translate(x, y); ctx.rotate(sp * dt); ctx.scale(Math.cos(sp * dt * 1.7), 1);
+    ctx.fillStyle = col; ctx.beginPath(); ctx.roundRect(-sz / 2, -sz / 4, sz, sz / 2, 5); ctx.fill(); ctx.restore();
+  }
+}
+
+function quizRoundV(L, cfg) {
+  const band = BANDS[cfg.band], it = ITEMS[cfg.item], t = TT, wonT = L - T_ZERO, phase = phaseOf(L);
+  stageBgV(t, band, phase);
+  vignette(t, phase === 'danger' ? 1 : 0);
+  ringV(L, band, wonT, phase);
+  // the hero: springs in (frame 0 of a round is already mid-drop), pushes in on 'burst', shivers on 'danger', jumps after the reveal
+  const e = L - T_IN, z = phase === 'burst' ? 1 + 0.12 * EZ.io(seg(e, 1, 1.35)) : phase === 'danger' ? 1.12 - 0.04 * EZ.o2(seg(e, 2, 2.3)) : 1;
+  Hero(it, t, {
+    cx: VL.cx, cy: VL.cy, h: VL.h, z, in: EZ.back(seg(L, -0.15, 0.3)), sil: band.dark,
+    pose: phase === 'win' ? 'cheer' : phase === 'danger' ? 'reach' : cfg.pose || 'idle', mood: phase === 'danger' ? 'tense' : phase === 'win' ? 'happy' : 'calm',
+    wipe: wonT > 0 ? clamp(wonT / 0.55) : 0, pop: wonT > 0 ? 0.1 * Math.exp(-6 * wonT) * Math.cos(18 * wonT) : 0,
+  });
+  confettiV(wonT - 0.1, band);
+  // prompt plate (dark) before zero, answer plate (accent) after
+  if (wonT < 0) {
+    const a = EZ.o2(seg(L, -0.2, 0.2)), sc = 0.98 + 0.02 * Math.sin(t * 5);
+    // one line on the plate: shrink a long prompt down to 64 px; longer still, the plate grows to two lines
+    ctx.font = `900 72px ${FONT}`; ctx.letterSpacing = '1.4px';
+    const fit = Math.max(64, Math.min(72, (72 * 740) / (ctx.measureText(cfg.prompt).width + 8))), two = (ctx.measureText(cfg.prompt).width * fit) / 72 > 740;
+    ctx.save(); ctx.globalAlpha = a; plate(540, VL.plate, 810 * sc, two ? 170 : 112, 'rgba(20,10,60,0.62)'); ctx.restore();
+    text(cfg.prompt, 540, VL.plate, { size: fit, a, scale: sc, maxW: 740, shadow: false, label: 'prompt' });
+  } else {
+    const p = EZ.back(seg(wonT, 0.02, 0.32)), sc = Math.max(0.01, p) * (1 + 0.012 * Math.sin(t * 3));
+    ctx.save(); ctx.translate(540, VL.plate); ctx.rotate(-0.04 * (1 - clamp(p)) + 0.012 * Math.sin(t * 2.2)); ctx.scale(sc, sc);
+    plate(0, 0, 760, 150, band.accent); ctx.restore();
+    text(it.name + '!', 540, VL.plate, { size: 112, color: band.dark, scale: sc, maxW: 660, shadow: false, label: 'answer' });
+  }
+  if (wonT > 0 && wonT < 0.3) { ctx.fillStyle = `rgba(255,255,255,${0.6 * (1 - wonT / 0.3)})`; ctx.fillRect(0, 0, W, H); }
+  hudV(L, cfg, band, cfg.score + (wonT > 0.4 ? 1 : 0), wonT - 0.4);
+}
+
+function titleCardV(L, d, cfg) {
+  const band = BANDS[cfg.band], t = TT, cy = 960;
+  stageBg(t * 1.6, band);
+  rays(t, 22, '#FFFFFF', 0.1, 0.8);
+  for (let i = 0; i < 3; i++) {
+    const k = ((L * 1.2 + i / 3) % 1); ctx.strokeStyle = `rgba(255,255,255,${0.4 * (1 - k)})`; ctx.lineWidth = 18;
+    ctx.beginPath(); ctx.arc(W / 2, cy, 140 + k * 900, 0, TAU); ctx.stroke();
+  }
+  vignette(t, 0);
+  const p = EZ.back(seg(L, -0.1, 0.3)), grow = 1 + 0.08 * (L / d);
+  text(`LEVEL ${cfg.level}`, W / 2, cy - 250, { size: 80, a: EZ.o2(seg(L, 0, 0.25)), color: band.accent, label: 'level' });
+  const r = text(band.label, W / 2, cy - 20, { size: 220, scale: Math.max(0.01, p) * grow, rot: -0.05 + 0.02 * Math.sin(t * 3), maxW: 740 });
+  for (let i = 0; i < 4; i++) {
+    const sp = spring(L - 0.1 - i * 0.1, 9, 0.4), on = i < band.stars, x = W / 2 + (i - 1.5) * 170, y = cy + 210;
+    star(x, y, 70 * Math.max(0.01, sp) * (1 + 0.06 * Math.sin(t * 5 + i)), Math.sin(t * 2 + i) * 0.12, on ? band.accent : 'rgba(20,10,60,0.4)');
+  }
+  text(cfg.sub, W / 2, cy + 400, { size: 64, a: EZ.o2(seg(L, 0.2, 0.45)), maxW: 780, label: 'sub' });
+  // the key object of the card: band word + stars (the guard needs a tracked subject on every frame)
+  const hw = Math.max(r.w / 2, 330) + 20;
+  if (typeof track === 'function') track('key', W / 2 - hw, cy - 20 - 140, W / 2 + hw, cy + 210 + 80, band.label);
 }

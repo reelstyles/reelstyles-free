@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>dark keynote film (vertical 9:16)</title>
+  <!-- templates/vertical.html: the 9:16 (1080x1920, 30 fps) page. Copy it to the kit root as index.html and templates/film-v.js as film.js.
+       data-duration on #dk-stage = DUR in film.js. The film scripts sit at the end of <body>, after the stage. -->
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="engine/dk.css">
+  <link rel="stylesheet" href="engine/dk-v.css">
+  <style>html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #06080D; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>window.__timelines = window.__timelines || {};</script>
+</head>
+<body>
+  <!-- data-duration must equal DUR in film.js -->
+  <div id="dk-stage" class="dk-v" data-composition-id="main" data-start="0" data-duration="34" data-width="1080" data-height="1920">
+    <!-- sound: add an <audio> clip here, see ../RENDER.md -->
+  </div>
+  <script src="engine/dk.js"></script>
+  <script src="engine/dk-v.js"></script>   <!-- 9:16 mode + the bridge to the guard (the runtime of a vertical film) -->
+  <script src="engine/safe.js"></script>   <!-- vertical layout guard: label band, end card timing, layout QA (tools/layout-check.mjs) -->
+  <script src="characters/cast.js"></script>
+  <script src="film.js"></script>
+</body>
+</html>

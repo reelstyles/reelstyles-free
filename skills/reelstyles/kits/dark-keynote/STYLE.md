@@ -49,7 +49,7 @@ A launch film for software where the interface is the star. Near-black navy stag
 ## Pitfalls
 - Closing as a flat tinted rectangle looks like a placeholder. Squash the real surface.
 - Too few generated items leave holes in a grid. Generate by rule, then pad.
-- The film script must stay inline at the bottom of `index.html`. As an external `<script src>` the bundler runs it before the stage exists.
+- 16:9: the film script must stay inline at the bottom of `index.html`. As an external `<script src>` in `<head>` the bundler runs it before the stage exists (9:16 loads `film.js` at the end of `<body>`, after the stage).
 - Hide late arrivals with `gsap.set(..., {opacity:0})` or inline `opacity:0`; `fromTo(..., immediateRender:false)` leaves them visible early.
 - Keep `data-duration` on `#dk-stage` equal to `TOTAL`.
 - Keep content above the toast zone (bottom 64 px plus 90 px).
@@ -58,8 +58,20 @@ A launch film for software where the interface is the star. Near-black navy stag
 - End on one resolved image: wordmark, tag, a single caret.
 
 ## Files
-- Copy `templates/index.html` to the kit root and edit the film script at the bottom (shots, `TOTAL`, `data-duration`). The kit is 16:9 only (1920x1080). There is no 9:16 template.
+- 16:9: copy `templates/index.html` to the kit root and edit the film script at the bottom (shots, `TOTAL`, `data-duration`).
+- 9:16 (1080x1920, phone Shorts): `cp templates/vertical.html index.html && cp templates/film-v.js film.js`, edit `film.js` (`DUR` = `data-duration` on `#dk-stage`). The vertical film runs on `engine/dk-v.js` (camera, sets, labels, end card, the bridge to the layout guard `engine/safe.js`) with the hero from `characters/cast.js`. Render with `bash tools/render.sh` (lint, layout check before the render, render, then `tools/vcheck.sh`); it names the film `out.mp4` only when every check passes. Check again any time: `bash tools/vcheck.sh out.mp4` must print `vcheck: pass`.
 - The engine is `engine/dk.js` and `engine/dk.css`, loaded from `<head>`. Do not edit it for a film.
-- Render with `--workers 2`. `snapshot` has no `--workers` flag.
+- 16:9 render with `--workers 2`. `snapshot` has no `--workers` flag.
 - Dead-hold check, mandatory before hand-over: `node tools/holdcheck.mjs out.mp4` (limit 1.2 s). Each hit is a lit region that did not move: add camera drift, `DK.alive` breathing or a staggered build, re-render, until it prints `holdcheck: ok`.
 - Sound is optional. Foley with ffmpeg: a click is `ffmpeg -f lavfi -i "sine=f=1800:d=0.03" -af afade=out:st=0:d=0.03 tick.wav`, the press drop `sine=f=140:d=0.25` with a fade, mixed at -14 dB under the voice. Marimba ticks for the product, detuned clicks for the pile.
+
+## Vertical pitfalls (machine-checked, 2026-11-13)
+The 16:9 film shrunk to a phone is a dark screen of 28 px window titles and 96 px tiles: nothing reads, and the contact sheet is nine near-identical navy tiles. The 9:16 files fix it in the kit; `bash tools/vcheck.sh out.mp4` finds the rest with exact times.
+- **A hero, always.** `DK.hero(parent, {title})` is the product as a character: an app window with a screen face (calm caret, worried coral, happy arcs, surprised, blinks by itself), poses `idle`, `walk`, `reach`, `cheer`, `slump`, body `mess`, `sorted`, `check`. It tracks itself (`hero` = the card, `face` = the screen). A shot without it tracks its main object as the hero: `DKV.track(el, 'hero', name)` (the giant number, the old-vs-new card), at least 25% of the frame tall, the number at 540 px type.
+- **Framing (owner 11-02, wide, never a crop):** hero whole at 30-57% of the frame (`s` 0.72-0.95 at camera zoom 0.74-1.36), screen top of the card at y >= 520 so the label has its band; cheer jumps 80 px, so give a cheering picture ~90 px more headroom. Close-ups over 70% at most 40% of the film.
+- **Labels:** one per picture, `DKV.label(html)` + `DKV.say(label, u)` in render; never a y, `labelY()` puts it above the card. 72 px Inter 800 on a raised plate, `<b>` mint, `<i>` coral (the problem only). No `DK.toast` in 9:16: the bottom 400 px sit under the phone's own caption and buttons.
+- **A new picture every 2 s:** `keys(0, 2.0, PICS)`; the two pictures of one set differ by a big zoom change (0.8 vs 1.3), a different pose and a different body. Dark frames look alike to the eye and to vcheck's blurred SSIM: every set needs one bright mass of its own (coral blocks, the mint button and ripples, the tile wall, the ring, the white number).
+- **Element opacity:** a tracked element under 25% opacity is not measured, so a shot whose hero fades in from 0 fails "nothing tracked" on its first frame: start it at 30%.
+- **End card:** `DKV.end(DUR - 2, DUR, ['Made by Claude Code', 'No video model'])`; the last picture keeps playing under it without a label. Lines are fitted while shown (a hidden element has no width).
+- **Hook:** frame 0 mid-action (the pile starts with windows already falling).
+- Kit lessons from real builds: `LESSONS.md` (newest last).

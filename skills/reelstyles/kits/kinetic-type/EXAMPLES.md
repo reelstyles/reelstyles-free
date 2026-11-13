@@ -4,4 +4,4 @@
 2. **Hook + lesson opener for a Short (10 s).** "Open with the word 'STOP' slamming in, then stack 'YOU ARE / DOING / THIS / WRONG' line by line with alternating drift, ticker three mistakes (one word each), end on a channel wordmark."
 3. **Quote card (8 s).** "Animate the quote 'DONE IS BETTER THAN PERFECT' as a rise-from-mask poster stack, the last word in amber with outline echoes, a small attribution line (≥ 30 px) and the author's wordmark reveal."
 
-Vertical: for a real 9:16 Short, start from `templates/vertical.html` + `templates/film-v.js` (see RENDER.md, "Vertical film") and re-stage the beats of prompt 2 for a tall frame: stacked lines, two-line ticker beats, a rising wipe.
+Vertical: for a real 9:16 Short, start from `templates/vertical.html` + `templates/film-v.js` (STYLE.md, Files + Vertical pitfalls): a VS proverb told by the word block (`Hero`), one label per picture, a new picture every 2 s on its own set.

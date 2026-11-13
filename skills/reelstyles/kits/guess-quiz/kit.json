@@ -33,8 +33,13 @@
   "files": [
     {
       "path": "EXAMPLES.md",
-      "bytes": 669,
-      "sha256": "320698a127349fc51e4ebd4520d153043137c118422c3e7a833817c99988ea6e"
+      "bytes": 687,
+      "sha256": "478ad583c0717bb5eea95e8ccbba6a4cb97c5671e242bec4a472f030bad45bcb"
+    },
+    {
+      "path": "LESSONS.md",
+      "bytes": 324,
+      "sha256": "bb7dc4be5cbfd674684da2d2b55a6989e427a2287d691b35671450839ff4d54a"
     },
     {
       "path": "LICENSES/ASSETS.md",
@@ -48,18 +53,28 @@
     },
     {
       "path": "STYLE.md",
-      "bytes": 6101,
-      "sha256": "6ca7246a3926173cc8fb8d7aa8149d23d5e60272c5ed45ad4b0146df57c24799"
+      "bytes": 9593,
+      "sha256": "cef303851316f1208f10eaa859524866b3f45e46a2b5fcd483c76fa9fab5702f"
     },
     {
       "path": "characters/README.md",
-      "bytes": 89,
-      "sha256": "5cd1a48ca8c887b99f624658750cbe2ffea29ba88485dec0998d73bf8287db0a"
+      "bytes": 190,
+      "sha256": "d971a2facc44ca8ea523a480e0ed9e27c3dd77c86cf8ad8e94c5f2d75f7879df"
+    },
+    {
+      "path": "characters/cast.js",
+      "bytes": 4748,
+      "sha256": "6bff1f80508015c18b304de9e9d0010670c4c8b09921cd4d9b006468eee8626e"
     },
     {
       "path": "engine/runtime.js",
-      "bytes": 5837,
-      "sha256": "c983d0f24cefb83c9f045ecb06f01debb2bbaec860061c4ca3b0f1f9d168e45b"
+      "bytes": 6833,
+      "sha256": "98d073cb83d7916aa652b27b4fb18f06094b8ed8580afc098fdc80b5cde56241"
+    },
+    {
+      "path": "engine/safe.js",
+      "bytes": 13769,
+      "sha256": "dec05b9f70ce387e6308bdfb6f6892d4b1cec1ff823dd6cec79f01f5b26b5a79"
     },
     {
       "path": "fonts/Inter-800.woff2",
@@ -88,8 +103,13 @@
     },
     {
       "path": "sets/stage.js",
-      "bytes": 11783,
-      "sha256": "8f8ab36eb599b7a7924fd3ac08f3565725bd6e671227bf8c6f237c6d695fe46f"
+      "bytes": 22156,
+      "sha256": "f7e9ac4ea36b87563bd5885a1b2080dd2e5f03c00482517a66ac2f0133387d6d"
+    },
+    {
+      "path": "templates/film-v.js",
+      "bytes": 1909,
+      "sha256": "09a20345b23b7bf9f4f5cfc63e77ab3fdf886d0866d9d22a7d5c3defbb67be59"
     },
     {
       "path": "templates/film.js",
@@ -103,8 +123,23 @@
     },
     {
       "path": "templates/vertical.html",
-      "bytes": 1141,
-      "sha256": "2ef123a46f61cbe49556e49d465eb2f97820109e07662acc846b499eb8e1fe15"
+      "bytes": 1381,
+      "sha256": "07ea6d7dcc03a86cc155ce4c1f10804816273497651a60bab5878f5d429fabcb"
+    },
+    {
+      "path": "tools/layout-check.mjs",
+      "bytes": 9193,
+      "sha256": "cd69e026e262dcb39ba4b2d75718ac2fbff12b25da4ed95fea957e998dd3b84b"
+    },
+    {
+      "path": "tools/render.sh",
+      "bytes": 2621,
+      "sha256": "1b0e0a79d61e9189683123e7c3d2ee8cba93b2a0980c70fb9a0d65d33e2838f4"
+    },
+    {
+      "path": "tools/vcheck.sh",
+      "bytes": 3432,
+      "sha256": "ffbcfbec593284c084713bf8d04e87cf281f9a1378e93b1f3d1b83598e40a3bb"
     }
   ]
 }

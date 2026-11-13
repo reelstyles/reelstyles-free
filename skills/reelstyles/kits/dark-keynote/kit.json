@@ -9,7 +9,8 @@
   "status": "ready",
   "renderer": "hyperframes@0.8.96",
   "aspect": [
-    "16:9"
+    "16:9",
+    "9:16"
   ],
   "size": [
     1920,
@@ -36,6 +37,11 @@
       "sha256": "a5355ac98a99a1b4fa7978d9d6840ea696f9d92737f44dcb6e1f676e11e1caf0"
     },
     {
+      "path": "LESSONS.md",
+      "bytes": 325,
+      "sha256": "78b9d0012d93cf955ea33556047469fb1e20f377e0b5ff96fee5e88213c546a3"
+    },
+    {
       "path": "LICENSES/ASSETS.md",
       "bytes": 922,
       "sha256": "b4367529bd469f7eb203d36e24a85425d1c9b5c65504c637823e45191c99b855"
@@ -57,8 +63,23 @@
     },
     {
       "path": "STYLE.md",
-      "bytes": 5889,
-      "sha256": "e4438fe4d1152637367e74ae5d59d0924e2430eabe467e2f733f319bcff7bed2"
+      "bytes": 8782,
+      "sha256": "1584f467c6739f6e8f9c8ffddcf97aa93c1b6b758f5a1eeea8cd3a41ed380cf7"
+    },
+    {
+      "path": "characters/cast.js",
+      "bytes": 11331,
+      "sha256": "38b91c43d220d571eec8e797969b6fdecdb4d883271a8d3cb8ffe99c454d3dcc"
+    },
+    {
+      "path": "engine/dk-v.css",
+      "bytes": 2834,
+      "sha256": "9ef2294aee1b933fe44a6b786d7c93743fac995889866543daa6b759fa321a9d"
+    },
+    {
+      "path": "engine/dk-v.js",
+      "bytes": 6997,
+      "sha256": "0c6b13bcf3382aefcaddb713cadc462ef3d08894e5eab240624b4711bcdf9536"
     },
     {
       "path": "engine/dk.css",
@@ -69,6 +90,11 @@
       "path": "engine/dk.js",
       "bytes": 7788,
       "sha256": "f2927cf7c1b479fff8b7fa669bd0c2431a8a54ab20c7ce9a356501ebb4d314af"
+    },
+    {
+      "path": "engine/safe.js",
+      "bytes": 13769,
+      "sha256": "dec05b9f70ce387e6308bdfb6f6892d4b1cec1ff823dd6cec79f01f5b26b5a79"
     },
     {
       "path": "fonts/Inter-400.woff2",
@@ -119,6 +145,31 @@
       "path": "tools/holdcheck.mjs",
       "bytes": 2081,
       "sha256": "6f04df3287d981a36c4c90521d4f296c6fd1289b2f95e3af6f0f2e4044de54f2"
+    },
+    {
+      "path": "tools/layout-check.mjs",
+      "bytes": 9193,
+      "sha256": "cd69e026e262dcb39ba4b2d75718ac2fbff12b25da4ed95fea957e998dd3b84b"
+    },
+    {
+      "path": "tools/vcheck.sh",
+      "bytes": 3432,
+      "sha256": "ffbcfbec593284c084713bf8d04e87cf281f9a1378e93b1f3d1b83598e40a3bb"
+    },
+    {
+      "path": "templates/film-v.js",
+      "bytes": 20701,
+      "sha256": "c726f6409724ae5600cbecd798ffa3bd8ffe061e5c3f5cbc45c546625b398d4b"
+    },
+    {
+      "path": "templates/vertical.html",
+      "bytes": 1446,
+      "sha256": "77e299671b9398a449c23f61d4c20ee8fdabf5a6bab978a209ebf40b5baa63f7"
+    },
+    {
+      "path": "tools/render.sh",
+      "bytes": 2621,
+      "sha256": "1b0e0a79d61e9189683123e7c3d2ee8cba93b2a0980c70fb9a0d65d33e2838f4"
     }
   ]
 }

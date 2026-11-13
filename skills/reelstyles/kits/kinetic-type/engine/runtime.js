@@ -1,7 +1,8 @@
 // =====================================================================
 //  engine/runtime.js: frame clock + shot registry for the kinetic-type look. Classic script, every name is a global.
-//  Load order: gsap → engine/runtime.js → engine/kinetic.js → film.js.
-//    shot(t0, t1, draw, cam, theme)  draw(t) paints in world space; cam(t) → [cx, cy, zoom, rot]; theme = {base, blobs}
+//  Load order: gsap → engine/runtime.js → (9:16: engine/safe.js) → engine/kinetic.js → (9:16: characters/cast.js) → film.js.
+//    shot(t0, t1, draw, cam, theme)  draw(t) paints in world space; cam(t) → [cx, cy, zoom, rot]; theme = {base, blobs} or theme(t) → one
+//  9:16: when engine/safe.js is loaded the frame also draws the queued labels (label()), the end card, and runs the layout QA (qaFrame).
 //    trans(fn)                        screen-space overlay after every shot (wipes)
 //    mountFilm(duration)              waits for fonts, then gives HyperFrames a paused GSAP timeline that paints at each seek
 //  Vertical films set window.FRAME_W = 1080 / window.FRAME_H = 1920 before this script (default 1920x1080).
@@ -28,10 +29,10 @@ function trans(fn) { TRANS.push(fn); }
 const shotAt = (t) => SHOTS.find((s) => t >= s.t0 && t < s.t1) || SHOTS[SHOTS.length - 1];
 
 function renderFrame(t) {
-  TT = t;
+  TT = t; if (typeof LAYOUT !== 'undefined') LAYOUT.length = 0;
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   const s = shotAt(t);
-  drawStage(t, s ? s.theme : null);
+  drawStage(t, s ? (typeof s.theme === 'function' ? s.theme(t) : s.theme) : null);
   if (s) {
     ctx.save();
     const c = s.cam ? s.cam(t) : [W / 2, H / 2, 1, 0];
@@ -41,7 +42,9 @@ function renderFrame(t) {
   }
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   TRANS.forEach((f) => f(t));
+  drawLabels(t);
   drawProgress(t);
+  if (typeof LAYOUT !== 'undefined') { drawEnd(); qaFrame(); }   // engine/safe.js: end card + layout QA (tools/layout-check.mjs)
 }
 
 let DURATION = 1;

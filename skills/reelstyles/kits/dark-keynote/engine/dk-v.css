@@ -1,0 +1,28 @@
+/* dark-keynote 9:16 styles (templates/vertical.html loads this after dk.css). Phone sizes: labels 72 px, UI text >= 40 px,
+   borders 2 px, everything brighter than the 16:9 stage so a 6-inch screen still reads the hero against the navy. */
+#dk-stage.dk-v{width:1080px;height:1920px;}
+.dk-v #dk-lift{background:radial-gradient(900px 1100px at 50% 34%,#1A2236 0%,rgba(26,34,54,0) 72%);}
+.dk-v #dk-cam{width:1080px;height:1920px;transform-origin:0 0;}
+.dk-v #dk-grid{left:-1400px;top:-1800px;width:3880px;height:5520px;
+  background-image:linear-gradient(rgba(255,255,255,.075) 2px,transparent 2px),linear-gradient(90deg,rgba(255,255,255,.075) 2px,transparent 2px),linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:192px 192px,192px 192px,48px 48px,48px 48px;}
+.dk-v #dk-glow{width:1400px;height:1400px;background:radial-gradient(circle,rgba(var(--accent-rgb),.16) 0%,rgba(var(--accent-rgb),0) 65%);}
+.dk-v #dk-vig{background:radial-gradient(ellipse 80% 70% at 50% 46%,rgba(0,0,0,0) 55%,rgba(0,0,0,.5) 100%);}
+.dkv-set{position:absolute;left:0;top:0;width:1080px;height:1920px;}
+/* windows on a phone: thicker border, 40 px titles */
+.dk-v .dk-win .ci{border:2px solid rgba(255,255,255,.14);border-radius:26px;}
+.dk-v .dk-win .bar{height:76px;font-size:40px;padding:0 24px;gap:16px;}
+.dk-v .dk-win .bar i{width:24px;height:24px;border-radius:7px;}
+.dk-v .dk-win .ln{left:28px;height:20px;border-radius:10px;background:rgba(255,255,255,.16);}
+.dk-v .dk-win .bd{top:90px;right:20px;min-width:72px;height:72px;border-radius:36px;font-size:44px;line-height:72px;}
+/* label plate: the one caption per picture, placed by labelY() above the hero */
+.dkv-label{position:absolute;left:0;top:0;display:none;box-sizing:border-box;width:max-content;max-width:800px;padding:24px 44px 28px;border-radius:30px;
+  background:rgba(12,16,25,.94);border:2px solid rgba(255,255,255,.2);box-shadow:0 24px 60px rgba(0,0,0,.6),inset 0 2px 0 rgba(255,255,255,.08);
+  font:800 72px/1.08 "Inter",sans-serif;letter-spacing:-.025em;color:#F2F5FA;text-align:center;text-wrap:balance;transform-origin:50% 50%;z-index:950;}
+.dkv-label b{color:var(--accent);font-weight:900;}
+.dkv-label i{color:var(--problem);font-style:normal;font-weight:900;}
+.dkv-label.mark{padding:0 20px;background:none;border:none;box-shadow:none;font:900 300px/1 "Inter",sans-serif;letter-spacing:-.06em;}
+/* end card (engine/safe.js endCard timing, drawn in DOM) */
+#dkv-end{position:absolute;inset:0;z-index:980;display:none;background:rgba(6,8,13,.62);}
+#dkv-end div{position:absolute;left:60px;width:880px;text-align:center;font:900 112px/1 "Inter",sans-serif;letter-spacing:-.04em;color:#F2F5FA;white-space:nowrap;text-shadow:0 8px 40px rgba(0,0,0,.7);}
+#dkv-end div.l2{color:var(--accent);}

@@ -33,8 +33,8 @@
   "files": [
     {
       "path": "EXAMPLES.md",
-      "bytes": 1061,
-      "sha256": "3081578366248245115da8bc8d3d351f268f844355c93b9f9c69b8e73c1b9441"
+      "bytes": 1070,
+      "sha256": "63d0237959e0d060f75b7ce23d3457e3fe1e3849c710e0ecaef49a065f50f174"
     },
     {
       "path": "LICENSES/ASSETS.md",
@@ -63,18 +63,18 @@
     },
     {
       "path": "STYLE.md",
-      "bytes": 5825,
-      "sha256": "72a3ca40b779ff863d94f3546ba62d3b6497305eae58c10ba06db10c2b8010e2"
+      "bytes": 8458,
+      "sha256": "95752bc1947a3d81ff0e7ed715f721c40d6f3ebd14d692776935fb86895f909e"
     },
     {
       "path": "engine/kinetic.js",
-      "bytes": 10761,
-      "sha256": "354c6ecc8298956744356129c9052d8b41631f6128c2943966dcc0aa61882590"
+      "bytes": 14925,
+      "sha256": "2fda3664746b51a33a4a42f1732403320677222b7d1fedc2e953a955c8aa338b"
     },
     {
       "path": "engine/runtime.js",
-      "bytes": 3357,
-      "sha256": "1812a5e3cc0d0fb9017902b0c3b195bf45fb95c26520c6ff1518152e37d896e3"
+      "bytes": 3821,
+      "sha256": "36610e692739928e3321e0cf7c53590c95e4f4e7a0f4a7018d6255d7627100a5"
     },
     {
       "path": "fonts/ArchivoBlack-Regular.ttf",
@@ -108,8 +108,8 @@
     },
     {
       "path": "templates/film-v.js",
-      "bytes": 6385,
-      "sha256": "d1274f491f71e7b18d27976b6047180b11274faaf1b70ff545292c83a21584cc"
+      "bytes": 7040,
+      "sha256": "0536ddedbfa7b6f2aa8b3f144eafd3342b762463dc7bdfed7530c7d137d26583"
     },
     {
       "path": "templates/film.js",
@@ -123,13 +123,43 @@
     },
     {
       "path": "templates/vertical.html",
-      "bytes": 1433,
-      "sha256": "5bf51c2f5416381fde6d324486a95837031963b250ae6cdd6ecd9bfa7dc65432"
+      "bytes": 1656,
+      "sha256": "3d3b6ffa3f2aa5b8e5a3451dde73c88bbae7e1e48bb5b9af1c87426d909c52f7"
     },
     {
       "path": "tools/dead-holds.mjs",
       "bytes": 2530,
       "sha256": "9ea6456eceb1d34c78b052de1993e410880beb48fa480e1a9ab3abbc91f6d2ce"
+    },
+    {
+      "path": "LESSONS.md",
+      "bytes": 326,
+      "sha256": "99bd72e4bfcf06163489148a005365b00d1ff02dc766a0ffafda12089ed1596d"
+    },
+    {
+      "path": "characters/cast.js",
+      "bytes": 5730,
+      "sha256": "7147bb41dd387b7d7ac9b4c470bb91c32b2c13e036ba449e2424148f88e89088"
+    },
+    {
+      "path": "engine/safe.js",
+      "bytes": 13769,
+      "sha256": "dec05b9f70ce387e6308bdfb6f6892d4b1cec1ff823dd6cec79f01f5b26b5a79"
+    },
+    {
+      "path": "tools/layout-check.mjs",
+      "bytes": 9193,
+      "sha256": "cd69e026e262dcb39ba4b2d75718ac2fbff12b25da4ed95fea957e998dd3b84b"
+    },
+    {
+      "path": "tools/vcheck.sh",
+      "bytes": 3432,
+      "sha256": "ffbcfbec593284c084713bf8d04e87cf281f9a1378e93b1f3d1b83598e40a3bb"
+    },
+    {
+      "path": "tools/render.sh",
+      "bytes": 2621,
+      "sha256": "1b0e0a79d61e9189683123e7c3d2ee8cba93b2a0980c70fb9a0d65d33e2838f4"
     }
   ]
 }

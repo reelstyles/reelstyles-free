@@ -18,13 +18,20 @@
 //    caption(text,t0,t1)                         burned subtitle label (screen space)
 //    mount(duration)                             hands HyperFrames a paused GSAP timeline that paints the canvas at every seek
 //    soundEvents()                               stroke / magnet / eraser schedule (tools/foley.mjs turns it into a wav)
+//  9:16 (vertical.html also loads engine/safe.js + characters/cast.js):
+//    live(t0, t1, fn)                            fn(g, t, c) draws in board space every frame while t0 <= t < t1 (the hero: characters/cast.js)
+//    label(text, t0, t1, {col, size})            a phone label written stroke by stroke above the hero's head (labelY), >= 64 px, tracked for the guard
+//    shot([[t, cx, cy, zoom, roll, whip]...])    hard cut to each key, held to the next one with a slow push; whip = screen px the camera
+//                                                slides in from (0.3 s, blurred), so every 2 s is a new picture without a frame that cuts the hero
+//    draw(..., {nopen: true})                    strokes drawn before the camera arrives (the set), no pen flies to them
 //
 //  The stroke / pen / eraser / camera ideas follow lemo-opuscar styles/whiteboard (MIT, (c) 2026 LemoLab; notice in
 //  LICENSES/MIT-lemo-opuscar.txt). This file is a rewrite as classic script with a flat schedule, plus highlighter, pens per
 //  colour, diagram pieces, shutter blur and a foley export.
 // =====================================================================
 const _cv = typeof document !== 'undefined' && document.getElementById('c');   // frame size follows the canvas attributes (1920x1080 default, 1080x1920 for vertical)
-const W = _cv ? _cv.width : 1920, H = _cv ? _cv.height : 1080, FPS = 30, TAU = Math.PI * 2;
+const W = _cv ? _cv.width : 1920, H = _cv ? _cv.height : 1080, FPS = 30, TAU = Math.PI * 2, VERT = H > W;
+let TT = 0;   // film time of the frame being painted (engine/safe.js reads it)
 const HAND = '"Architects Daughter", "Comic Sans MS", cursive';
 
 // ---- math (deterministic)
@@ -43,7 +50,7 @@ const PAL = {
 const PEN = { ink: PAL.ink, sig: PAL.sig, hot: PAL.hot };
 
 // ---- schedule
-const STROKES = [], ERASES = [], MAGNETS = [], CAMKEYS = [], CAPS = [], GHOSTS = [];
+const STROKES = [], ERASES = [], MAGNETS = [], CAMKEYS = [], CAPS = [], GHOSTS = [], LIVE = [], LABELS = [], SHOTS = [];
 let ctx = null, sctx = null, ictx = null, hctx = null, SC = null, IC = null, HC = null, DUR_ = 10, seedN = 1;
 const colOf = (c) => PEN[c] || c || PAL.ink;
 
@@ -75,7 +82,7 @@ function resample(pts, step, w, rnd, kind) {
 function addStroke(pts, t0, t1, o = {}) {
   const w = o.w ?? 8, rnd = mulberry32(1000 + seedN++ * 7919);
   const r = resample(pts, Math.max(3, w * 0.55), w, rnd, o.kind);
-  const s = { ...r, t0, t1, w, col: colOf(o.col), kind: o.kind || 'ink', pen: o.pen || o.col || 'ink', z: STROKES.length, rnd: rnd() };
+  const s = { ...r, t0, t1, w, col: colOf(o.col), kind: o.kind || 'ink', pen: o.nopen ? '_' : o.pen || o.col || 'ink', z: STROKES.length, rnd: rnd() };
   let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
   for (const p of r.P) { x0 = Math.min(x0, p[0]); y0 = Math.min(y0, p[1]); x1 = Math.max(x1, p[0]); y1 = Math.max(y1, p[1]); }
   s.bb = [x0 - w * 2, y0 - w * 2, x1 + w * 2, y1 + w * 2];
@@ -87,6 +94,7 @@ function addStroke(pts, t0, t1, o = {}) {
 function draw(shapes, t0, dur, o = {}) {
   const sh = shapes.filter((p) => p && p.length >= 4);
   if (!sh.length) return t0;
+  if (VERT && o.w == null) o = { ...o, w: 12 };   // phone: 12 px marker unless the film says otherwise
   const len = sh.map((p) => { let d = 0; for (let i = 2; i < p.length; i += 2) d += Math.hypot(p[i] - p[i - 2], p[i + 1] - p[i - 1]); return Math.max(d, 8); });
   const hop = Math.min(0.05, dur * 0.06), net = Math.max(0.05, dur - hop * (sh.length - 1));
   const wt = len.map((l) => Math.max(l, 40)), tot = wt.reduce((a, b) => a + b, 0);
@@ -118,10 +126,10 @@ function glyphStrokes(str, x, y, size, anchor, seed) {
   return { strokes: out, tw };
 }
 function write(str, x, y, o = {}) {
-  const size = o.size ?? 60, anchor = o.anchor || 'l', w = o.w ?? Math.max(5, size * 0.056);
+  const size = o.size ?? 60, anchor = o.anchor || 'l', w = o.w ?? Math.max(VERT ? 8 : 5, size * 0.056);
   const { strokes, tw } = glyphStrokes(str, x, y, size, anchor, 77 + seedN * 31 + str.length);
   const dur = o.dur ?? Math.max(0.35, str.length * 0.07);
-  draw(strokes, o.t0 ?? 0, dur, { col: o.col, w, pen: o.col });
+  draw(strokes, o.t0 ?? 0, dur, { col: o.col, w, pen: o.col, nopen: o.nopen });
   const x0 = anchor === 'c' ? x - tw / 2 : anchor === 'r' ? x - tw : x;
   return { x0, x1: x0 + tw, y0: y - size, y1: y + size * 0.3, t1: (o.t0 ?? 0) + dur, cx: x0 + tw / 2 };
 }
@@ -178,10 +186,10 @@ function bulb(cx, cy, s = 1) {
 function bubble(x, y, w, h, tail = 'l') { const tx = tail === 'l' ? x + 50 : x + w - 50, d = tail === 'l' ? -34 : 34; return [[x + 16, y, x + w - 16, y, x + w, y + 16, x + w, y + h - 16, x + w - 16, y + h, tx + 28, y + h, tx + d, y + h + 40, tx - 6, y + h, x + 16, y + h, x, y + h - 16, x, y + 16, x + 16, y]]; }
 
 // ---- highlighter, eraser, magnets, camera, ghosts, captions
-function highlight(x, y, w, h, t0, dur, col = PAL.hi) {   // a chisel swipe; tall areas are filled by a zig-zag of swipes
+function highlight(x, y, w, h, t0, dur, col = PAL.hi, nopen = false) {   // a chisel swipe; tall areas are filled by a zig-zag of swipes
   const bw = Math.min(h, 44), rows = Math.max(1, Math.ceil((h - bw) / (bw * 0.6)) + 1), p = [];
   for (let r = 0; r < rows; r++) { const yy = rows === 1 ? y + h / 2 : y + bw / 2 + (h - bw) * r / (rows - 1); if (r % 2 === 0) p.push(x, yy, x + w, yy - 2); else p.push(x + w, yy + 2, x, yy); }
-  addStroke(p, t0, t0 + dur, { w: bw, col, kind: 'hi', pen: 'hi' });
+  addStroke(p, t0, t0 + dur, { w: bw, col, kind: 'hi', pen: nopen ? '_' : 'hi' });
 }
 function erase(t0, t1, x, y, w, h) {
   const rows = Math.max(2, Math.round(h / 90)), p = [];
@@ -199,8 +207,27 @@ function ghosts(x, y, w, h, n, seed = 5) {
   }
 }
 function caption(text, t0, t1) { CAPS.push({ text, t0, t1 }); }
+function live(t0, t1, fn) { LIVE.push({ t0, t1, fn }); }
+function shot(keys) { SHOTS.length = 0; SHOTS.push(...keys.map((k) => [k[0], k[1], k[2], k[3] ?? 1, k[4] ?? 0, k[5] ?? 0, k[6]])); }
+// phone label: the single-line hand written in screen space (stroke by stroke in 0.45 s), on a wiped board patch, auto-fitted to 730 px (+ the patch = the 810 px label band)
+function label(text, t0, t1, o = {}) {
+  const size = Math.min(o.size ?? 104, 730 / (textWidth(text, 1) || 1)), w = Math.max(9, size * 0.095);
+  if (size < 64) console.warn(`label "${text}" fits only at ${Math.round(size)} px (need >= 64): shorten it`);
+  const { strokes, tw } = glyphStrokes(text, 0, size * 0.5, size, 'c', 4242 + LABELS.length * 13), R = mulberry32(77 + LABELS.length);
+  const S = strokes.map((p) => ({ ...resample(p, Math.max(3, w * 0.55), w * 0.6, R), w })), L = S.map((x) => Math.max(x.L, 30)), tot = L.reduce((a, b) => a + b, 0);
+  let acc = 0; S.forEach((x, i) => { x.a = acc / tot; acc += L[i]; x.b = acc / tot; });
+  LABELS.push({ text, t0, t1, size, tw, S, col: colOf(o.col || 'ink'), wd: o.dur ?? 0.45 });
+}
 
+function shotAt(t) {   // key [t, cx, cy, zoom, roll, whip, zoomEnd]: zoom eases to zoomEnd (default zoom x 1.04) until the next key
+  const K = SHOTS; let i = 0;
+  while (i < K.length - 1 && t >= K[i + 1][0]) i++;
+  const a = K[i], t1 = K[i + 1] ? K[i + 1][0] : a[0] + 2, z = lerp(a[3], a[6] ?? a[3] * 1.04, EZ.io(seg(t, a[0], t1)));
+  const wp = a[5] * (1 - EZ.o3(seg(t, a[0], a[0] + 0.3))) / z;   // slides in from a[5] screen px (sign = side)
+  return [a[1] - wp, a[2], z, a[4] * (1 - seg(t, a[0], a[0] + 0.4))];
+}
 function camAt(t) {
+  if (SHOTS.length) return shotAt(t);
   const K = CAMKEYS;
   if (!K.length) return [960, 540, 1, 0];
   if (t <= K[0][0]) return K[0].slice(1);
@@ -281,7 +308,7 @@ function paintInk(g, hg, t, c) {
 // ---- pens: one per marker colour; follow their own stroke tip, hop between strokes, park off-frame in long gaps
 function strokeTip(S, t) { const P = S.P, k = prog(S, t) * (P.length - 1), i = Math.min(P.length - 2, Math.floor(k)), f = k - i; return [lerp(P[i][0], P[i + 1][0], f), lerp(P[i][1], P[i + 1][1], f)]; }
 function penState(name, t) {
-  const mine = STROKES.filter((s) => s.pen === name && s.kind !== 'hi' || (name === 'hi' && s.kind === 'hi')).sort((a, b) => a.t0 - b.t0);
+  const mine = STROKES.filter((s) => s.pen === name && s.kind !== 'hi' || (name === 'hi' && s.kind === 'hi' && s.pen !== '_')).sort((a, b) => a.t0 - b.t0);
   if (!mine.length) return null;
   const cur = mine.find((s) => t >= s.t0 && t <= s.t1);
   if (cur) return { p: strokeTip(cur, t), lift: 0, drawing: true, S: cur };
@@ -289,8 +316,8 @@ function penState(name, t) {
   const c = camAt(t), park = toWorld(c, W + 260, H + 160);
   const end = (s) => s.P[s.P.length - 1], start = (s) => s.P[0];
   if (prev && next) {
-    const gap = next.t0 - prev.t1;
-    if (gap > 1.8) {
+    const gap = next.t0 - prev.t1, far = Math.hypot(start(next)[0] - end(prev)[0], start(next)[1] - end(prev)[1]) > 1200;   // far = another spot on the board: park, never fly across the picture
+    if (gap > 1.8 || far) {
       const lv = 0.5, rt = 0.55;
       if (t < prev.t1 + lv) { const u = EZ.io((t - prev.t1) / lv); return { p: [lerp(end(prev)[0], park[0], u), lerp(end(prev)[1], park[1], u)], lift: 1, S: prev }; }
       if (t > next.t0 - rt) { const u = EZ.io(1 - (next.t0 - t) / rt); return { p: [lerp(park[0], start(next)[0], u), lerp(park[1], start(next)[1], u)], lift: 1 - u * 0.9 }; }
@@ -360,6 +387,7 @@ function drawEraser(g, c, E, t) {
 // ---- one scene at time t onto the scratch canvas
 function paintScene(t) {
   const c = camAt(t), g = sctx;
+  if (typeof LAYOUT !== 'undefined') LAYOUT.length = 0;   // engine/safe.js boxes: the last sub-frame painted is the one checked
   g.setTransform(1, 0, 0, 1, 0, 0); g.globalCompositeOperation = 'source-over'; g.globalAlpha = 1;
   const bg = g.createLinearGradient(0, 0, W * 0.4, H); bg.addColorStop(0, PAL.board); bg.addColorStop(1, PAL.board2); g.fillStyle = bg; g.fillRect(0, 0, W, H);
   applyCam(g, c); g.fillStyle = TEX.scuff; const a = toWorld(c, W / 2, H / 2), r = Math.hypot(W, H) / 2 / c[2] + 40; g.fillRect(a[0] - r, a[1] - r, r * 2, r * 2);
@@ -370,10 +398,12 @@ function paintScene(t) {
   paintInk(ictx, hctx, t, c);
   g.setTransform(1, 0, 0, 1, 0, 0); g.globalCompositeOperation = 'multiply';
   g.globalAlpha = 0.55; g.drawImage(HC, 0, 0); g.globalAlpha = 0.94; g.drawImage(IC, 0, 0); g.globalAlpha = 1; g.globalCompositeOperation = 'source-over';
+  for (const L of LIVE) if (t >= L.t0 && t < L.t1) { g.save(); applyCam(g, c); L.fn(g, t, c); g.restore(); }   // characters (they track themselves)
   for (const M of MAGNETS) drawMagnet(g, c, M, t);
   for (const E of ERASES) drawEraser(g, c, E, t);
-  const names = [...new Set(STROKES.map((s) => (s.kind === 'hi' ? 'hi' : s.pen)))];
+  const names = [...new Set(STROKES.map((s) => (s.kind === 'hi' && s.pen !== '_' ? 'hi' : s.pen)))];
   for (const nm of names) {
+    if (nm === '_') continue;
     const ps = penState(nm, t); if (!ps) continue;
     const [sx, sy] = toScreen(c, ps.p[0], ps.p[1]), k = clamp(Math.pow(c[2], 0.5), 0.6, 1.2) * 0.85, col = nm === 'hi' ? '#e8b800' : colOf(nm);
     drawMarker(g, sx, sy, k, ps.lift, col, Math.sin(t * 9 + names.indexOf(nm)) * (ps.drawing ? 0.025 : 0.05));
@@ -406,15 +436,30 @@ function paintCaption(g, t) {
   g.fillStyle = PAL.ink; g.fillText(C.text, W / 2, y + 36); g.globalAlpha = 1;
 }
 
+function paintLabels(g, t) {
+  for (const L of LABELS) {
+    if (t < L.t0 || t >= L.t1) continue;
+    const h = L.size * 1.55, cy = typeof labelY === 'function' ? labelY(h) : 385, cx = 513, bw = L.tw + 70, k = seg(t, L.t0, L.t0 + L.wd), a = 1 - seg(t, L.t1 - 0.12, L.t1);
+    g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = a;
+    g.fillStyle = 'rgba(247,246,241,0.9)'; g.beginPath(); g.roundRect(cx - bw / 2, cy - h / 2, bw, h, 28); g.fill();   // wiped patch: no ghost marks under the words
+    g.translate(cx, cy - L.size * 0.5 + L.size * 0.32);
+    for (const S of L.S) if (k > S.a) tracePath(g, S, hand(clamp((k - S.a) / (S.b - S.a))), L.col, a);
+    g.restore();
+    if (typeof LAYOUT !== 'undefined') LAYOUT.push({ kind: 'label', name: L.text, x0: cx - bw / 2, y0: cy - h / 2, x1: cx + bw / 2, y1: cy + h / 2 });
+  }
+}
 function renderFrame(t) {
+  TT = t;
   const c0 = camAt(t - 1 / FPS), c1 = camAt(t), sp = Math.hypot(c1[0] - c0[0], c1[1] - c0[1]) * c1[2] + Math.abs(c1[2] - c0[2]) * 900;
-  const n = sp > 14 ? Math.min(4, Math.ceil(sp / 14)) : 1;   // shutter blur only when the camera really moves (sub-frames ≤ ~14 px apart)
+  const n = sp > 14 && sp < 500 ? Math.min(4, Math.ceil(sp / 14)) : 1;   // a jump over 500 px is a cut: no blur across it   // shutter blur only when the camera really moves (sub-frames ≤ ~14 px apart)
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
   if (n === 1) { paintScene(t); ctx.drawImage(SC, 0, 0); } else {
     for (let i = 0; i < n; i++) { paintScene(t + (i / (n - 1) - 0.5) * 0.5 / FPS); ctx.globalAlpha = 1 / (i + 1); ctx.drawImage(SC, 0, 0); }
     ctx.globalAlpha = 1;
   }
   paintCaption(ctx, t);
+  paintLabels(ctx, t);
+  if (typeof LAYOUT !== 'undefined') { drawEnd(); qaFrame(); }   // engine/safe.js: end card + layout QA
 }
 
 function mount(duration, id = 'main') {

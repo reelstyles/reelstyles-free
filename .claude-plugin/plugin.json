@@ -3,7 +3,11 @@
   "version": "2026.11.13",
   "description": "7 video styles for AI coding agents. Your agent animates the film in code and renders it with HyperFrames.",
   "author": {
-    "name": "ReelStyles"
+    "name": "ReelStyles",
+    "url": "https://reelstyles.com"
   },
-  "homepage": "https://reelstyles.com"
+  "homepage": "https://reelstyles.com",
+  "repository": "https://github.com/reelstyles/reelstyles-free",
+  "license": "MIT",
+  "icon": ".claude-plugin/icon.png"
 }

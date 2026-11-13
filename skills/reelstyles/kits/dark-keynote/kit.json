@@ -168,8 +168,8 @@
     },
     {
       "path": "tools/render.sh",
-      "bytes": 2621,
-      "sha256": "1b0e0a79d61e9189683123e7c3d2ee8cba93b2a0980c70fb9a0d65d33e2838f4"
+      "bytes": 2930,
+      "sha256": "cd36849282ab49b5dd72d80341300e8852f2308a5383fa63dc0b10fd7010d18c"
     }
   ]
 }

@@ -69,9 +69,9 @@ cmd_for() {   # prints the exact shell command that installs $1 here, or nothing
             elif [ -s "$HOME/.nvm/nvm.sh" ]; then echo ". ~/.nvm/nvm.sh && nvm install $NODE_MIN"
             elif [ "$p" = brew ]; then echo "brew install node"
             elif [ "$p" = winget ]; then echo "winget install -e --id OpenJS.NodeJS.LTS"
-            else   # Linux / WSL: nvm's official installer (distro Node packages are often older than $NODE_MIN), no sudo
+            else   # Linux / WSL: nvm's official installer, shipped as setup/nvm-install.sh (distro Node packages are often older than $NODE_MIN), no sudo
               local pre=""; command -v curl >/dev/null || case "$p" in apt-get) pre="$(apt curl ca-certificates) && ";; dnf) pre="${SUDO}dnf install -y curl && ";; esac
-              echo "${pre}curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/$NVM_VER/install.sh | bash && . ~/.nvm/nvm.sh && nvm install $NODE_MIN"
+              echo "${pre}bash \"$REPO/setup/nvm-install.sh\" && . ~/.nvm/nvm.sh && nvm install $NODE_MIN"
             fi ;;
     ffmpeg:brew) echo "brew install ffmpeg" ;;
     ffmpeg:apt-get) apt ffmpeg ;;

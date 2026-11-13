@@ -82,8 +82,8 @@
     },
     {
       "path": "fonts/ems-tech.js",
-      "bytes": 24794,
-      "sha256": "d485d30a40e04254191cc909cbee4a6444fba936daa0e54cee6900d767934a4d"
+      "bytes": 25287,
+      "sha256": "2c94ca83d3053bf24fa3122d135dc5c0fc9115832cb5d868be8b9c2a557ce3e3"
     },
     {
       "path": "samples/whiteboard-example.mp4",
@@ -122,8 +122,8 @@
     },
     {
       "path": "tools/render.sh",
-      "bytes": 2621,
-      "sha256": "1b0e0a79d61e9189683123e7c3d2ee8cba93b2a0980c70fb9a0d65d33e2838f4"
+      "bytes": 2930,
+      "sha256": "cd36849282ab49b5dd72d80341300e8852f2308a5383fa63dc0b10fd7010d18c"
     },
     {
       "path": "tools/vcheck.sh",

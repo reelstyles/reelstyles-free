@@ -10,6 +10,8 @@ cd "$(dirname "$0")/.." || exit 1
 o=${1:-out.mp4}; o=${o%.mp4}; v=$(grep -o 'hyperframes@[0-9.]*' RENDER.md 2>/dev/null | head -1 | cut -d@ -f2)   # head -1: -m1 still printed every match on the line (11-11)
 HF=${HF:-npx -y hyperframes@${v:-0.8.96}}
 [ -f index.html ] && [ -f film.js ] || { echo "render: no index.html + film.js here (RENDER.md step 1 copies them from templates/)"; exit 1; }
+# a kit whose score is built by tools/score.sh (doodle-film) ships without the .wav in the free plugin (directory accepts no audio files, 11-13): build it once
+[ -f tools/score.sh ] && [ ! -s audio/score.wav ] && { bash tools/score.sh || { echo "render: tools/score.sh failed (it needs ffmpeg)"; exit 1; }; }
 $HF lint . || { echo "render: fix the lint errors first"; exit 1; }
 # 11-12: the layout check needs only the browser, not the video: run it BEFORE the render (a 35 s film failed 15 layout rules after a full render)
 if grep -q engine/safe.js index.html; then lc=$(node tools/layout-check.mjs . 2>&1) || { echo "$lc"; echo "render: layout rules failed before rendering (no video made): fix film.js and run bash tools/render.sh again"; exit 1; }; export LAYOUT_DONE=1; fi

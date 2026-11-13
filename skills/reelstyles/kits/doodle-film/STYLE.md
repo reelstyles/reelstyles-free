@@ -61,5 +61,5 @@ A line that draws itself on. A spark falling with a scribbled comet tail. Startl
 - 9:16: copy `templates/vertical.html` as `index.html` and `templates/film-v.js` as `film.js`.
 - Edit `film.js`. Keep `data-duration` (root and `<audio>`) equal to `DUR`.
 - Render with `bash tools/render.sh`: lint, render, then `tools/deadhold.sh` (16:9) or `tools/vcheck.sh` (9:16) and `tools/layout-check.mjs`. It writes `out.mp4` only when all pass, else `out.FAILED.mp4` and the fixes. A dead hold is a tile unchanged for 1.2 s: add motes, a cloud, a camera push or a staggered build.
-- Score: `audio/score.wav` is procedural (pentatonic tune, whoosh, pop, chime, swell, footsteps). Re-time it in `tools/score.sh` (`add <freq> <start> <dur> <vol>`, `noise <start> <dur> <vol> <lowpass> <highpass>`), then `bash tools/score.sh` (needs ffmpeg, bc). Delete the `<audio>` tag for a silent film.
+- Score: `audio/score.wav` is procedural (pentatonic tune, whoosh, pop, chime, swell, footsteps). Re-time it in `tools/score.sh` (`add <freq> <start> <dur> <vol>`, `noise <start> <dur> <vol> <lowpass> <highpass>`), then `bash tools/score.sh` (needs ffmpeg). Delete the `<audio>` tag for a silent film.
 - Lessons from real builds: `LESSONS.md`.

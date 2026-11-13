@@ -63,8 +63,8 @@
     },
     {
       "path": "STYLE.md",
-      "bytes": 5965,
-      "sha256": "8e080d820cfb7a263fe81effcaac978a950ef880e72cedf343b4446bc69efef3"
+      "bytes": 5961,
+      "sha256": "64982c8de2affd780eeefefbe9dd6a09613137c8c20baf7e9a7ac297f3fac980"
     },
     {
       "path": "audio/score.wav",
@@ -133,13 +133,13 @@
     },
     {
       "path": "tools/render.sh",
-      "bytes": 2621,
-      "sha256": "1b0e0a79d61e9189683123e7c3d2ee8cba93b2a0980c70fb9a0d65d33e2838f4"
+      "bytes": 2930,
+      "sha256": "cd36849282ab49b5dd72d80341300e8852f2308a5383fa63dc0b10fd7010d18c"
     },
     {
       "path": "tools/score.sh",
-      "bytes": 2199,
-      "sha256": "7ba1b1d2f43d12fc49b2dd0a2a03a880b85dbd70c9e1c45340aa272d1f844f62"
+      "bytes": 2194,
+      "sha256": "4372f40f65a6fab1dfc03c52eeeefd6bd95716f1ead14329a35392ad401121cb"
     },
     {
       "path": "tools/vcheck.sh",

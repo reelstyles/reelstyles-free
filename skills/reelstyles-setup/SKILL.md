@@ -1,6 +1,6 @@
 ---
 name: reelstyles-setup
-description: Set up ReelStyles on this computer for the user's AI agent. Checks and installs Node.js 22+, ffmpeg, git and Chrome for HyperFrames, wires the ReelStyles skill into the agents the user has (Claude Code, Codex, Cursor, Roo Code, Cline, Gemini CLI, GitHub Copilot, Windsurf), then renders a 5 s test film. Use when the user says "set up ReelStyles", "install ReelStyles", or before the first ReelStyles video if setup has not passed.
+description: "Set up ReelStyles on this computer for the user's AI agent. Checks and installs Node.js 22+, ffmpeg, git and Chrome for HyperFrames, wires the ReelStyles skill into the agents the user has (Claude Code, Codex, Cursor, Roo Code, Cline, Gemini CLI, GitHub Copilot, Windsurf), then renders a 5 s test film. Use when the user says \"set up ReelStyles\", \"install ReelStyles\", or before the first ReelStyles video if setup has not passed."
 ---
 
 # ReelStyles setup

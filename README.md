@@ -33,6 +33,14 @@ Clone this repo (or unzip it) into your project or next to it. Agents that read 
 ## What you need
 Node.js 22 or newer, ffmpeg, and Chrome or Chromium (HyperFrames uses it to render). The setup skill can install them for you if you say yes. Long films render faster on a computer with more CPU cores.
 
+## What it runs and downloads
+- Setup (`setup/setup.sh`, on Windows `setup/setup.ps1`) checks for Node.js 22+, ffmpeg, git and Chrome. For anything missing it shows the install command (Homebrew, apt, dnf or winget) and asks before it runs it. On Linux without Node it runs nvm's official installer, which ships here as `setup/nvm-install.sh`.
+- Setup also adds a short note to your agent's skill or rules folder (for example `.claude/skills`, `.agents/skills`, `AGENTS.md` or `.cursor/rules`) so the agent finds ReelStyles. It only touches agents it finds on your computer, or the ones you name.
+- Rendering runs HyperFrames through npx, pinned to `hyperframes@0.8.96`. npm downloads it once, and HyperFrames downloads its own headless Chrome.
+- The film pages load the GSAP animation library from jsDelivr (`gsap@3.12.5`).
+- Free narration uses Kokoro through HyperFrames, and its voice model downloads the first time you use it.
+- Your topics, scripts and films stay on your computer. Nothing is sent to ReelStyles, and the kits need no account or API key.
+
 ## Licence
 MIT. You can use, change and share these kits, also for commercial work. The full text is in LICENSE. Open-source parts keep their own licences; see LICENSES in each kit.
 

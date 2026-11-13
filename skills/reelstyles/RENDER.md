@@ -56,14 +56,7 @@ npx -y hyperframes@0.8.96 tts script.txt -o audio/voice.wav -v am_michael -s 0.9
 npx -y hyperframes@0.8.96 transcribe audio/voice.wav --json          # word-level timestamps for cueing shots
 ```
 
-**Option B: bring your own ElevenLabs key.** Your account, your plan's licence terms (free plans are non-commercial):
-
-```sh
-export ELEVENLABS_API_KEY=...        # never commit it, never put it in the project files
-curl -s -X POST "https://api.elevenlabs.io/v1/text-to-speech/<voice_id>?output_format=mp3_44100_128" \
-  -H "xi-api-key: $ELEVENLABS_API_KEY" -H "Content-Type: application/json" \
-  -d '{"text": "Your narration here.", "model_id": "eleven_multilingual_v2"}' -o audio/voice.mp3
-```
+**Option B: an ElevenLabs voice.** The user makes the narration in their own ElevenLabs account (their plan's licence terms apply; free plans are non-commercial), downloads it and saves it as `audio/voice.mp3` in the film folder. Never ask for, read or store an API key: the user brings the audio file.
 
 Music/SFX: only tracks you hold a licence for. Mix to one file (voice around −16 LUFS, music 18-22 LU under the voice), for example:
 

@@ -1,6 +1,6 @@
 ---
 name: reelstyles
-description: Make an animated video or a whole researched, voiced episode from one topic sentence, in a finished visual style (cut-paper, 80s anime, cartoon, collage, diagrams, 3D and more: 7 styles), animated in code and rendered with HyperFrames. Use when the user asks for a video, a film, a Short, an explainer or a ReelStyles style.
+description: "Make an animated video or a whole researched, voiced episode from one topic sentence, in a finished visual style (cut-paper, 80s anime, cartoon, collage, diagrams, 3D and more: 7 styles), animated in code and rendered with HyperFrames. Use when the user asks for a video, a film, a Short, an explainer or a ReelStyles style."
 ---
 
 # ReelStyles

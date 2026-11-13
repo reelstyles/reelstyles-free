@@ -2,7 +2,7 @@
 
 7 video styles for Claude Code and other coding agents. You pick a style, give your agent a topic, and it animates the film in code and renders an MP4 on your computer.
 
-Each clip below was made with its kit. All 7 kits are complete and MIT licensed, so you can use them in paid work too.
+This repo holds the 7 free ones; you can watch all 126 on [reelstyles.com](https://reelstyles.com/?utm_source=github-free). Each clip below was made with its kit. All 7 kits are complete and MIT licensed, so you can use them in paid work too.
 
 [<img src="previews/dark-keynote.webp" alt="Dark Keynote" width="400">](https://reelstyles.com/style/dark-keynote)
 [<img src="previews/whiteboard.webp" alt="Whiteboard explainer" width="400">](https://reelstyles.com/style/whiteboard)
@@ -34,7 +34,7 @@ Clone this repo (or unzip it) into your project or next to it. Agents that read 
 Node.js 22 or newer, ffmpeg, and Chrome or Chromium (HyperFrames uses it to render). The setup skill can install them for you if you say yes. Long films render faster on a computer with more CPU cores.
 
 ## Licence
-MIT. You can use, change and share these kits, also for commercial work. The full text is in LICENSE.md.
+MIT. You can use, change and share these kits, also for commercial work. The full text is in LICENSE. Open-source parts keep their own licences; see LICENSES in each kit.
 
 ## More styles
 Full has all 126 and every style added later. It costs $49 for the first 20 buyers and $79 after that. You pay once. Current prices are at https://reelstyles.com/pricing?utm_source=free-kit

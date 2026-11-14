@@ -16,6 +16,7 @@
 
   DK.hero = function (parent, o) {
     o = o || {}; var Wd = o.w || 600, Ht = o.h || 900;
+    var shadow = DK.el(parent, 'dkp-shadow', null, { position: 'absolute', left: '0', top: '0', width: (Wd * 1.3) + 'px', height: '90px', transformOrigin: '50% 50%' });   // contact shadow on the floor
     var root = DK.el(parent, '', null, { position: 'absolute', left: '0', top: '0', width: Wd + 'px', height: Ht + 'px', transformOrigin: '50% 100%', zIndex: 200 });
     var ci = DK.el(root, '', null, { position: 'absolute', inset: '0', borderRadius: '48px', background: 'linear-gradient(180deg,#2A3349,#1A2133 60%,#151B2A)', border: '3px solid rgba(255,255,255,.2)', boxSizing: 'border-box', overflow: 'hidden' });
     var bar = DK.el(ci, '', '<i style="display:block;width:34px;height:34px;border-radius:10px;background:var(--accent);box-shadow:0 0 18px rgba(var(--accent-rgb),.8)"></i><span>' + (o.title || 'Tidy') + '</span>',
@@ -75,6 +76,7 @@
         case 'slump': rot = (-6 - 1.2 * Math.sin(u * 1.4)) * dir; sy = 0.93 + 0.008 * Math.sin(u * 3); sx = 1.04; dy = 6; light = 0.74; break;
         default: dy = -7 * Math.sin(u * Math.PI * 2 / 1.1); rot = 0.9 * Math.sin(u * 1.7); sy = 1 + 0.01 * Math.sin(u * 5.7); sx = 2 - sy;
       }
+      shadow.style.transform = 'translate(' + (p.x - Wd * 0.65).toFixed(1) + 'px,' + (p.y - 45).toFixed(1) + 'px) scale(' + (s * (1 + dy / 400)).toFixed(3) + ')'; shadow.style.opacity = (1 + dy / 200).toFixed(2);
       root.style.left = (p.x - Wd / 2) + 'px'; root.style.top = (p.y - Ht) + 'px';
       root.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) rotate(' + rot.toFixed(2) + 'deg) scale(' + (s * sx).toFixed(4) + ',' + (s * sy).toFixed(4) + ')';
       var g = p.glow == null ? 0.4 : p.glow;

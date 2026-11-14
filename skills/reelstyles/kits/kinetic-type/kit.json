@@ -1,7 +1,7 @@
 {
   "id": "kinetic-type",
   "name": "Kinetic type",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Words as the actors: giant letters slam, stack, flash and swap over a drifting colour stage, with slanted wipes and a bracketed logo reveal.",
   "family": "typography",
   "dim": "2d",
@@ -37,6 +37,11 @@
       "sha256": "63d0237959e0d060f75b7ce23d3457e3fe1e3849c710e0ecaef49a065f50f174"
     },
     {
+      "path": "LESSONS.md",
+      "bytes": 536,
+      "sha256": "eb1266265d79567decfc17c780703b173054773fc87d32f13422c790d52f8363"
+    },
+    {
       "path": "LICENSES/ASSETS.md",
       "bytes": 1090,
       "sha256": "c3b912682dbdef178f2afab273981e484da7807df77f188588bc49900aa550cc"
@@ -63,8 +68,13 @@
     },
     {
       "path": "STYLE.md",
-      "bytes": 8458,
-      "sha256": "95752bc1947a3d81ff0e7ed715f721c40d6f3ebd14d692776935fb86895f909e"
+      "bytes": 6060,
+      "sha256": "bddd07e3a428ffd9e7648add3f2d91c449b5784e0f52fc65ef139bac78f92ea8"
+    },
+    {
+      "path": "characters/cast.js",
+      "bytes": 5730,
+      "sha256": "7147bb41dd387b7d7ac9b4c470bb91c32b2c13e036ba449e2424148f88e89088"
     },
     {
       "path": "engine/kinetic.js",
@@ -72,9 +82,24 @@
       "sha256": "2fda3664746b51a33a4a42f1732403320677222b7d1fedc2e953a955c8aa338b"
     },
     {
+      "path": "engine/look.js",
+      "bytes": 14671,
+      "sha256": "49f0d93baeb3c013474b925f62ed7d9f6e5d00d0a93295d4186db993cce05a5c"
+    },
+    {
       "path": "engine/runtime.js",
       "bytes": 3821,
       "sha256": "36610e692739928e3321e0cf7c53590c95e4f4e7a0f4a7018d6255d7627100a5"
+    },
+    {
+      "path": "engine/safe.js",
+      "bytes": 13769,
+      "sha256": "dec05b9f70ce387e6308bdfb6f6892d4b1cec1ff823dd6cec79f01f5b26b5a79"
+    },
+    {
+      "path": "film.js",
+      "bytes": 7040,
+      "sha256": "0536ddedbfa7b6f2aa8b3f144eafd3342b762463dc7bdfed7530c7d137d26583"
     },
     {
       "path": "fonts/ArchivoBlack-Regular.ttf",
@@ -102,9 +127,24 @@
       "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
     },
     {
+      "path": "index.html",
+      "bytes": 1656,
+      "sha256": "3d3b6ffa3f2aa5b8e5a3451dde73c88bbae7e1e48bb5b9af1c87426d909c52f7"
+    },
+    {
       "path": "samples/kinetic-type-example.mp4",
       "bytes": 6967969,
       "sha256": "763e1828d9fbbcd64e8748e71a008fe26b5ce8b1c1a6f60992fb21d8e5dbb5ff"
+    },
+    {
+      "path": "sets/recipes.js",
+      "bytes": 17702,
+      "sha256": "a808e4fa98e20da8b456031b25cdcadec9182088f46f0c477c93bbd639615a11"
+    },
+    {
+      "path": "templates/film-look.js",
+      "bytes": 1676,
+      "sha256": "ab3de56d61bffb6262d94c0ff4c820e22a3da414ff846a0a97290df731ade2e5"
     },
     {
       "path": "templates/film-v.js",
@@ -118,8 +158,8 @@
     },
     {
       "path": "templates/index.html",
-      "bytes": 1287,
-      "sha256": "f646aee83e22217295ec69e35aef571cd5afb7c33d07bcfd1e4562ed0afa9c60"
+      "bytes": 1420,
+      "sha256": "a5103e63f03c009f84de3df8ea9a7c42d1a6a00a8db3a4571a0359559f4b8cf5"
     },
     {
       "path": "templates/vertical.html",
@@ -132,34 +172,19 @@
       "sha256": "9ea6456eceb1d34c78b052de1993e410880beb48fa480e1a9ab3abbc91f6d2ce"
     },
     {
-      "path": "LESSONS.md",
-      "bytes": 326,
-      "sha256": "99bd72e4bfcf06163489148a005365b00d1ff02dc766a0ffafda12089ed1596d"
-    },
-    {
-      "path": "characters/cast.js",
-      "bytes": 5730,
-      "sha256": "7147bb41dd387b7d7ac9b4c470bb91c32b2c13e036ba449e2424148f88e89088"
-    },
-    {
-      "path": "engine/safe.js",
-      "bytes": 13769,
-      "sha256": "dec05b9f70ce387e6308bdfb6f6892d4b1cec1ff823dd6cec79f01f5b26b5a79"
-    },
-    {
       "path": "tools/layout-check.mjs",
       "bytes": 9193,
       "sha256": "cd69e026e262dcb39ba4b2d75718ac2fbff12b25da4ed95fea957e998dd3b84b"
     },
     {
-      "path": "tools/vcheck.sh",
-      "bytes": 3432,
-      "sha256": "ffbcfbec593284c084713bf8d04e87cf281f9a1378e93b1f3d1b83598e40a3bb"
-    },
-    {
       "path": "tools/render.sh",
       "bytes": 2930,
       "sha256": "cd36849282ab49b5dd72d80341300e8852f2308a5383fa63dc0b10fd7010d18c"
+    },
+    {
+      "path": "tools/vcheck.sh",
+      "bytes": 3432,
+      "sha256": "ffbcfbec593284c084713bf8d04e87cf281f9a1378e93b1f3d1b83598e40a3bb"
     }
   ]
 }

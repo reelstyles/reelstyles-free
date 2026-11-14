@@ -7,6 +7,8 @@
 //      o.pose   'idle' (breathes, sways) | 'walk' (hops side to side) | 'reach' (leans in, swells) | 'cheer' (jumps, squashes)
 //               | 'slump' (droops and tilts)
 //      o.mood   'calm' | 'tense' (shivers, the countdown's last second) | 'happy' (bouncier, after the reveal)
+//      o.foot   y of the floor the item stands on (overrides o.cy: a wide item never floats)
+//      o.rim    rim-light colour (16:9 sets: the grade's rim), o.rimDir [dx,dy] toward the light
 //      o.in     entrance 0..1+ (a spring: drops in from above, overshoots); o.sil silhouette colour; o.wipe 0..1 colour reveal
 //               (circle from the item centre, white rim while it grows)
 //    returns the screen box of the item.
@@ -18,7 +20,7 @@ function itemBox(it) {
   const b = { x0: 1e9, y0: 1e9, x1: -1e9, y1: -1e9 }, add = (x, y, p = 0) => { b.x0 = Math.min(b.x0, x - p); b.x1 = Math.max(b.x1, x + p); b.y0 = Math.min(b.y0, y - p); b.y1 = Math.max(b.y1, y + p); };
   if (it.kind === 'flag') { add(-184, -131); add(172, 251); }   // pole (-14..4, -14..fh+136) + cloth 340 x 230 + wave ±16, around (-170, -115)
   else for (const s of it.shapes) for (const o of s.ops) {
-    if (o[0] === 'e') { const r = Math.max(o[3], o[4]); add(o[1], o[2], r); }
+    if (o[0] === 'e') { const r = o[5] || 0, c = Math.cos(r), sn = Math.sin(r), hw = Math.hypot(o[3] * c, o[4] * sn), hh = Math.hypot(o[3] * sn, o[4] * c); add(o[1] - hw, o[2] - hh); add(o[1] + hw, o[2] + hh); }   // the true extents of a rotated ellipse
     else if (o[0] === 'r') { add(o[1], o[2]); add(o[1] + o[3], o[2] + o[4]); }
     else { const p = o[1], pad = o[0] === 'p' ? 8 : o[2] / 2; for (let i = 0; i < p.length; i += 2) add(p[i], p[i + 1], pad); }
   }
@@ -42,11 +44,15 @@ function Hero(it, t, o = {}) {
   const M = HMOOD[o.mood] || HMOOD.calm, P = (HPOSE[o.pose] || HPOSE.idle)(t, M.sp), k = o.in ?? 1;
   const breathe = 1 + 0.025 * Math.sin(t * 2.6) + (o.pop ?? 0), sh = M.shiver ? Math.sin(t * 61) * M.shiver : 0;
   ctx.save();
-  ctx.translate((o.cx ?? 540) + P[0] + sh, (o.cy ?? 980) + P[1] + (1 - Math.min(1, k)) * -160);
+  const cy = o.foot != null ? o.foot - (bh * s) / 2 : (o.cy ?? 980);   // o.foot: the item stands on this y (its box bottom)
+  ctx.translate((o.cx ?? 540) + P[0] + sh, cy + P[1] + (1 - Math.min(1, k)) * -160);
   ctx.translate(0, (bh * s) / 2); ctx.rotate(P[2]); ctx.scale(P[3], P[4]); ctx.translate(0, (-bh * s) / 2);   // pose pivots on the bottom
   const S = s * Math.max(0.01, k) * breathe;
   ctx.scale(S, S); ctx.translate(-mx, -my);
-  ctx.shadowColor = 'rgba(20,10,60,0.38)'; ctx.shadowBlur = 44; ctx.shadowOffsetY = 24;   // shadows are in screen px
+  if (o.rim) {   // rim light: the silhouette in the light colour, 7 px toward the light (o.rimDir, default up), with a glow
+    const d = o.rimDir ?? [0, -1]; ctx.save(); ctx.shadowColor = o.rim; ctx.shadowBlur = 34; ctx.translate((d[0] * 7) / S, (d[1] * 7) / S); drawItem(it, t, true, o.rim); ctx.restore();
+  }
+  ctx.shadowColor = 'rgba(20,10,60,0.38)'; ctx.shadowBlur = o.rim ? 18 : 44; ctx.shadowOffsetY = o.rim ? 6 : 24;   // shadows are in screen px
   drawItem(it, t, true, o.sil ?? '#1F1B3A');
   ctx.shadowColor = 'transparent';
   const w = o.wipe ?? 0;

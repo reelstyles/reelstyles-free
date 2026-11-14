@@ -1,0 +1,27 @@
+/* engine/look.css: the cinematic layer (engine/look.js, sets/props.js, sets/places.js). The props speak the kit's surface
+   language: raised navy steps, 2 px hairline border, inner top highlight, soft black shadow, light only from var(--light-rgb). */
+#dkl-far,#dkl-near{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:0 0;}
+#dkl-near{z-index:880;}
+#dkl-air{position:absolute;inset:0;z-index:870;pointer-events:none;overflow:hidden;}
+.dkl-layer{position:absolute;left:0;top:0;width:1080px;height:1920px;}
+.dkl-mote{position:absolute;left:0;top:0;border-radius:50%;background:rgba(var(--light-rgb),.9);box-shadow:0 0 14px rgba(var(--light-rgb),.8);}
+.dkl-haze{position:absolute;left:-300px;top:1150px;width:1680px;height:620px;background:radial-gradient(closest-side,rgba(var(--light-rgb),.55),rgba(var(--light-rgb),0));filter:blur(30px);}
+#dkl-tint{position:absolute;inset:0;z-index:885;mix-blend-mode:soft-light;pointer-events:none;}
+#dkl-grain{position:absolute;inset:0;z-index:960;pointer-events:none;opacity:.09;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='256' height='256'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='256' height='256' filter='url(%23n)'/></svg>");}
+/* surfaces */
+.dkp{position:absolute;box-sizing:border-box;}
+.dkp-s{position:absolute;box-sizing:border-box;border-radius:22px;background:linear-gradient(180deg,rgba(var(--light-rgb),.2),rgba(var(--light-rgb),0) 45%),linear-gradient(180deg,#2C3550,#1C2334 65%,#151B29);border:2px solid rgba(255,255,255,.2);box-shadow:inset 0 2px 0 rgba(255,255,255,.1),0 30px 70px rgba(0,0,0,.55);}
+.dkp-lit{box-shadow:inset 0 2px 0 rgba(255,255,255,.1),inset 6px 0 0 rgba(var(--light-rgb),.22),0 30px 70px rgba(0,0,0,.55);}
+.dkp-shadow{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.7),rgba(0,0,0,0));}
+.dkp-led{position:absolute;width:18px;height:18px;border-radius:50%;background:#2A3346;}
+/* floor: a dark reflective plane with a hairline grid in perspective, the light pool on it */
+.dkl-floor{position:absolute;overflow:hidden;background:linear-gradient(180deg,#1E2740 0%,#131A2A 45%,#0C1019 100%);}
+.dkl-floor .pool{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(var(--light-rgb),.5),rgba(var(--light-rgb),0));}
+.dkl-edge{position:absolute;height:4px;background:linear-gradient(90deg,rgba(var(--light-rgb),0),rgba(var(--light-rgb),.6),rgba(var(--light-rgb),0));box-shadow:0 0 30px rgba(var(--light-rgb),.5);}
+/* light: the visible source, its halo, a beam */
+.dkl-src{position:absolute;border-radius:50%;background:radial-gradient(circle,#fff 0%,rgba(var(--light-rgb),1) 30%,rgba(var(--light-rgb),0) 70%);}
+.dkl-halo{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(var(--light-rgb),.38),rgba(var(--light-rgb),0));}
+.dkl-beam{position:absolute;transform-origin:50% 0;background:linear-gradient(180deg,rgba(var(--light-rgb),.48),rgba(var(--light-rgb),.1) 80%,rgba(var(--light-rgb),0));filter:blur(6px);}
+.dkl-bokeh{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(var(--light-rgb),.55) 0%,rgba(var(--light-rgb),.35) 55%,rgba(var(--light-rgb),.05) 72%,rgba(var(--light-rgb),0) 75%);filter:blur(4px);}
+.dkl-led-row{position:absolute;height:10px;border-radius:5px;background:rgba(var(--light-rgb),.5);}

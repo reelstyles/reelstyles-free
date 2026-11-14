@@ -51,7 +51,7 @@ const PEN = { ink: PAL.ink, sig: PAL.sig, hot: PAL.hot };
 
 // ---- schedule
 const STROKES = [], ERASES = [], MAGNETS = [], CAMKEYS = [], CAPS = [], GHOSTS = [], LIVE = [], LABELS = [], SHOTS = [];
-let ctx = null, sctx = null, ictx = null, hctx = null, SC = null, IC = null, HC = null, DUR_ = 10, seedN = 1;
+let ctx = null, sctx = null, ictx = null, hctx = null, SC = null, IC = null, HC = null, WC = null, NC = null, wctx = null, nctx = null, DUR_ = 10, seedN = 1;
 const colOf = (c) => PEN[c] || c || PAL.ink;
 
 function resample(pts, step, w, rnd, kind) {
@@ -82,7 +82,8 @@ function resample(pts, step, w, rnd, kind) {
 function addStroke(pts, t0, t1, o = {}) {
   const w = o.w ?? 8, rnd = mulberry32(1000 + seedN++ * 7919);
   const r = resample(pts, Math.max(3, w * 0.55), w, rnd, o.kind);
-  const s = { ...r, t0, t1, w, col: colOf(o.col), kind: o.kind || 'ink', pen: o.nopen ? '_' : o.pen || o.col || 'ink', z: STROKES.length, rnd: rnd() };
+  const s = { ...r, t0, t1, w, col: colOf(o.col), kind: o.kind || 'ink', pen: o.nopen ? '_' : o.pen || o.col || 'ink', z: STROKES.length, rnd: rnd(), layer: o.layer || 'mid' };
+  if (typeof ANCH !== 'undefined') { s.ax = ANCH[0]; s.ay = ANCH[1]; }
   let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
   for (const p of r.P) { x0 = Math.min(x0, p[0]); y0 = Math.min(y0, p[1]); x1 = Math.max(x1, p[0]); y1 = Math.max(y1, p[1]); }
   s.bb = [x0 - w * 2, y0 - w * 2, x1 + w * 2, y1 + w * 2];
@@ -129,7 +130,7 @@ function write(str, x, y, o = {}) {
   const size = o.size ?? 60, anchor = o.anchor || 'l', w = o.w ?? Math.max(VERT ? 8 : 5, size * 0.056);
   const { strokes, tw } = glyphStrokes(str, x, y, size, anchor, 77 + seedN * 31 + str.length);
   const dur = o.dur ?? Math.max(0.35, str.length * 0.07);
-  draw(strokes, o.t0 ?? 0, dur, { col: o.col, w, pen: o.col, nopen: o.nopen });
+  draw(strokes, o.t0 ?? 0, dur, { col: o.col, w, pen: o.col, nopen: o.nopen, layer: o.layer });
   const x0 = anchor === 'c' ? x - tw / 2 : anchor === 'r' ? x - tw : x;
   return { x0, x1: x0 + tw, y0: y - size, y1: y + size * 0.3, t1: (o.t0 ?? 0) + dur, cx: x0 + tw / 2 };
 }
@@ -208,7 +209,8 @@ function ghosts(x, y, w, h, n, seed = 5) {
 }
 function caption(text, t0, t1) { CAPS.push({ text, t0, t1 }); }
 function live(t0, t1, fn) { LIVE.push({ t0, t1, fn }); }
-function shot(keys) { SHOTS.length = 0; SHOTS.push(...keys.map((k) => [k[0], k[1], k[2], k[3] ?? 1, k[4] ?? 0, k[5] ?? 0, k[6]])); }
+function shot(keys) { SHOTS.length = 0; SHOTS.push(...keys.map((k) => [k[0], k[1], k[2], k[3] ?? 1, k[4] ?? 0, k[5] ?? 0, k[6], k[7] ?? 0, k[8] ?? 0])); }
+const drift = (t, z) => [(Math.sin(t * 0.71) * 5 + Math.sin(t * 1.9 + 1) * 1.5) / z, (Math.sin(t * 0.53 + 2) * 4 + Math.sin(t * 2.3) * 1.2) / z];   // handheld breathing: no frame is ever still
 // phone label: the single-line hand written in screen space (stroke by stroke in 0.45 s), on a wiped board patch, auto-fitted to 730 px (+ the patch = the 810 px label band)
 function label(text, t0, t1, o = {}) {
   const size = Math.min(o.size ?? 104, 730 / (textWidth(text, 1) || 1)), w = Math.max(9, size * 0.095);
@@ -224,18 +226,19 @@ function shotAt(t) {   // key [t, cx, cy, zoom, roll, whip, zoomEnd]: zoom eases
   while (i < K.length - 1 && t >= K[i + 1][0]) i++;
   const a = K[i], t1 = K[i + 1] ? K[i + 1][0] : a[0] + 2, z = lerp(a[3], a[6] ?? a[3] * 1.04, EZ.io(seg(t, a[0], t1)));
   const wp = a[5] * (1 - EZ.o3(seg(t, a[0], a[0] + 0.3))) / z;   // slides in from a[5] screen px (sign = side)
-  return [a[1] - wp, a[2], z, a[4] * (1 - seg(t, a[0], a[0] + 0.4))];
+  const pu = EZ.io(seg(t, a[0], t1)), dr = drift(t, z);   // [7], [8] = world px the camera pans over the shot (parallax shows)
+  return [a[1] - wp + (a[7] || 0) * pu + dr[0], a[2] + (a[8] || 0) * pu + dr[1], z, a[4] * (1 - seg(t, a[0], a[0] + 0.4))];
 }
 function camAt(t) {
   if (SHOTS.length) return shotAt(t);
   const K = CAMKEYS;
   if (!K.length) return [960, 540, 1, 0];
-  if (t <= K[0][0]) return K[0].slice(1);
+  if (t <= K[0][0]) { const d = drift(t, K[0][3]); return [K[0][1] + d[0], K[0][2] + d[1], K[0][3], K[0][4]]; }
   for (let i = 0; i < K.length - 1; i++) if (t < K[i + 1][0]) {
     const a = K[i], b = K[i + 1], u = EZ.io(seg(t, a[0], b[0])), z = 1 / lerp(1 / a[3], 1 / b[3], u);
-    return [lerp(a[1], b[1], u), lerp(a[2], b[2], u), z, lerp(a[4], b[4], u)];
+    const dr = drift(t, z); return [lerp(a[1], b[1], u) + dr[0], lerp(a[2], b[2], u) + dr[1], z, lerp(a[4], b[4], u)];
   }
-  return K[K.length - 1].slice(1);
+  const e = K[K.length - 1], d = drift(t, e[3]); return [e[1] + d[0], e[2] + d[1], e[3], e[4]];
 }
 const toScreen = (c, x, y) => { const k = c[2], co = Math.cos(-c[3]), si = Math.sin(-c[3]), dx = (x - c[0]) * k, dy = (y - c[1]) * k; return [W / 2 + dx * co - dy * si, H / 2 + dx * si + dy * co]; };
 const toWorld = (c, sx, sy) => { const k = c[2], dx = (sx - W / 2), dy = (sy - H / 2), co = Math.cos(c[3]), si = Math.sin(c[3]); return [c[0] + (dx * co - dy * si) / k, c[1] + (dx * si + dy * co) / k]; };
@@ -286,22 +289,26 @@ function tracePath(g, S, k, col, alpha, fixedW) {
 const prog = (S, t) => (t <= S.t0 ? 0 : t >= S.t1 ? 1 : hand((t - S.t0) / (S.t1 - S.t0)));
 
 function paintInk(g, hg, t, c) {
-  g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, W, H); hg.setTransform(1, 0, 0, 1, 0, 0); hg.clearRect(0, 0, W, H);
+  for (const x of [g, hg, wctx, nctx]) { x.setTransform(1, 0, 0, 1, 0, 0); x.clearRect(0, 0, W, H); }
+  const LC = (s) => (typeof layerCam === 'function' ? layerCam(c, s) : c);
   // time-ordered merge of strokes and erasers so a stroke drawn after a wipe stays
   const items = [];
-  for (const s of STROKES) if (s.t0 < t && visible(s.bb, c)) items.push([s.t0, s]);
+  for (const s of STROKES) { const lc = s.t0 < t && LC(s); if (lc && visible(s.bb, lc)) items.push([s.t0, s, lc]); }
   for (const e of ERASES) if (e.t0 < t) items.push([e.t0, e]);
   items.sort((a, b) => a[0] - b[0] || (a[1].z ?? 0) - (b[1].z ?? 0));
   applyCam(g, c); applyCam(hg, c);
-  for (const [, it] of items) {
-    if (it.rect) {
+  for (const [, it, lc] of items) {
+    if (it.rect) { applyCam(g, c);
       const k = clamp((t - it.t0) / (it.t1 - it.t0)), P = it.P, n = P.length - 1, upto = Math.min(n, Math.floor(k * n));
       g.save(); g.globalCompositeOperation = 'destination-out'; g.strokeStyle = 'rgba(0,0,0,0.9)'; g.lineWidth = it.bw; g.lineCap = 'round'; g.lineJoin = 'round';
       g.beginPath(); g.moveTo(P[0][0], P[0][1]); for (let i = 1; i <= upto; i++) g.lineTo(P[i][0], P[i][1]); g.stroke(); g.restore();
-    } else if (it.kind === 'hi') tracePath(hg, it, prog(it, t), it.col, 1);
-    else tracePath(g, it, prog(it, t), it.col, 1);
+    } else {   // depth layers: washes under the ink, the near layer on its own canvas in front of Max
+      const tg = it.layer === 'near' ? nctx : it.kind === 'wash' ? wctx : it.kind === 'hi' ? hg : g; applyCam(tg, lc);
+      if (it.kind === 'wash') paintWash(tg, it, prog(it, t)); else tracePath(tg, it, prog(it, t), it.col, 1);
+    }
   }
   const fade = clamp((c[2] - 0.35) / 0.5);   // dry-marker texture locked to board space, off when the camera is wide
+  applyCam(g, c);
   if (fade > 0) { g.globalCompositeOperation = 'destination-out'; g.globalAlpha = 0.5 * fade; g.fillStyle = TEX.dry; const a = toWorld(c, W / 2, H / 2), r = Math.hypot(W, H) / 2 / c[2] + 40; g.fillRect(a[0] - r, a[1] - r, r * 2, r * 2); g.globalAlpha = 1; g.globalCompositeOperation = 'source-over'; }
 }
 
@@ -389,16 +396,17 @@ function paintScene(t) {
   const c = camAt(t), g = sctx;
   if (typeof LAYOUT !== 'undefined') LAYOUT.length = 0;   // engine/safe.js boxes: the last sub-frame painted is the one checked
   g.setTransform(1, 0, 0, 1, 0, 0); g.globalCompositeOperation = 'source-over'; g.globalAlpha = 1;
-  const bg = g.createLinearGradient(0, 0, W * 0.4, H); bg.addColorStop(0, PAL.board); bg.addColorStop(1, PAL.board2); g.fillStyle = bg; g.fillRect(0, 0, W, H);
+  g.fillStyle = boardFill(g, t); g.fillRect(0, 0, W, H);
   applyCam(g, c); g.fillStyle = TEX.scuff; const a = toWorld(c, W / 2, H / 2), r = Math.hypot(W, H) / 2 / c[2] + 40; g.fillRect(a[0] - r, a[1] - r, r * 2, r * 2);
   // ghosts of old lessons, faint, always fully drawn
   g.globalCompositeOperation = 'multiply';
   for (const s of GHOSTS) if (visible(s.bb, c)) tracePath(g, s, 1, s.col, 0.11);
   g.globalAlpha = 1;
   paintInk(ictx, hctx, t, c);
-  g.setTransform(1, 0, 0, 1, 0, 0); g.globalCompositeOperation = 'multiply';
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalCompositeOperation = 'source-over'; g.drawImage(WC, 0, 0); g.globalCompositeOperation = 'multiply';
   g.globalAlpha = 0.55; g.drawImage(HC, 0, 0); g.globalAlpha = 0.94; g.drawImage(IC, 0, 0); g.globalAlpha = 1; g.globalCompositeOperation = 'source-over';
   for (const L of LIVE) if (t >= L.t0 && t < L.t1) { g.save(); applyCam(g, c); L.fn(g, t, c); g.restore(); }   // characters (they track themselves)
+  g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.filter = 'blur(2.5px)'; g.drawImage(NC, 0, 0); g.restore();   // near layer: in front of Max, a touch soft
   for (const M of MAGNETS) drawMagnet(g, c, M, t);
   for (const E of ERASES) drawEraser(g, c, E, t);
   const names = [...new Set(STROKES.map((s) => (s.kind === 'hi' && s.pen !== '_' ? 'hi' : s.pen)))];
@@ -408,14 +416,14 @@ function paintScene(t) {
     const [sx, sy] = toScreen(c, ps.p[0], ps.p[1]), k = clamp(Math.pow(c[2], 0.5), 0.6, 1.2) * 0.85, col = nm === 'hi' ? '#e8b800' : colOf(nm);
     drawMarker(g, sx, sy, k, ps.lift, col, Math.sin(t * 9 + names.indexOf(nm)) * (ps.drawing ? 0.025 : 0.05));
   }
+  paintAir(g, c, t); postLook(g, c, t);
   // glossy window sheen: a soft diagonal band that moves slower than the board
   g.setTransform(1, 0, 0, 1, 0, 0);
   const off = (c[0] * -0.35) % 2600, sh = g.createLinearGradient(0, 0, W, H * 0.55);
   const x0 = ((off % 2600) + 2600) % 2600 / 2600 * 1.6 - 0.3;
   sh.addColorStop(clamp(x0 - 0.16), 'rgba(255,255,255,0)'); sh.addColorStop(clamp(x0), 'rgba(255,255,255,0.13)'); sh.addColorStop(clamp(x0 + 0.16), 'rgba(255,255,255,0)');
   g.fillStyle = sh; g.fillRect(0, 0, W, H);
-  const vg = g.createRadialGradient(W / 2, H / 2, H * 0.55, W / 2, H / 2, H * 1.05); vg.addColorStop(0, 'rgba(60,60,70,0)'); vg.addColorStop(1, 'rgba(60,60,70,0.10)'); g.fillStyle = vg; g.fillRect(0, 0, W, H);
-}
+  }
 
 function paintCaption(g, t) {
   const C = CAPS.find((x) => t >= x.t0 && t < x.t1); if (!C) return;
@@ -429,11 +437,11 @@ function paintCaption(g, t) {
     g.fillStyle = PAL.hot; g.beginPath(); g.roundRect(x + 22, y + hh - 16, 44, 5, 3); g.fill();
     g.fillStyle = PAL.ink; lines.forEach((l, i) => g.fillText(l, 540, y + 44 + i * 68)); g.globalAlpha = 1; return;
   }
-  const w = g.measureText(C.text).width + 90, x = W / 2 - w / 2, y = H - 128 + (1 - a) * 12;
-  g.fillStyle = 'rgba(20,24,32,0.10)'; g.beginPath(); g.roundRect(x + 4, y + 8, w, 78, 26); g.fill();
-  g.fillStyle = 'rgba(252,251,247,0.92)'; g.beginPath(); g.roundRect(x, y, w, 78, 26); g.fill();
-  g.fillStyle = PAL.hot; g.beginPath(); g.roundRect(x + 22, y + 62, 44, 5, 3); g.fill();
-  g.fillStyle = PAL.ink; g.fillText(C.text, W / 2, y + 36); g.globalAlpha = 1;
+  g.font = `bold 60px ${HAND}`;   // bold, light on a dark plate: readable on every grade
+  const w = g.measureText(C.text).width + 100, x = W / 2 - w / 2, y = H - 150 + (1 - a) * 12;
+  g.fillStyle = 'rgba(16,18,26,0.82)'; g.beginPath(); g.roundRect(x, y, w, 96, 22); g.fill();
+  g.fillStyle = PAL.hot; g.beginPath(); g.roundRect(x + 26, y + 80, 56, 6, 3); g.fill();
+  g.fillStyle = '#fbf7ef'; g.fillText(C.text, W / 2, y + 46); g.globalAlpha = 1;
 }
 
 function paintLabels(g, t) {
@@ -465,8 +473,8 @@ function renderFrame(t) {
 function mount(duration, id = 'main') {
   const cv = document.getElementById('c'); ctx = cv.getContext('2d');
   const mk = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c; };
-  SC = mk(); IC = mk(); HC = mk(); sctx = SC.getContext('2d'); ictx = IC.getContext('2d'); hctx = HC.getContext('2d');
-  DUR_ = duration; buildTextures();
+  SC = mk(); IC = mk(); HC = mk(); WC = mk(); NC = mk(); sctx = SC.getContext('2d'); ictx = IC.getContext('2d'); hctx = HC.getContext('2d'); wctx = WC.getContext('2d'); nctx = NC.getContext('2d');
+  DUR_ = duration; buildTextures(); buildLook();
   document.fonts.load(`44px "Architects Daughter"`).then(() => {
     const st = { t: 0 }, tl = gsap.timeline({ paused: true });
     tl.to(st, { t: duration, duration, ease: 'none', onUpdate: () => renderFrame(st.t) });

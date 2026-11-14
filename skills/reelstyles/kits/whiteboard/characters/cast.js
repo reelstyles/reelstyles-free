@@ -6,7 +6,7 @@
 //
 //    hero(t0, t1, o)   registers him in a picture (live): o = { x, y (feet, board px), s (scale, 1 = 850 px tall), dir (1 faces +x),
 //                      pose: name | (u) => name/object (u = seconds into the picture), ex: expression | (u) => ..., hold: prop in
-//                      the front hand ('coin' | 'bag' | 'umbrella' | 'key'), reveal: seconds to draw him on with the pen (0 = already drawn) }
+//                      the front hand ('coin' | 'bag' | 'umbrella' | 'key' | 'phone'), reveal: seconds to draw him on with the pen (0 = already drawn) }
 //    POSES             idle · walk (use walk(u)) · reach · cheer · slump · point · push · shrug · think · umbrella
 //    blend(a, b, u0, u1)  pose a turning into pose b between u0 and u1 (seconds into the picture)
 //    EXPR              happy · sad · shock · firm
@@ -43,7 +43,7 @@ function mixPose(a, b, k) {
 const blend = (a, b, u0, u1) => (u) => mixPose(a, b, EZ.io(seg(u, u0, u1)));
 
 // ---- marker primitives (local px); every op = { pts, w, col, fill } so the pen can draw him on in order
-const HERO_COL = { shirt: '#177f8c', pants: '#2c3a52', skin: '#fbf7ef', hair: '#20242b', shadow: 'rgba(32,36,43,0.13)' };
+const HERO_COL = { shirt: '#177f8c', pants: '#2c3a52', skin: '#fbf7ef', hair: '#20242b', shadow: 'rgba(32,36,43,0.32)' };
 function boil(pts, B, n) {   // re-jittered 8x a second: the hand-drawn boil of a live marker line
   return pts.map(([x, y], i) => { const r = Math.sin(i * 127.1 + n * 311.7 + B * 74.7) * 43758.5453, q = Math.sin(i * 269.5 + n * 183.3 + B * 12.9) * 24634.6345; return [x + (r - Math.floor(r) - 0.5) * 3.2, y + (q - Math.floor(q) - 0.5) * 3.2]; });
 }
@@ -114,6 +114,7 @@ function heroOps(P, E, hold) {
   ops.push({ pts: ellipsePts(hand[0], hand[1], 21, 21, 16), w: 8, col: INK, fill: HERO_COL.skin });
   if (hold === 'coin') { ops.push({ pts: ellipsePts(hand[0] + 6, hand[1] - 34, 34, 34, 20), w: 8, col: INK, fill: PAL.hi }); ops.push({ pts: [[hand[0] + 6, hand[1] - 52], [hand[0] + 6, hand[1] - 16]], w: 7, col: INK }); }
   if (hold === 'bag') { const x = hand[0], y = hand[1] + 18; ops.push({ pts: [[x - 52, y + 40], [x + 52, y + 40], [x + 62, y + 170], [x - 62, y + 170], [x - 52, y + 40]], w: 9, col: INK, fill: PAL.hot }); ops.push({ pts: [[x - 26, y + 40], [x - 18, y], [x + 18, y], [x + 26, y + 40]], w: 8, col: INK }); }
+  if (hold === 'phone') { const x = hand[0] + 4, y = hand[1] - 30; ops.push({ pts: [[x - 38, y - 70], [x + 38, y - 70], [x + 38, y + 70], [x - 38, y + 70], [x - 38, y - 70]], w: 9, col: INK, fill: INK }); ops.push({ pts: [[x - 26, y - 56], [x + 26, y - 56], [x + 26, y + 50], [x - 26, y + 50], [x - 26, y - 56]], w: 0, col: INK, fill: '#d7eef2' }); }
   if (hold === 'key') { const x = hand[0] + 10, y = hand[1] - 40; ops.push({ pts: ellipsePts(x, y - 30, 30, 30, 18), w: 9, col: INK, fill: PAL.hi }); ops.push({ pts: [[x, y], [x, y + 90], [x + 24, y + 90], [x, y + 66], [x + 20, y + 66]], w: 10, col: INK }); }
   return { ops, head: [HC[0] - hr - 4, HC[1] - hr - 60, HC[0] + hr + 4, HC[1] + hr + 4] };
 }
@@ -127,6 +128,13 @@ function drawHero(g, t, u, o) {
   const s = o.s ?? 1, dir = o.dir ?? 1, B = Math.floor(t * 8), rv = o.reveal ? clamp(u / o.reveal) : 1;
   g.save(); g.translate(o.x, o.y); g.scale(s * dir, s);
   g.lineCap = 'round'; g.lineJoin = 'round';
+  const Lr = typeof lightAt === 'function' && rv >= 1 ? lightAt(camAt(t)) : null;
+  if (Lr) {   // rim light: the outline once more in the light's colour, shifted toward the light, under the body
+    const m0 = g.getTransform(), hx = m0.e + m0.c * -450, hy = m0.f + m0.d * -450, dx = Lr.sx - hx, dy = Lr.sy - hy, dl = Math.hypot(dx, dy) || 1, k0 = Math.abs(m0.a) || 1;
+    g.save(); g.translate((dx / dl) * 9 / k0 * dir, (dy / dl) * 9 / Math.abs(m0.d || 1)); g.strokeStyle = Lr.col; g.globalAlpha = 0.95;
+    ops.forEach((op, i) => { if (op.flat) return; const pts = boil(op.pts, B, i); g.lineWidth = (op.w || 4) + 6; opPath(g, pts); if (op.fill) { g.fillStyle = Lr.col; g.fill(); } g.stroke(); });
+    g.restore();
+  }
   const N = ops.length, upto = rv * N; let tip = null;
   ops.forEach((op, i) => {
     if (i >= upto) return;

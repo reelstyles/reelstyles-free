@@ -15,7 +15,7 @@ These hold in every kit. The kit's STYLE.md says how things look. This file says
 - Wides and medium-wides carry the film: the main character whole, feet on a visible floor with a contact shadow, about 30-55% of the frame height. Close-ups are short beats, at most 4 in 10 shots.
 - Nothing important touches an edge: characters, faces, props and text stay at least 65 px inside. Only sky, ground and walls may bleed off.
 - One main subject per shot. The key object of the beat is big (at least 12% of the frame height) and has a clear silhouette.
-- No empty or near-empty shot: every set is a real place with a floor, a back wall or horizon, and 3+ props.
+- Every shot is a full, real place: a floor, a back wall or horizon, and 3+ props. Measured (`node products/reelstyles/tools/clip-measure.mjs out.mp4 --gate`, also works on a still), the good samples sit at mean luma 0.1-0.7, luma spread (contrast) 0.1-0.24 and a flat (detail-free) share of at most 0.6.
 
 ## Make it look like a film
 
@@ -27,8 +27,8 @@ These hold in every kit. The kit's STYLE.md says how things look. This file says
 
 ## Pace
 
-- A new picture at least every 2 s: a cut to a new angle, or a big visible change. A moving arm in the same frame is not a new picture.
-- Frame 0 is already in motion. No title card, no standing pose to open.
+- A new picture at least every 2 s: a cut to a new angle, or a big visible change (measured motion 0.04-0.2, and `dead` at most 1: never 3 seconds that look the same). A moving arm in the same frame is not a new picture.
+- Frame 0 is already a full, lit picture in motion, with at least half the detail of the rest of the film (measured `f0` 0.5 or more). No title card, no standing pose to open.
 - The last shot is the payoff, large and readable without a label, still moving until the end. No end card unless the user asks.
 
 ## Text on screen

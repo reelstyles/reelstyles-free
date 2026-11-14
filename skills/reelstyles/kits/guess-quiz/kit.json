@@ -38,8 +38,8 @@
     },
     {
       "path": "LESSONS.md",
-      "bytes": 324,
-      "sha256": "bb7dc4be5cbfd674684da2d2b55a6989e427a2287d691b35671450839ff4d54a"
+      "bytes": 524,
+      "sha256": "d9e2d7d786310b7465d6a3e4cff7ed2cd85acf0cffaf84b43a2fd74e8eb44c88"
     },
     {
       "path": "LICENSES/ASSETS.md",
@@ -53,8 +53,8 @@
     },
     {
       "path": "STYLE.md",
-      "bytes": 9593,
-      "sha256": "cef303851316f1208f10eaa859524866b3f45e46a2b5fcd483c76fa9fab5702f"
+      "bytes": 6142,
+      "sha256": "6ed466bca0009e6047831360018e6496fae62d3ad6ee91b3a2ccdf27111f8600"
     },
     {
       "path": "characters/README.md",
@@ -63,8 +63,8 @@
     },
     {
       "path": "characters/cast.js",
-      "bytes": 4748,
-      "sha256": "6bff1f80508015c18b304de9e9d0010670c4c8b09921cd4d9b006468eee8626e"
+      "bytes": 5570,
+      "sha256": "e0766fc5ac5387c83c7d6ccb33ab50e38a50fe49bc41d378cc5947691125c128"
     },
     {
       "path": "engine/runtime.js",
@@ -75,6 +75,11 @@
       "path": "engine/safe.js",
       "bytes": 13769,
       "sha256": "dec05b9f70ce387e6308bdfb6f6892d4b1cec1ff823dd6cec79f01f5b26b5a79"
+    },
+    {
+      "path": "film.js",
+      "bytes": 1909,
+      "sha256": "09a20345b23b7bf9f4f5cfc63e77ab3fdf886d0866d9d22a7d5c3defbb67be59"
     },
     {
       "path": "fonts/Inter-800.woff2",
@@ -97,14 +102,29 @@
       "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
     },
     {
+      "path": "index.html",
+      "bytes": 1381,
+      "sha256": "07ea6d7dcc03a86cc155ce4c1f10804816273497651a60bab5878f5d429fabcb"
+    },
+    {
       "path": "sets/items.js",
       "bytes": 7615,
       "sha256": "a4c66e1ea1cb4f7b3ffa59ef33a596af3322d25bd63cdd1cf0d89e66c029d49c"
     },
     {
+      "path": "sets/look.js",
+      "bytes": 8393,
+      "sha256": "e26f6d72fafe7a9d47ca93d2d83a85d5244d3cfcaac03101bc0d11a6922945cc"
+    },
+    {
+      "path": "sets/scenes.js",
+      "bytes": 14122,
+      "sha256": "119c706bb42b5da7d4aef58d4a79741db6837ce8247aa935110d21192dc1d801"
+    },
+    {
       "path": "sets/stage.js",
-      "bytes": 22156,
-      "sha256": "f7e9ac4ea36b87563bd5885a1b2080dd2e5f03c00482517a66ac2f0133387d6d"
+      "bytes": 25011,
+      "sha256": "e35d2cf930bebac2ad7cbed386ae01d353741d02601ef7c6e8a8756b49c2f720"
     },
     {
       "path": "templates/film-v.js",
@@ -118,8 +138,8 @@
     },
     {
       "path": "templates/index.html",
-      "bytes": 1141,
-      "sha256": "b54c6707ba25ce42a4a4a9dadde88d661a3939930237dfdb264b06768fa08da6"
+      "bytes": 1266,
+      "sha256": "096aa87af96d2200db82c7cb4bec7e05124157482e8e54fc5b6fd936eb2881cb"
     },
     {
       "path": "templates/vertical.html",

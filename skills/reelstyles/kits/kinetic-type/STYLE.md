@@ -1,93 +1,73 @@
 # Kinetic type
 
-Words are the actors. Every beat is one huge word or one stacked phrase that enters with attitude, lands and keeps moving. No characters, photos, icons, 3D text, neon or handwriting. At most one thin furniture element (brackets, rule, dot) per shot.
+Words are the actors. Every beat is one huge word or a short stack that enters with attitude, lands and keeps moving. In 16:9 the words STAND in a lit typographic set: a floor, a sky or back wall, one light source, props built from type. No people, photos, icons, 3D extrusions or handwriting.
 
 ## Look
 
-- Stage: flat ink, 3 blurred colour blobs (radius 560-1000 px) drifting on slow sines, a dot grid (3 px dots, 60 px pitch) sliding diagonally, a soft vignette. `drawStage` paints it.
-- Letters: solid fills with a hard shadow (4% of size), or outline echoes (5 px).
-- Ticker beats sit on flat colour fields (mint, pink, amber, violet).
-- Rhythm: title and stack beats 1.8-2.2 s, ticker beats 0.5 s, logo 1.8-2.4 s.
-- Order: title slam, stack, ticker, slot swap, logo.
-- One focal point per shot, at most 3 elements (word, eyebrow, furniture). Max 6 words per shot, one word per ticker beat.
+- **Start every 16:9 shot from a scene recipe** (`sets/recipes.js`); the full lit set exists at frame 0:
+  - `setStreet(t0, t1, o)`: sky, light, a skyline of type towers (letters of `o.far` as windows), haze, street floor.
+  - `setRoom(t0, t1, o)`: back wall with dot grid and a ghost poster word (`o.far[0]`), window or screen light, floor.
+  - `setStage(t0, t1, o)`: pleated backdrop, spotlight cone from above, footlights.
+  - `o`: `{mood, light: {kind, x, y}, far, props, subject: (t, S) => ..., near, air, cam, caption: [text, t0]}`. `S.FY` = the subject floor line (y 842), `S.base(z)` = floor y at depth z.
+- **Grade per mood** (`engine/look.js`, `GRADES`): `night` · `dawn` · `day` · `dusk` · `neon` · `storm` · `hearth` · `gold` · `cold`. `gradeTrack([[t, mood, blend]...])` turns the tint across the film: cold first, `gold` at the payoff.
+- **One light per scene**: `light.kind` `sun` · `moon` · `lamp` · `neon` · `screen` · `window`, drawn with bloom by `lightDraw()` (`hang: true` = ceiling lamp with cord), pooled on the floor and wall. Dark places stay dark, lit only by it.
+- **Depth**: far layer (sky/wall, parallax 0.15), skyline (0.35), subject (1), near layer (`near: 'GO'`: two giant blurred letters in the bottom corners, 1.5). `layerIn(cam, p, fn)` for your own layers.
+- **Air**: `air` `dust` · `rain` · `snow` · `embers` · `confetti` · `haze`. Grain, vignette and the grade come free.
 
 ## Palette
 
-Only `PAL`: ink `#0C0B16`, ink2 `#171428`, cream `#F6F1E7` (default text), violet `#8B5CFF`, pink `#FF4FA3`, mint `#2EE6C5`, blue `#4C7DFF`, coral `#FF6B4A`. Amber `#FFB534` is the one accent: eyebrows, logo dot, hairline.
+Only `PAL`: ink `#0C0B16`, ink2 `#171428`, cream `#F6F1E7` (default text), violet `#8B5CFF`, pink `#FF4FA3`, mint `#2EE6C5`, blue `#4C7DFF`, coral `#FF6B4A`. Amber `#FFB534` is the accent: eyebrows, signs, the logo dot. Set colours come from `GRADES`.
 
-Text on a field: ink on mint or amber, cream on pink or violet. Never violet on violet. Contrast 4.5:1 or more.
+The subject word is the brightest, most saturated thing in the frame: cream, amber, pink or mint against the grade. Contrast 4.5:1 or more.
 
 ## Type
 
-- Display: Archivo Black. `cond: 0.82` (82% width) for stacks and ticker words, full width for titles and the logo word. `cond` may go 0.7-1.0.
-- Small text: Inter 800, capitals, tracked +0.22 em, eyebrows 34-40 px.
-- Hero words 150 px or larger; engine minimum 28 px.
-- Never draw text with raw `ctx.fillText`.
+- Display: Archivo Black, `cond` 0.82-0.9 for stacks, full width for titles. Small text: Inter 800 caps, tracked.
+- A subject word is 300-520 px (one line) or two lines 220 + 300 px: 30-55% of the frame height.
+- Captions (`o.caption`, `small()`): 44 px or more, top band, 4 words max.
+- Never draw text with raw `ctx.fillText` in a film.
 
 ## Cast and props
 
-No people. In 9:16 the hero is the word block (`characters/cast.js`). Calls the kit has:
-- `Hero(lines, t, o)` (9:16): 1-4 stacked lines (`'WORD'` or `{s, col, size}`) as one acting block, every line as wide as fits, stretched upright to at least 32% of the frame; `o.pose` `idle` | `walk` | `reach` | `cheer` | `slump`, `o.mood` `calm` | `loud` (echoes) | `sad`, `o.t0`, `o.anim`, `o.dir`. It tracks itself as the `hero` and returns its box (for brackets or hairlines).
-- `label(str, {t0})` (9:16): the one label of a picture, on an ink plate above the hero.
-- `word(str, cx, cy, size, t, o)`: one animated word. Options: `col`, `t0`, `stagger`, `dur`, `anim`, `cond`, `track`, `maxW`, `mask`, `drift`, `idle`, `out: [t, dur]`, `rot`, `stroke`, `outline`, `shadow`, `free`.
-- `echo(str, cx, cy, size, t, o, n)`: outline rings behind a word. Call it before the solid `word`, same arguments.
-- `stack(lines, cy, size, t, o)`: poster stack. Lines are `{s, col, t0, anim}`, pitch 0.86 x size, drift alternates.
-- `small(str, cx, cy, t, o)`: eyebrow or caption.
-- `brackets(t, t0, col, w, h, cx, cy)`: corner brackets that close in, then breathe.
-- `wipeTo(tc, dur, colA, colB, up, slant)`: slanted double colour wipe.
-- A theme `{base, blobs: [[colour, x, y, radius], ...]}` is the 5th argument of `shot`.
+The cast are words. `litWord(str, cx, base, size, t, o)` stands a word on the floor (feet on `base`): a rim on the light side, hard shadow, contact shadow and a cast shadow away from the light. Options are those of `word()` plus `pose` (`walk` · `reach` · `cheer` · `slump`, from `characters/cast.js` `POSES`), `cast` (0 for an upper stacked line), `rim`.
+
+Props are type-made set dressing, `props: [[kind, x, z, arg, col]]`, z 0 (back) to 1 (front):
+- `block` (one big letter or digit), `sign` (text plate on a post), `board` (glowing amber display), `plinth` (lit box with a word), `lamp` (post lamp).
+- 3 props per shot, none behind the subject's letters, none within 65 px of an edge. Story-specific things are said in words (`sign`, `board`), not drawn.
+
+Tools also usable alone: `word()`, `echo()`, `stack()`, `small()`, `brackets()`, `wipeTo()`, `wordBox()` (width for layouts). 9:16 hero: `Hero(lines, t, o)`; its label: `label(str, {t0})`.
 
 ## Camera and motion
 
-- Entrances per letter, staggered 25-70 ms: `drop` (spring landing), `rise` (out of a mask line), `slam` (from 3.4x scale, tickers), `spin` (logo), `pop`, `fade`. Slam for loud, rise for build, drop for weight.
-- A landed word never freezes: idle bob (about 1.2% of size), scale breath, drift (±14 px x `drift`).
-- Camera: `pushCam(t0, t1, z0, z1, dx, dy, extra)` on every shot, push 5-8% at 16:9. Impact: pass `(t) => shake(t, t0, amp)` as `extra`.
-- Easing: `EZ.o5` entrances, `spring` weight, `EZ.io` wipes.
-- Cuts: hard on the beat for tickers; `wipeTo` between sections, cut under full coverage. No fades.
+- `cam: camMove(kind, {t0, d, amt, x, y})`: `push` · `pull` · `truck` · `crane` · `drift`. Neighbouring shots use different moves.
+- Default framing is wide: the floor visible under the word, nothing cut by an edge.
+- Entrances per letter, staggered 25-70 ms: `drop` (weight), `rise` (build), `slam` (loud), `spin` (logo), `pop`, `fade`. A landed word never freezes (idle bob, drift, its pose).
+- Easing: `EZ.o5` entrances, `spring` weight, `EZ.io` moves. Impact: `shake(t, t0, amp)`.
+- Hard cuts on the beat between sets, a new picture every 2 s.
 
 ## Native moves
 
-- Title slam with outline echoes; poster stack with alternating drift; colour-field ticker.
-- Slot swap: static lead-in line, a rolling word in a clipped window that lands on the payoff (beat 4 of `templates/film-v.js`).
-- Letters assembling into a wordmark with brackets, glint line, amber dot.
-- Number slam: a huge digit, its unit in a small word.
-- Word-shake on impact; a word exiting upward (`out`).
+- A word drops into the set and its shadow lands with it.
+- `walk` word striding across the floor (move `cx` over the shot).
+- A word splitting into halves that slide (doors, break-ups): place halves with `wordBox().w`, light through the gap with `lightCone()`.
+- Countdown: a number re-slamming each beat.
+- Payoff: the grade turns warm and the word cheers.
+- Poster stack, colour-field ticker and slot swap (9:16 template) still belong to the style.
 
 ## Pitfalls
 
-- A held word without `pushCam` or idle looks dead.
-- `echo` scale above 1.15 on words wider than 1500 px leaves the frame.
-- A word too long for `maxW` shrinks and warns in the console. Split the line.
-- `mask: true` clips a band around the line. Put no other text in it.
-- `free: true` only for scaled ghost decor.
-- Every shot shows text or a ghost word from frame 1: first `t0` at or before the shot start (tickers `a - 0.05`).
-- Colour-field shots last 0.5 s or more with a ghost word. Wipes 0.4-0.5 s. No flat colour shot without type.
-- Nothing stands alone in the middle (cursor block, hairline): pair it with type.
-- Shots tile 0..DUR with no gap.
-- The logo holds 1.2 s or more with idle motion.
+- First entrance `t0` 0.2-0.35 s before the shot start: frame 0 is mid-landing, never an empty set.
+- Props with z above 0.7 or x within 200 px of an edge get cut; check every still.
+- A ghost `far` word on a wall is long: keep it to 6 letters.
+- A word wider than `maxW` shrinks: split it into a stack.
+- `filter: blur` is slow: only the near layer and cast shadows use it.
+- Deterministic: `mulberry32` only, never `Math.random` or `Date`. Prefix your own helpers; never redefine kit globals (`LIGHT`, `GRADES`, `word`).
 
 ## Files
 
-- 16:9: copy `templates/index.html` and `templates/film.js` to the kit root; edit `film.js`.
-- 9:16 (1080x1920, phone Shorts): `cp templates/vertical.html index.html && cp templates/film-v.js film.js`, edit `film.js` (`DUR` = `data-duration` on `#root`). The page sets `window.FRAME_W = 1080` / `window.FRAME_H = 1920` and loads the layout guard `engine/safe.js` right after `engine/runtime.js`, then `characters/cast.js` (the hero). Render with `bash tools/render.sh` (lint, layout check before the render, render, `tools/vcheck.sh`); it names the film `out.mp4` only when every check passes. Check again any time: `bash tools/vcheck.sh out.mp4` must print `vcheck: pass`.
-- Register shots with `shot`. `DUR` in `film.js` equals `data-duration` on `#root`. The 9:16 size also lives in the CSS, `data-width`/`data-height` and the canvas attributes.
-- Do not edit `engine/` for a film (`engine/safe.js`, `tools/vcheck.sh`, `tools/layout-check.mjs`, `tools/render.sh` are the same file in every kit).
-- After each render run `node tools/dead-holds.mjs out.mp4` until it prints `OK`; fix hits with a camera push, idle bob or staggered build.
-- 9:16 also: ffprobe must print `1080,1920`, and `ffmpeg -v info -i out.mp4 -vf freezedetect=n=-60dB:d=1 -f null - 2>&1 | grep freeze_start` must print nothing.
-- Sound is optional. Hits with ffmpeg only, placed with `adelay`:
-  - slam: `ffmpeg -y -f lavfi -i "sine=f=60:d=0.25" -af "afade=t=out:st=0:d=0.25,volume=2" audio/hit.wav`
-  - wipe: pink noise 0.4 s (`anoisesrc`), highpass 1200 Hz, fade in 0.15 s, out 0.25 s.
-  - logo dot: sine 1760 Hz, 0.3 s, fade out.
-
-## Vertical pitfalls (machine-checked, 2026-11-13)
-
-The 16:9 beats squeezed into 9:16 were one 200 px word in a dark column, half the frame empty, flat colour frames from full wipes on the 1-s contact sheet, 3 px dots and 5 px rings that vanish on a phone. `templates/film-v.js` (34 s, "slow and steady wins the race") fixes it in the kit; `bash tools/vcheck.sh out.mp4` finds the rest with exact times.
-- **The hero is the word block.** `Hero()` with 2-3 lines, centre (515, 1010): 32-52% of the frame tall (`minH 620`, `maxH 1000`), short words stretched upright (`tall` up to 1.6) instead of left small. One word alone is under 25% and fails "hero too small": stack it (`FAST / FAST / FAST`) or add a line. The box includes the pose's reach, so the guard and `labelY()` see the jumping letters.
-- **Framing (owner 11-02, wide, never a crop):** camera zoom 1.00-1.05 only; a `reach` block gets `maxW 660` so its lean stays inside x 0-1080. No close-up over 70%.
-- **Labels:** one per picture, `label('THIS ONE RUNS', {t0})`, never a y: it is drawn after the shot in screen space on an ink plate (Inter 800 caps, 76 px, never under 64, wraps to two lines), above the hero, inside x 108-918. Words of the hero are not labels; eyebrows (`small()`) stay decor.
-- **A new picture every 2 s:** `keys(0, 2.0, PICS)`, hard cuts on the beat, no full-cover `wipeTo` (a 1-s contact sheet lands on a flat colour frame). Neighbouring pictures never share a dark or a light base (stage/track/slot/brackets are dark, mint/pink/amber/violet/coral fields are light), or vcheck's blurred SSIM sees one picture.
-- **Sets:** `stage`, five colour `field`s with a ghost outline word (2.7x, alpha 0.22, `free`), `track` (lane rules racing past), `slot` (hairlines over and under the block), `brackets`. One furniture element each.
-- **Line weights:** dots 5 px on a 72 px grid, echo rings 9 px, brackets 9 px in 9:16 (the engine does it).
-- **Hook:** frame 0 mid-slam (`t0` of the first block 0.12 s before 0).
-- **End card:** `endCard(DUR - 2, DUR, ['Made by Claude Code', 'No video model'])`; the last block keeps moving under it at 45% alpha, without a label.
-- Kit lessons from real builds: `LESSONS.md` (newest last).
+- 16:9: copy `templates/index.html` to the kit root as `index.html` and `templates/film-look.js` (sets, start here) or `templates/film.js` (the plain stage sample) as `film.js`. `DUR` = `data-duration`; end with `mountFilm(DUR)`.
+- Load order: `engine/runtime.js` → `engine/kinetic.js` → `engine/look.js` → `characters/cast.js` → `sets/recipes.js` → `film.js`.
+- 9:16: `cp templates/vertical.html index.html && cp templates/film-v.js film.js`. It loads `engine/safe.js` (layout guard) and the `Hero` block; render checks run `tools/vcheck.sh`.
+- Stills: `npx -y hyperframes@0.8.96 snapshot . --at 1,3,5,7,9 --no-end -o snapshots`. Render: `bash tools/render.sh out.mp4` in the foreground (lint, layout check, render, checks). Then `node tools/dead-holds.mjs out.mp4` must print `OK`.
+- Sound (optional, ffmpeg only): slam = 60 Hz sine 0.25 s; wipe = pink noise 0.4 s highpassed; logo dot = 1760 Hz 0.3 s. One `<audio>` clip in `#root`.
+- Kit lessons from real builds: `LESSONS.md`.

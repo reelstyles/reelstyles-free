@@ -63,8 +63,8 @@
     },
     {
       "path": "STYLE.md",
-      "bytes": 5961,
-      "sha256": "64982c8de2affd780eeefefbe9dd6a09613137c8c20baf7e9a7ac297f3fac980"
+      "bytes": 6012,
+      "sha256": "5e264d578b954c15814d5b5fbf63e523b2bc988ff7dac828c31f06eddef1cc5f"
     },
     {
       "path": "audio/score.wav",
@@ -73,18 +73,23 @@
     },
     {
       "path": "characters/pip.js",
-      "bytes": 10946,
-      "sha256": "eac6bb66d51c5ee1ea56a3b3f82023f75122de22f7835512a92ef4fd8a916999"
+      "bytes": 11099,
+      "sha256": "12429d070882552999575b9e1ffdcc6d3eddba55f4c739a4597d964628cbfba6"
     },
     {
       "path": "engine/doodle.js",
-      "bytes": 13338,
-      "sha256": "fa71ab62a032b5582e29a7710f35d1a23dec8a779bcc95d24468b34ab1d8240b"
+      "bytes": 13395,
+      "sha256": "93a6918eece467cc51e3632734f1cf7fb09627e41b65efb5c5feda2e7fb47597"
+    },
+    {
+      "path": "engine/look.js",
+      "bytes": 8857,
+      "sha256": "d01be41a7bfdc4c103fb8c7037b68858a59b1353b93edb1d956abbf2c377f79c"
     },
     {
       "path": "engine/runtime.js",
-      "bytes": 4219,
-      "sha256": "d4779e06341be53c69a64c60f1fd3e56ace250e71cbbbbc401b8abd8745647a5"
+      "bytes": 4536,
+      "sha256": "a600a5bc2be6adbac31689b168f86c06f765ea85f8b66ddae0f19fee796198da"
     },
     {
       "path": "engine/safe.js",
@@ -95,6 +100,11 @@
       "path": "fonts/Caveat.ttf",
       "bytes": 403648,
       "sha256": "0bdb6b660482d31531b3945849fba5916b3ef8695da7024a9e6b9ee3c4157988"
+    },
+    {
+      "path": "sets/scenes.js",
+      "bytes": 16124,
+      "sha256": "ade309885b9f20f829e7d475b643fb258ec27f8e3606c21b4914d2279abb3d22"
     },
     {
       "path": "sets/sets.js",
@@ -108,18 +118,18 @@
     },
     {
       "path": "templates/film.js",
-      "bytes": 6917,
-      "sha256": "8fe781d058a8dc642c5fcda398707f0af7ff5127a7d3948b24620a00a8ba2381"
+      "bytes": 6065,
+      "sha256": "a17782d8276c4c512bf81472fdca20224d1779f11be70097679086733656a8cb"
     },
     {
       "path": "templates/index.html",
-      "bytes": 1264,
-      "sha256": "37767713801f1f62d63857fbb25e8ecde429b0d078862dc3b6e732af870696d6"
+      "bytes": 1346,
+      "sha256": "3fa85c1f82e1011d9cae39b595dffb7a16aab1ba12f3c1da4ddc881e85e1f049"
     },
     {
       "path": "templates/vertical.html",
-      "bytes": 1428,
-      "sha256": "ef5b059fd0e61a6280c3e3ab5ba256a70cfe15fc02d26ea60445c9de219fddda"
+      "bytes": 1510,
+      "sha256": "10d4f627f1017b667adbeb779c375773f8e26a7bee702f436cbcb8a3cab06bf0"
     },
     {
       "path": "tools/deadhold.sh",

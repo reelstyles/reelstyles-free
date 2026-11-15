@@ -1,8 +1,8 @@
-# ReelStyles Free 2026.11.14
+# ReelStyles Free 2026.11.15
 
 7 video styles for Claude Code and other coding agents. You pick a style, give your agent a topic, and it animates the film in code and renders an MP4 on your computer.
 
-This repo holds the 7 free ones; you can watch all 126 on [reelstyles.com](https://reelstyles.com/?utm_source=github-free). Each clip below was made with its kit. All 7 kits are complete and MIT licensed, so you can use them in paid work too.
+This repo holds the 7 free ones; you can watch all 130 on [reelstyles.com](https://reelstyles.com/?utm_source=github-free). Each clip below was made with its kit. All 7 kits are complete and MIT licensed, so you can use them in paid work too.
 
 [<img src="previews/dark-keynote.webp" alt="Dark Keynote" width="400">](https://reelstyles.com/style/dark-keynote)
 [<img src="previews/whiteboard.webp" alt="Whiteboard explainer" width="400">](https://reelstyles.com/style/whiteboard)
@@ -14,7 +14,7 @@ This repo holds the 7 free ones; you can watch all 126 on [reelstyles.com](https
 
 To try it in Claude Code, run the two /plugin lines below and ask for "a 20 s video about coffee in the whiteboard style". The first video takes about 20 minutes, setup included. After that a short video renders in a few minutes.
 
-Each kit is a set of plain files: a style guide, scene templates, render steps and a rubric the agent checks its own frames against. Any agent that can read files and use a terminal can work with them, for example Claude Code, Codex, Cursor, OpenCode, Roo Code, Cline, Gemini CLI or GitHub Copilot. The agent writes each scene in code and HyperFrames renders it on your computer. You don't need an AI video model for this.
+Each kit is a set of plain files: a style guide, scene templates, render steps and a rubric the agent checks its own frames against. Any agent that can read files and use a terminal can work with them, for example Claude Code, Codex, OpenCode, Cursor, Gemini CLI, GitHub Copilot, Cline, Windsurf or Roo Code. The agent writes each scene in code and HyperFrames renders it on your computer. You don't need an AI video model for this.
 
 **Start here:** tell your agent **"set up ReelStyles"**. It runs the `reelstyles-setup` skill, which checks for Node.js 22+, ffmpeg and Chrome and asks before it installs anything missing. Then it connects ReelStyles to your agent and renders a 5 s test film. You can also run the script yourself: `bash setup/setup.sh install`, then `wire auto`, then `test` (on Windows PowerShell: `powershell -ExecutionPolicy Bypass -File setup\setup.ps1 install`, then the same commands).
 
@@ -27,15 +27,17 @@ After that, ask for a film: **"Read skills/reelstyles/SKILL.md, then make me a 3
 ```
 To update later, run `/plugin marketplace update reelstyles-free`.
 
-## Use it with Codex, Cursor, OpenCode, Roo Code, Cline, Gemini CLI, Copilot or another agent
-Clone this repo (or unzip it) into your project or next to it. Agents that read `AGENTS.md` will find the skill from there. You can also copy `skills/reelstyles/` into the folder where your agent looks for skills or rules. To update, run `git pull`.
+## Use it with Codex, OpenCode, Cursor, Gemini CLI, GitHub Copilot, Cline, Windsurf or Roo Code
+Clone this repo (or unzip it), open the folder in your agent and say **"set up ReelStyles"**. The folder already has the files each agent looks for: `AGENTS.md` (Codex, OpenCode, Cursor, Copilot, Cline, Windsurf, Roo Code), `GEMINI.md` (Gemini CLI), `.claude/CLAUDE.md` (Claude Code without the plugin), and the two skills in `.agents/skills/`, `.github/skills/` (Copilot in VS Code) and `.cline/skills/`.
+
+To make films in another project folder, run `bash setup/setup.sh wire auto --dir <that folder>` (Windows: `setup\setup.ps1 wire auto --dir <that folder>`). It adds short pointer files there for the agents it finds on your computer, or for the ones you name: `claude codex opencode cursor roo cline gemini copilot windsurf`. To update, run `git pull`.
 
 ## What you need
 Node.js 22 or newer, ffmpeg, and Chrome or Chromium (HyperFrames uses it to render). The setup skill can install them for you if you say yes. Long films render faster on a computer with more CPU cores.
 
 ## What it runs and downloads
 - Setup (`setup/setup.sh`, on Windows `setup/setup.ps1`) checks for Node.js 22+, ffmpeg, git and Chrome. For anything missing it shows the install command (Homebrew, apt, dnf or winget) and asks before it runs it. On Linux without Node it runs nvm's official installer, which ships here as `setup/nvm-install.sh`.
-- Setup also adds a short note to your agent's skill or rules folder (for example `.claude/skills`, `.agents/skills`, `AGENTS.md` or `.cursor/rules`) so the agent finds ReelStyles. It only touches agents it finds on your computer, or the ones you name.
+- `wire` adds a short note to the agent's skill or rules folder of the project you name (for example `.claude/skills`, `.agents/skills`, `AGENTS.md`, `GEMINI.md` or `.cursor/rules`) so the agent finds ReelStyles there. It only touches agents it finds on your computer, or the ones you name.
 - Rendering runs HyperFrames through npx, pinned to `hyperframes@0.8.96`. npm downloads it once, and HyperFrames downloads its own headless Chrome.
 - The film pages load the GSAP animation library from jsDelivr (`gsap@3.12.5`).
 - Free narration uses Kokoro through HyperFrames, and its voice model downloads the first time you use it.
@@ -45,4 +47,4 @@ Node.js 22 or newer, ffmpeg, and Chrome or Chromium (HyperFrames uses it to rend
 MIT. You can use, change and share these kits, also for commercial work. The full text is in LICENSE. Open-source parts keep their own licences; see LICENSES in each kit.
 
 ## More styles
-Full has all 126 and every style added later. It costs $49 for the first 20 buyers and $79 after that. You pay once. Current prices are at https://reelstyles.com/pricing?utm_source=free-kit
+Full has all 130 and every style added later. It costs $49 for the first 20 buyers and $79 after that. You pay once. Current prices are at https://reelstyles.com/pricing?utm_source=free-kit

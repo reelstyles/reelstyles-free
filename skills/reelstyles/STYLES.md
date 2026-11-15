@@ -4,7 +4,7 @@ Kit folder: `kits/<id>/`. Aspects = the frame sizes the kit is tested in. Best f
 
 | id | Name | Category | Aspects | Best for |
 |---|---|---|---|---|
-| `dark-keynote` | Dark Keynote | Launch & product | 16:9 | then-vs-now-short, easy-actually |
+| `dark-keynote` | Dark Keynote | Launch & product | 16:9, 9:16 | then-vs-now-short, easy-actually |
 | `whiteboard` | Whiteboard explainer | Motion graphics | 16:9, 9:16 | easy-actually, every-x-explained |
 | `doodle-film` | Doodle film | Cartoon | 16:9, 9:16 | pain-word-silent, easy-actually |
 | `kinetic-type` | Kinetic type | Launch & product | 16:9, 9:16 | easy-actually, pain-word-silent |
@@ -12,7 +12,7 @@ Kit folder: `kits/<id>/`. Aspects = the frame sizes the kit is tested in. Best f
 | `guess-quiz` | Countdown guessing quiz | Motion graphics | 16:9, 9:16 | every-x-explained |
 | `comic-panels` | Pop comic panels | Paper & print | 16:9, 9:16 | money-disaster, animated-movie |
 
-## Not in this tier (119)
+## Not in this tier (123)
 
 These styles come with ReelStyles Full: https://reelstyles.com/pricing?utm_source=free-kit
 
@@ -46,7 +46,7 @@ These styles come with ReelStyles Full: https://reelstyles.com/pricing?utm_sourc
 | `halftone-dossier` | Halftone dossier | Paper & print | 16:9 |
 | `saas-launch` | Neon Deck | Launch & product | 16:9, 9:16 |
 | `product-cinematic` | Product Cinematic | Launch & product | 16:9, 9:16 |
-| `device-demo` | Device Demo | Launch & product | 16:9 |
+| `device-demo` | Device Demo | Launch & product | 16:9, 9:16 |
 | `rubber-hose` | Rubber hose | Cartoon | 16:9 |
 | `brand-film` | Hollow Light | Launch & product | 16:9 |
 | `risograph` | Risograph | Paper & print | 16:9 |
@@ -137,3 +137,7 @@ These styles come with ReelStyles Full: https://reelstyles.com/pricing?utm_sourc
 | `sketch-to-color` | Sketch to Color | Painterly | 9:16, 1:1 |
 | `ball-ring` | Ball ring | Satisfying | 9:16 |
 | `voxel-duo` | Voxel Duo | 3D & cutaway | 9:16 |
+| `puppet-stage` | Puppet stage | Cartoon | 16:9 |
+| `chalkboard` | Chalkboard | Motion graphics | 16:9 |
+| `sand-slice` | Sand Slice | Code art | 16:9 |
+| `domino-run` | Domino run | Code art | 16:9 |

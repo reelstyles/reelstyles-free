@@ -1,6 +1,6 @@
 // =====================================================================
 //  engine/runtime.js: the frame clock of the doodle film. Classic script (no modules), every name is a global.
-//  Load order in index.html: gsap → engine/runtime.js → engine/doodle.js → characters/pip.js → sets/sets.js → film.js.
+//  Load order in index.html: gsap → engine/runtime.js → engine/safe.js → engine/doodle.js → engine/look.js → characters/pip.js → sets/sets.js → film.js.
 //
 //    shot(t0, t1, draw, title, cam)   register a shot; draw() reads TT (film seconds). cam(t) → [cx, cy, zoom, rot]
 //                                     = the world point at frame centre. Shots must tile the film with no gap.
@@ -44,11 +44,13 @@ function renderFrame(t) {
   if (s) {
     const c = s.cam ? s.cam(t) : [W / 2, H / 2, 1, 0];
     CAM = [c[0], c[1], c[2] ?? 1, c[3] ?? 0];
+    if (typeof look === 'function') { LOOK = null; const c0 = s.cam ? s.cam(s.t0) : c; CAM0 = [c0[0], c0[1], c0[2] ?? 1, c0[3] ?? 0]; }   // engine/look.js
     ctx.translate(W / 2, H / 2); ctx.scale(CAM[2], CAM[2]); if (CAM[3]) ctx.rotate(CAM[3]); ctx.translate(-CAM[0], -CAM[1]);
     ctx.lineCap = 'round'; ctx.lineJoin = 'round';
     s.draw(t);
   }
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+  if (typeof applyLook === 'function') applyLook();   // grade + one light + bloom (engine/look.js), under the paper grain
   paperFX();
   flushText();
   TRANS.forEach((f) => f());

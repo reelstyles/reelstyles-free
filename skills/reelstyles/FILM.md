@@ -15,7 +15,7 @@ These hold in every kit. The kit's STYLE.md says how things look. This file says
 - Wides and medium-wides carry the film: the main character whole, feet on a visible floor with a contact shadow, about 30-55% of the frame height. Close-ups are short beats, at most 4 in 10 shots.
 - Nothing important touches an edge: characters, faces, props and text stay at least 65 px inside. Only sky, ground and walls may bleed off.
 - One main subject per shot. The key object of the beat is big (at least 12% of the frame height) and has a clear silhouette.
-- Every shot is a full, real place: a floor, a back wall or horizon, and 3+ props. Measured (`node products/reelstyles/tools/clip-measure.mjs out.mp4 --gate`, also works on a still), the good samples sit at mean luma 0.1-0.7, luma spread (contrast) 0.1-0.24 and a flat (detail-free) share of at most 0.6.
+- Every shot is a full, real place: a floor, a back wall or horizon, and 3+ props. Measured (`node <the folder of this file>/tools/clip-measure.mjs out.mp4 --gate`, also works on a still), the good samples sit at mean luma 0.1-0.7, luma spread (contrast) 0.1-0.24 and a flat (detail-free) share of at most 0.6.
 
 ## Make it look like a film
 

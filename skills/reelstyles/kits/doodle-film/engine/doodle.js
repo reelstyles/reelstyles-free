@@ -151,7 +151,7 @@ function flushText() {
     const V = H > W && typeof LAYOUT !== 'undefined' && !o.free;
     const size = Math.max(o.size || 44, MIN_TEXT, V ? 64 : 0), plate = o.plate === undefined ? PAL.white : o.plate, pad = plate ? 22 : 0, M = 40;
     let [sx, sy] = o.at ? toScreen(o.at[0], o.at[1]) : [o.x ?? W / 2, o.y ?? H - 130];
-    ctx.save(); ctx.font = `${size}px ${HAND}`;
+    ctx.save(); ctx.font = `${o.weight || 700} ${size}px ${HAND}`;   // bold Caveat: readable on a phone
     let maxW = Math.min(o.maxW || 900, W - 2 * M - 2 * pad, V ? VSAFE.lx1 - VSAFE.lx0 - 2 * pad - 10 : 1e9), lines;
     for (;;) {                                                        // wrap until every line fits the frame
       lines = []; let cur = '';

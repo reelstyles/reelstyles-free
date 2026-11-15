@@ -34,7 +34,7 @@ function pipDraw(o) {
   if (typeof track === 'function' && !o.extra) track('face', -68, -312, 68, -182);   // engine/safe.js: the head box (labels keep off it); the body box is measured by figure()
   if (typeof qaNote === 'function' && !hop && !o.air && Math.abs(y - gnd) > 45) qaNote(`feet float: the figure at x ${Math.round(x)} is ${Math.round(y - gnd)} px off the ground: omit y (it snaps to the ground) or pass air:true`);
   // contact shadow on the ground, always drawn (shrinks as he jumps)
-  ctx.save(); ctx.translate(0, hop * 120); ink(ellP(0, 4, 70 - hop * 20, 12), { c: PAL.faint, w: 4, seed: 3, dbl: false, a: 0.7 }); ctx.restore();
+  ctx.save(); ctx.translate(0, hop * 120); unmeasured(() => fillLoose(ellP(0, 4, 74 - hop * 30, 14, 20), { c: PAL.pencil, seed: 3, hatch: false, off: [0, 0], a: 0.45 - hop * 0.2, base: false })); ink(ellP(0, 4, 70 - hop * 20, 12), { c: PAL.faint, w: 4, seed: 3, dbl: false, a: 0.7 }); ctx.restore();
   const hip = [[-18, -66 + bob], [18, -66 + bob]], leg = (i, f) => {
     const sw = walking ? Math.sin(ph + (i ? Math.PI : 0)) : 0, lift = walking ? Math.max(0, Math.cos(ph + (i ? Math.PI : 0))) * 16 : 0;
     const fx = hip[i][0] + sw * 40 * f + (hop ? (i ? 12 : -4) : 0), fy = -lift - hop * 0;

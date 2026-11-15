@@ -47,7 +47,8 @@ say it is theirs. Never imitate a real person's voice.
 ## 6. Build
 
 Time every shot to the word timings. Follow the kit's STYLE.md and its beats; a new picture at least every 2-4 s (the kit
-says which). Build one beat at a time, take stills, review them with `REVIEW.md`, fix, then the next beat.
+says which). Build one beat at a time, take stills, review them with `REVIEW.md`, fix, then the next beat. Write
+`cues.json` as you build (one sound per visible event, `RENDER.md` step 4) and mix it with the voice before the render.
 
 ## 7. Checks and stop 2
 

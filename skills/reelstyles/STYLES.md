@@ -12,7 +12,7 @@ Kit folder: `kits/<id>/`. Aspects = the frame sizes the kit is tested in. Best f
 | `guess-quiz` | Countdown guessing quiz | Motion graphics | 16:9, 9:16 | every-x-explained |
 | `comic-panels` | Pop comic panels | Paper & print | 16:9, 9:16 | money-disaster, animated-movie |
 
-## Not in this tier (123)
+## Not in this tier (122)
 
 These styles come with ReelStyles Full: https://reelstyles.com/pricing?utm_source=free-kit
 
@@ -139,5 +139,4 @@ These styles come with ReelStyles Full: https://reelstyles.com/pricing?utm_sourc
 | `voxel-duo` | Voxel Duo | 3D & cutaway | 9:16 |
 | `puppet-stage` | Puppet stage | Cartoon | 16:9 |
 | `chalkboard` | Chalkboard | Motion graphics | 16:9 |
-| `sand-slice` | Sand Slice | Code art | 16:9 |
 | `domino-run` | Domino run | Code art | 16:9 |

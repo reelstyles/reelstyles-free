@@ -1,8 +1,8 @@
-# ReelStyles Free 2026.11.15
+# ReelStyles Free 2026.11.16
 
-7 video styles for Claude Code and other coding agents. You pick a style, give your agent a topic, and it animates the film in code and renders an MP4 on your computer.
+8 video styles for Claude Code and other coding agents. You pick a style, give your agent a topic, and it animates the film in code and renders an MP4 on your computer.
 
-This repo holds the 7 free ones; you can watch all 129 on [reelstyles.com](https://reelstyles.com/?utm_source=github-free). Each clip below was made with its kit. All 7 kits are complete and MIT licensed, so you can use them in paid work too.
+This repo holds the 8 free ones; you can watch all 129 on [reelstyles.com](https://reelstyles.com/?utm_source=github-free). Each clip below was made with its kit. All 8 kits are complete and MIT licensed, so you can use them in paid work too.
 
 [<img src="previews/dark-keynote.webp" alt="Dark Keynote" width="400">](https://reelstyles.com/style/dark-keynote)
 [<img src="previews/whiteboard.webp" alt="Whiteboard explainer" width="400">](https://reelstyles.com/style/whiteboard)
@@ -11,6 +11,7 @@ This repo holds the 7 free ones; you can watch all 129 on [reelstyles.com](https
 [<img src="previews/stick-metaphor.webp" alt="Stick-figure metaphor Short" width="400">](https://reelstyles.com/style/stick-metaphor)
 [<img src="previews/guess-quiz.webp" alt="Countdown guessing quiz" width="400">](https://reelstyles.com/style/guess-quiz)
 [<img src="previews/comic-panels.webp" alt="Pop comic panels" width="400">](https://reelstyles.com/style/comic-panels)
+[<img src="previews/midcentury-toon.webp" alt="Mid-century cartoon" width="400">](https://reelstyles.com/style/midcentury-toon)
 
 To try it in Claude Code, run the two /plugin lines below and ask for "a 20 s video about coffee in the whiteboard style". The first video takes about 20 minutes, setup included. After that a short video renders in a few minutes.
 

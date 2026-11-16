@@ -1,0 +1,180 @@
+{
+  "id": "midcentury-toon",
+  "name": "Mid-century cartoon",
+  "version": "1.2.0",
+  "description": "1950s limited-animation how-to look: colour printed off its broken ink line, held-body presenters, colour-plane rooms, numbered medallions, round call-outs and starbursts.",
+  "family": "cartoon",
+  "dim": "2d",
+  "tier": "pro",
+  "status": "ready",
+  "renderer": "hyperframes@0.8.96",
+  "aspect": [
+    "16:9",
+    "9:16"
+  ],
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "entry": "templates/index.html",
+  "licence": "LICENSES/",
+  "inspired_by": [
+    {
+      "repo": "lemomo-ai/lemo-opuscar (styles/midcentury-toon)",
+      "licence": "MIT",
+      "what": "off-register cel engine, ink ribbon, icon set and presenter drawing (ported and extended)"
+    }
+  ],
+  "read_first": [
+    "STYLE.md"
+  ],
+  "files": [
+    {
+      "path": "EXAMPLES.md",
+      "bytes": 945,
+      "sha256": "e2ab3e23250f852c0d37540f8ee2652c2397058f5156e0911d8c75eef7a48d06"
+    },
+    {
+      "path": "LESSONS.md",
+      "bytes": 572,
+      "sha256": "d87e8f3f487c83f985145f4172cd6a7d86453b171d0831e2ccd16d155f3b7e74"
+    },
+    {
+      "path": "LICENSES/ASSETS.md",
+      "bytes": 1258,
+      "sha256": "e9c3fe2a0447dbb8e0c2a765f9131d130ca70bcd3b949b87885528d3dc4cd2ee"
+    },
+    {
+      "path": "LICENSES/LICENSE-lemo-opuscar-MIT.txt",
+      "bytes": 1064,
+      "sha256": "14c9ff6f14bfb2391e74fedb01c256891d2a3bba1c2acf5789901bdf77e54e33"
+    },
+    {
+      "path": "LICENSES/OFL-alfaslabone.txt",
+      "bytes": 4430,
+      "sha256": "05dd88a474f93493ff1db3a89974fbae9455ec4e911356ffcd2ab1efd2bd4ee9"
+    },
+    {
+      "path": "LICENSES/OFL-jost.txt",
+      "bytes": 4384,
+      "sha256": "1af3438a4d5f0ed2bdbc5751a5a67ebf6d537334161184b7fbb68503ef0ea0c5"
+    },
+    {
+      "path": "LICENSES/OFL-oleoscript.txt",
+      "bytes": 4419,
+      "sha256": "8fbe530adcbe30c658393c3f2b5a4785d6765afcefdfe47f594730131f3a0abd"
+    },
+    {
+      "path": "STYLE.md",
+      "bytes": 6367,
+      "sha256": "a8a5c0cf20da6e44b79e3f49ad6954bb665d794e300de6f812f7b4a2d5e8a34b"
+    },
+    {
+      "path": "characters/icons.js",
+      "bytes": 9474,
+      "sha256": "67ea30f351bf2393f3bad9b90a7a275f1b8c76ee19360a6bfd1785ed359cc20c"
+    },
+    {
+      "path": "characters/presenter.js",
+      "bytes": 18416,
+      "sha256": "b6e0cb61631cbf6478e5acf0156dc7421d53e5705b3da8959e06138453f3e224"
+    },
+    {
+      "path": "engine/look.js",
+      "bytes": 14879,
+      "sha256": "db2ec2e272d3c8cf0fcf2e80dba332448d3258c933bcf13e6fd135094207da2c"
+    },
+    {
+      "path": "engine/manual.js",
+      "bytes": 8270,
+      "sha256": "cca61bb2fc822614fbc566f96465538b5e79882f96b4fd543d404b2fd549ce56"
+    },
+    {
+      "path": "engine/runtime.js",
+      "bytes": 7057,
+      "sha256": "51d17aa24de514f0cfe4695003857123f3f57b67bd76d5cea925773c738bebeb"
+    },
+    {
+      "path": "engine/safe.js",
+      "bytes": 13769,
+      "sha256": "dec05b9f70ce387e6308bdfb6f6892d4b1cec1ff823dd6cec79f01f5b26b5a79"
+    },
+    {
+      "path": "engine/toon.js",
+      "bytes": 21860,
+      "sha256": "edcdf2ef8a2d986c760c6a5fae69aced0589dc8050aa345bd7e8eb9b547fea57"
+    },
+    {
+      "path": "fonts/AlfaSlabOne-Regular.ttf",
+      "bytes": 97376,
+      "sha256": "28664afa698a3393bd5a29eec750230a0645c5301d62200e5f2d3a027fb2299d"
+    },
+    {
+      "path": "fonts/Jost.ttf",
+      "bytes": 134996,
+      "sha256": "6343b70971000b04c5d401c96ae08ce371086135e999d5e1e1413039c0213076"
+    },
+    {
+      "path": "fonts/OleoScript-Bold.ttf",
+      "bytes": 34628,
+      "sha256": "7e4843c9d74233f00a2815954177e33758c1c42a08d218b11c131cf7d818f1d5"
+    },
+    {
+      "path": "fonts/OleoScript-Regular.ttf",
+      "bytes": 34980,
+      "sha256": "1aa003ac938adf9bea644c406ce90eeb1913138aa1d7492242c0ca948c0f48ac"
+    },
+    {
+      "path": "sets/recipes.js",
+      "bytes": 16893,
+      "sha256": "7c83f79f262826a1e1a63f12304d9b66f5b328e67542d0958456cc900bc3d036"
+    },
+    {
+      "path": "sets/sets.js",
+      "bytes": 6643,
+      "sha256": "4e7f0ad8d95bacb78840573688288495caf92201e5d5528f694df26ab49fee24"
+    },
+    {
+      "path": "templates/film-look.js",
+      "bytes": 2170,
+      "sha256": "b9863ca946b452a5146d97365743c2695893f35929c50a836733de2c0d9e78d8"
+    },
+    {
+      "path": "templates/film-v.js",
+      "bytes": 11244,
+      "sha256": "eaf66fb3e0474ce0e1ca6c9435dff155fc1dc1284323efe4df1d9033a6cc4578"
+    },
+    {
+      "path": "templates/film.js",
+      "bytes": 5673,
+      "sha256": "3c770df7f13bd1137ef1cdc5e32fa37cbca53b6c7918c3bed329b017ce85c229"
+    },
+    {
+      "path": "templates/index.html",
+      "bytes": 1684,
+      "sha256": "5009bb59e5166b7460364dbd48a497d6f22a44233433fd9ea90d3b8c6255169c"
+    },
+    {
+      "path": "templates/vertical.html",
+      "bytes": 2023,
+      "sha256": "6072c12d45e770c57d09084bcfe3fa672a76a63bc7d413867ea422557702c993"
+    },
+    {
+      "path": "tools/layout-check.mjs",
+      "bytes": 9193,
+      "sha256": "cd69e026e262dcb39ba4b2d75718ac2fbff12b25da4ed95fea957e998dd3b84b"
+    },
+    {
+      "path": "tools/render.sh",
+      "bytes": 2930,
+      "sha256": "cd36849282ab49b5dd72d80341300e8852f2308a5383fa63dc0b10fd7010d18c"
+    },
+    {
+      "path": "tools/vcheck.sh",
+      "bytes": 3432,
+      "sha256": "ffbcfbec593284c084713bf8d04e87cf281f9a1378e93b1f3d1b83598e40a3bb"
+    }
+  ],
+  "example_video": "samples/midcentury-toon-example.mp4"
+}

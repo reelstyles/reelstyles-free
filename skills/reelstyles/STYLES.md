@@ -1,4 +1,4 @@
-# Styles (7)
+# Styles (8)
 
 Kit folder: `kits/<id>/`. Aspects = the frame sizes the kit is tested in. Best for = format ids from `formats.json`.
 
@@ -11,8 +11,9 @@ Kit folder: `kits/<id>/`. Aspects = the frame sizes the kit is tested in. Best f
 | `stick-metaphor` | Stick-figure metaphor Short | Cartoon | 16:9, 9:16 | then-vs-now-short, pain-word-silent, easy-actually |
 | `guess-quiz` | Countdown guessing quiz | Motion graphics | 16:9, 9:16 | every-x-explained |
 | `comic-panels` | Pop comic panels | Paper & print | 16:9, 9:16 | money-disaster, animated-movie |
+| `midcentury-toon` | Mid-century cartoon | Cartoon | 16:9, 9:16 | easy-actually, money-disaster |
 
-## Not in this tier (122)
+## Not in this tier (121)
 
 These styles come with ReelStyles Full: https://reelstyles.com/pricing?utm_source=free-kit
 
@@ -24,7 +25,6 @@ These styles come with ReelStyles Full: https://reelstyles.com/pricing?utm_sourc
 | `nyndra` | Copper Boards | Motion graphics | 16:9, 9:16 |
 | `midlife` | Editorial serif explainer | Motion graphics | 16:9 |
 | `anatomy` | Isometric machine cutaway | 3D & cutaway | 16:9 |
-| `midcentury-toon` | Mid-century cartoon | Cartoon | 16:9, 9:16 |
 | `scifi-toon` | Sci-fi sitcom toon | Cartoon | 16:9, 9:16 |
 | `iso-infographic` | Isometric infographic | Motion graphics | 16:9, 9:16 |
 | `silent-film` | 1920s silent film | Painterly | 16:9, 9:16 |

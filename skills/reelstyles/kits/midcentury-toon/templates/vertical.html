@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>mid-century film, vertical 9:16</title>
+  <style>
+    @font-face { font-family: "Oleo"; font-weight: 400; font-display: block; src: url("fonts/OleoScript-Regular.ttf") format("truetype"); }
+    @font-face { font-family: "Oleo"; font-weight: 700; font-display: block; src: url("fonts/OleoScript-Bold.ttf") format("truetype"); }
+    @font-face { font-family: "Slab"; font-weight: 400; font-display: block; src: url("fonts/AlfaSlabOne-Regular.ttf") format("truetype"); }
+    @font-face { font-family: "Jost"; font-weight: 100 900; font-display: block; src: url("fonts/Jost.ttf") format("truetype"); }
+    html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #F3E8D0; }
+    #c { display: block; width: 1080px; height: 1920px; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>window.__timelines = window.__timelines || {};</script>
+  <script>window.FRAME = { w: 1080, h: 1920 };   // engine/runtime.js reads this: the whole frame is 9:16</script>
+</head>
+<body>
+  <!-- data-duration must equal DUR in film-v.js (copy this file to index.html and film-v.js to film.js) -->
+  <div id="root" data-composition-id="main" data-start="0" data-duration="34" data-width="1080" data-height="1920">
+    <canvas id="c" width="1080" height="1920"></canvas>
+    <!-- sound: add an <audio> clip here, see STYLE.md Files -->
+  </div>
+  <script src="engine/runtime.js"></script>
+  <script src="engine/safe.js"></script>   <!-- vertical layout guard: auto label placement (labelY), end card, layout QA (tools/layout-check.mjs) -->
+  <script src="engine/toon.js"></script>
+  <script src="engine/manual.js"></script>
+  <script src="engine/look.js"></script>
+  <script src="characters/icons.js"></script>
+  <script src="characters/presenter.js"></script>
+  <script src="sets/sets.js"></script>
+  <script src="sets/recipes.js"></script>
+  <script src="film.js"></script>
+</body>
+</html>

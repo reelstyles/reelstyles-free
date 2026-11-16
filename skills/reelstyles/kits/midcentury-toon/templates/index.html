@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>mid-century film</title>
+  <style>
+    @font-face { font-family: "Oleo"; font-weight: 400; font-display: block; src: url("fonts/OleoScript-Regular.ttf") format("truetype"); }
+    @font-face { font-family: "Oleo"; font-weight: 700; font-display: block; src: url("fonts/OleoScript-Bold.ttf") format("truetype"); }
+    @font-face { font-family: "Slab"; font-weight: 400; font-display: block; src: url("fonts/AlfaSlabOne-Regular.ttf") format("truetype"); }
+    @font-face { font-family: "Jost"; font-weight: 100 900; font-display: block; src: url("fonts/Jost.ttf") format("truetype"); }
+    html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #F3E8D0; }
+    #c { display: block; width: 1920px; height: 1080px; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>window.__timelines = window.__timelines || {};</script>
+</head>
+<body>
+  <!-- data-duration must equal DUR in film.js -->
+  <div id="root" data-composition-id="main" data-start="0" data-duration="10" data-width="1920" data-height="1080">
+    <canvas id="c" width="1920" height="1080"></canvas>
+    <!-- sound: add an <audio> clip here, see STYLE.md Files -->
+  </div>
+  <script src="engine/runtime.js"></script>
+  <script src="engine/toon.js"></script>
+  <script src="engine/manual.js"></script>
+  <script src="engine/look.js"></script>
+  <script src="characters/icons.js"></script>
+  <script src="characters/presenter.js"></script>
+  <script src="sets/sets.js"></script>
+  <script src="sets/recipes.js"></script>
+  <script src="film.js"></script>
+</body>
+</html>

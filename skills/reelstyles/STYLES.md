@@ -13,7 +13,7 @@ Kit folder: `kits/<id>/`. Aspects = the frame sizes the kit is tested in. Best f
 | `comic-panels` | Pop comic panels | Paper & print | 16:9, 9:16 | money-disaster, animated-movie |
 | `midcentury-toon` | Mid-century cartoon | Cartoon | 16:9, 9:16 | easy-actually, money-disaster |
 
-## Not in this tier (121)
+## Not in this tier (122)
 
 These styles come with ReelStyles Full: https://reelstyles.com/pricing?utm_source=free-kit
 
@@ -140,3 +140,4 @@ These styles come with ReelStyles Full: https://reelstyles.com/pricing?utm_sourc
 | `puppet-stage` | Puppet stage | Cartoon | 16:9 |
 | `chalkboard` | Chalkboard | Motion graphics | 16:9 |
 | `domino-run` | Domino run | Code art | 16:9 |
+| `crime-city` | Crime City | Retro & internet | 9:16 |

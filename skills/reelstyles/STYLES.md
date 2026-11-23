@@ -1,4 +1,4 @@
-# Styles (8)
+# Styles (9)
 
 Kit folder: `kits/<id>/`. Aspects = the frame sizes the kit is tested in. Best for = format ids from `formats.json`.
 
@@ -12,8 +12,9 @@ Kit folder: `kits/<id>/`. Aspects = the frame sizes the kit is tested in. Best f
 | `guess-quiz` | Countdown guessing quiz | Motion graphics | 16:9, 9:16 | every-x-explained |
 | `comic-panels` | Pop comic panels | Paper & print | 16:9, 9:16 | money-disaster, animated-movie |
 | `midcentury-toon` | Mid-century cartoon | Cartoon | 16:9, 9:16 | easy-actually, money-disaster |
+| `text-story` | Chat text story | Motion graphics | 16:9, 9:16 | money-disaster, pain-word-silent |
 
-## Not in this tier (122)
+## Not in this tier (121)
 
 These styles come with ReelStyles Full: https://reelstyles.com/pricing?utm_source=free-kit
 
@@ -124,7 +125,6 @@ These styles come with ReelStyles Full: https://reelstyles.com/pricing?utm_sourc
 | `reaction-diffusion` | Living Turing patterns | Code art | 16:9 |
 | `paper-marbling` | Paper marbling | Code art | 16:9 |
 | `topo-contour` | Topographic contours | Code art | 16:9 |
-| `text-story` | Chat text story | Motion graphics | 16:9, 9:16 |
 | `tier-list` | Tier list ranking | Motion graphics | 16:9 |
 | `would-you-rather` | Would you rather | Motion graphics | 16:9 |
 | `money-growth` | Money growth chart | Motion graphics | 16:9 |

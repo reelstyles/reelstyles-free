@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>chat text story (9:16)</title>
+  <!-- templates/index.html: 12 s chat story, 1080x1920. The 16:9 version is templates/index.html (same film.js). -->
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <style>
+    html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #0B0D18; }
+    #c { display: block; width: 1080px; height: 1920px; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>window.__timelines = window.__timelines || {};</script>
+</head>
+<body>
+  <!-- data-duration must equal STORY.dur in film.js -->
+  <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1920">
+    <canvas id="c" width="1080" height="1920"></canvas>
+    <!-- sound: add an <audio> clip here, see RENDER.md -->
+  </div>
+  <script src="engine/runtime.js"></script>
+  <script src="engine/look.js"></script>
+  <script src="sets/props.js"></script>
+  <script src="sets/scenes.js"></script>
+  <script src="engine/chat.js"></script>
+  <script src="film.js"></script>
+</body>
+</html>

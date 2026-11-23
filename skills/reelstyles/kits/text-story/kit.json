@@ -1,0 +1,140 @@
+{
+  "id": "text-story",
+  "name": "Chat text story",
+  "version": "1.1.0",
+  "description": "A story told through a chat: the phone stands lit in a real place (desk, kitchen, bedside; grade per mood, one key light, depth layers, dust, grain) while the conversation floats beside it in big readable bubbles; typing dots, spring-in messages, code-drawn photos and a full-frame twist card.",
+  "family": "chat",
+  "dim": "2d",
+  "tier": "pro",
+  "status": "ready",
+  "renderer": "hyperframes@0.8.96",
+  "aspect": [
+    "16:9",
+    "9:16"
+  ],
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "read_first": [
+    "STYLE.md"
+  ],
+  "entry": "templates/index.html",
+  "licence": "LICENSES/",
+  "inspired_by": [
+    {
+      "repo": "genre: chat text-story videos",
+      "licence": "n/a",
+      "what": "the format only (messages arriving, typing dots, twist card); original UI, code and type"
+    }
+  ],
+  "example_video": "samples/text-story-example.mp4",
+  "files": [
+    {
+      "path": "EXAMPLES.md",
+      "bytes": 800,
+      "sha256": "7b1e56f0cb3a452f57f4f311621bf67ad9b7fa9501dd5afd996853c80c1e50e4"
+    },
+    {
+      "path": "LICENSES/ASSETS.md",
+      "bytes": 919,
+      "sha256": "1b168ff575ef3d8afdc9d3927ffab331f00273856238e99dfd43f4817ca544eb"
+    },
+    {
+      "path": "LICENSES/Inter-OFL.txt",
+      "bytes": 4477,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "STYLE.md",
+      "bytes": 5896,
+      "sha256": "70c0d7df4225a7d88219e4486db351591a5723f6f46a42eedb4bf1e8227ed4b6"
+    },
+    {
+      "path": "engine/chat.js",
+      "bytes": 21920,
+      "sha256": "c8eb12a2a5185343495850b80923409823af80d626d993d1f43963b7cde986f7"
+    },
+    {
+      "path": "engine/look.js",
+      "bytes": 10974,
+      "sha256": "de0f3d094ce937495a2d9178a6e2d4a387e7b25fc6a2b75c50e7cb143196acdd"
+    },
+    {
+      "path": "engine/runtime.js",
+      "bytes": 3161,
+      "sha256": "523c2f845ef545d7aa6438e646f5cf4865eb8b47a8be421ff9794eb9b6eeac4c"
+    },
+    {
+      "path": "fonts/Inter-500.woff2",
+      "bytes": 24272,
+      "sha256": "f3779f1efccc4bdcdf9c0a02ab95bf6bd092ed09c48c08cedc725889edd1d19f"
+    },
+    {
+      "path": "fonts/Inter-800.woff2",
+      "bytes": 24400,
+      "sha256": "a7d0a50f15d389cad679238466bdb5fc9787aa0715719064ce25abaff042820d"
+    },
+    {
+      "path": "fonts/Inter-900.woff2",
+      "bytes": 23900,
+      "sha256": "d5c0ed7b8b5dde97d48b97947d740bbd8ad3ba9f2c5cc6b8280f16acba2d828e"
+    },
+    {
+      "path": "fonts/Inter-OFL.txt",
+      "bytes": 4477,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "fonts/fonts.css",
+      "bytes": 496,
+      "sha256": "db1df4aca9f2030d933b2ff4c4bcacd9fc422e064a1f86e4701390f22b90aa8a"
+    },
+    {
+      "path": "sets/props.js",
+      "bytes": 12486,
+      "sha256": "82fab8c285b0993e94e3d26644cf571e6b2ce0346991b980ca23291f785f59b0"
+    },
+    {
+      "path": "sets/scenes.js",
+      "bytes": 10700,
+      "sha256": "35c73f32dacc57b106b7e75f97474d2cec60c48af4f17f8f7fad132eff54e101"
+    },
+    {
+      "path": "templates/film.js",
+      "bytes": 2720,
+      "sha256": "0e716f49db380190c671d8f4025c7e5fb32146e36ce5a3986d79bbea8fe43a08"
+    },
+    {
+      "path": "templates/index.html",
+      "bytes": 1171,
+      "sha256": "dfacf2f49f164858524bec73d8b8ee90ab43538f33ebaa839bec9b478f26ec0c"
+    },
+    {
+      "path": "templates/sfx.mjs",
+      "bytes": 1944,
+      "sha256": "464bd2737c33570c43b386e03afd07b282fc798332d684d0e53c5d0c1ab00567"
+    },
+    {
+      "path": "templates/vertical.html",
+      "bytes": 1171,
+      "sha256": "f4d66a9eaf7233219e6703be1f48bb25f2f8fde31c7fc58bb48d024a39bc7d38"
+    },
+    {
+      "path": "tools/holdcheck.mjs",
+      "bytes": 2081,
+      "sha256": "6f04df3287d981a36c4c90521d4f296c6fd1289b2f95e3af6f0f2e4044de54f2"
+    },
+    {
+      "path": "tools/layout-check.mjs",
+      "bytes": 6247,
+      "sha256": "30a42b9ae108a8c3cc2ea756d5a4c0f865f2370d749a02cc9ad9596928229cf0"
+    },
+    {
+      "path": "tools/render.sh",
+      "bytes": 1772,
+      "sha256": "ac9a3b95db2f9eea9b1165589d81f93488c45665ebec78878df196be961facbb"
+    }
+  ]
+}

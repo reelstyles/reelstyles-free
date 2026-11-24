@@ -1,4 +1,4 @@
-# ReelStyles Free 2026.11.23
+# ReelStyles Free 2026.11.24
 
 9 video styles for Claude Code and other coding agents. You pick a style, give your agent a topic, and it animates the film in code and renders an MP4 on your computer.
 
@@ -49,4 +49,4 @@ Node.js 22 or newer, ffmpeg, and Chrome or Chromium (HyperFrames uses it to rend
 MIT. You can use, change and share these kits, also for commercial work. The full text is in LICENSE. Open-source parts keep their own licences; see LICENSES in each kit.
 
 ## More styles
-Full has all 130 and every style added later. It costs $49 for the first 20 buyers and $79 after that. You pay once. Current prices are at https://reelstyles.com/pricing?utm_source=free-kit
+Full has all 130 and every style added later. It costs $49 for everyone until Dec 1, then $79. You pay once. Current prices are at https://reelstyles.com/pricing?utm_source=free-kit

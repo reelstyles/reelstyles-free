@@ -178,8 +178,8 @@
     },
     {
       "path": "tools/render.sh",
-      "bytes": 2930,
-      "sha256": "cd36849282ab49b5dd72d80341300e8852f2308a5383fa63dc0b10fd7010d18c"
+      "bytes": 2961,
+      "sha256": "8d93b07ca38bcd0c6cc86d38c43ae5c77883d05b1b1dce6d64a861e76e782c55"
     },
     {
       "path": "tools/vcheck.sh",

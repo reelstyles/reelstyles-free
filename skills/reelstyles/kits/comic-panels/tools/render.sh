@@ -7,7 +7,7 @@
 # 11-09: a cold run skipped the checks and shipped a hero cut by the left edge; the checks are part of the render now.
 set -u
 cd "$(dirname "$0")/.." || exit 1
-o=${1:-out.mp4}; o=${o%.mp4}; v=$(grep -o 'hyperframes@[0-9.]*' RENDER.md 2>/dev/null | head -1 | cut -d@ -f2)   # head -1: -m1 still printed every match on the line (11-11)
+o=${1:-out.mp4}; o=${o%.mp4}; v=$(grep -ho 'hyperframes@[0-9.]*' "$(dirname "$0")/../kit.json" RENDER.md 2>/dev/null | head -1 | cut -d@ -f2)   # head -1: -m1 still printed every match on the line (11-11)
 HF=${HF:-npx -y hyperframes@${v:-0.8.96}}
 [ -f index.html ] && [ -f film.js ] || { echo "render: no index.html + film.js here (RENDER.md step 1 copies them from templates/)"; exit 1; }
 # a kit whose score is built by tools/score.sh (doodle-film) ships without the .wav in the free plugin (directory accepts no audio files, 11-13): build it once
